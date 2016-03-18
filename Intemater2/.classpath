@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-7-openjdk-amd64">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
@@ -11,7 +11,6 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="/home/sachin/sachin/All Jars/spring-framework-3.2.9.RELEASE/libs/spring-beans-3.2.9.RELEASE.jar"/>
 	<classpathentry kind="lib" path="/home/sachin/sachin/All Jars/spring-framework-3.2.9.RELEASE/libs/spring-context-3.2.9.RELEASE.jar"/>
@@ -37,5 +36,6 @@
 	<classpathentry kind="lib" path="/home/sachin/sachin/All Jars/mysql-connector-java-3.1.13-bin.jar"/>
 	<classpathentry kind="lib" path="/home/sachin/sachin/All Jars/spring-hibernate.jar"/>
 	<classpathentry kind="lib" path="/home/sachin/sachin/All Jars/commons-io-2.4.jar/commons-io-2.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
