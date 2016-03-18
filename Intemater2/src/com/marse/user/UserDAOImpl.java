@@ -17,13 +17,15 @@ public class UserDAOImpl implements UserDAO {
 		Session session=factory.openSession();
 		
 		User objUser=(User) session.get(User.class, userId); 
-		
-		if (objUser.getUserPassword().equals(password)) {
+		if (null != objUser) {    // this condition for whether the user is exist or not
 			
-			loginStatus=true;
-		} else {
-			loginStatus=false;
-
+			if (objUser.getUserPassword().equals(password)) {
+				
+				loginStatus=true;
+			} else {
+				loginStatus=false;
+	
+			}
 		}
 		
 		return loginStatus;

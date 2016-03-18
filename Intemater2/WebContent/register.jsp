@@ -66,17 +66,25 @@ div {
     border: 3px solid #73AD21;
 }
 </style>
-
+	<h5 align="left"> 
+			<a href="newUser.jsp">View Customers</a> |
+		    <a href="newUser.jsp">Send Email</a> |
+			<a href="register.jsp">Create Contact</a> |
+			<a href="newUser.jsp">Create New User</a> |
+		    <a href="newUser.jsp">Change Password</a> |
+		    <a href="newUser.jsp">Logout</a>
+		</h5>
 <header class="main-header" role="banner">
   <img src="images/Contact-Banner.png" alt="Banner Image" align="center"/>
 </header>
 
 </head>
 <body>
-		<!-- <h1 align="center"><font color="#808000"><u>Create New Contact</u></font></h1> -->
+		
+		
 		<h2 align="center"><u>Create New Contact</u></h2>
 
-	<form name="homePage" action="" method="post">
+	<form name="homePage" action="register.form" method="post">
 		
 		<table align="center" border="0">
 		

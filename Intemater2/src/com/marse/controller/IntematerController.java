@@ -17,11 +17,13 @@ import com.marse.user.UserDAO;
 @Controller
 public class IntematerController {
 
+	// login view
 	@RequestMapping(value="login.form", method=RequestMethod.POST)
 	public ModelAndView loginPage(){
 		return new ModelAndView("login");
 	}
 	
+	// authentication logic
 	@RequestMapping(value="LoginAuthenticate.form", method=RequestMethod.POST)
 	public ModelAndView validateUser(@RequestParam int userId,
 									 @RequestParam String password,
@@ -56,19 +58,17 @@ public class IntematerController {
 	}
 	
 	
-	//2 
+	// creating new contact of Customer
 	
 	@RequestMapping(value="register.form", method=RequestMethod.POST)
-	public @ResponseBody ModelAndView createNewUser( HttpServletRequest request){
+	public @ResponseBody ModelAndView createNewCustomer( HttpServletRequest request){
 		
 		ModelAndView objModel=new ModelAndView(); 
 		// first checking session
-		
 		HttpSession objSession= request.getSession(false);
 		
 		if(objSession==null){
 			System.out.println("session is null");
-			
 			String message="Time out,<br> Please login again...!";
 			objModel.addObject("message", message);
 			objModel.setViewName("login");
@@ -77,7 +77,50 @@ public class IntematerController {
 			System.out.println("session is not null");
 			if(objSession.getAttribute("objUser")==null){
 				System.out.println("session>objuser is null");
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+				System.out.println("session objuser is not null");
+
+				// bussiness logic
 				
+				return objModel;    
+		        
+		        
+			}
+			
+		}// end of else
+	}
+	
+	// new user
+	
+	@RequestMapping(value="newUser.form", method=RequestMethod.POST)
+	public @ResponseBody ModelAndView createNewUser(@RequestParam String firstName,
+													@RequestParam String lastName,
+													@RequestParam String gender,
+													@RequestParam String userMobile1,
+													@RequestParam(required=false) String userMobile2,
+													@RequestParam String userPassword,
+													@RequestParam String userEmail,
+													@RequestParam String roll,
+													HttpServletRequest request){
+		
+		ModelAndView objModel=new ModelAndView(); 
+		// first checking session
+		HttpSession objSession= request.getSession(false);
+		
+		if(objSession==null){
+			System.out.println("session is null");
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			System.out.println("session is not null");
+			if(objSession.getAttribute("objUser")==null){
+				System.out.println("session>objuser is null");
 				String message="Invalid Session,<br> Please login again...!";
 				objModel.addObject("message", message);
 				objModel.setViewName("login");
