@@ -34,11 +34,15 @@ public class User {
 	@Column()
 	private String lastName;
 	@Column()
+	private String userGender;
+	@Column()
 	private String userPassword;
 	@Column()
 	private String roll;
 	@Column()
-	private String userMobile;
+	private String userMobile1;
+	@Column()
+	private String userMobile2;
 	@Column()
 	private String userEmail;
 	
@@ -75,11 +79,18 @@ public class User {
 	public void setRoll(String roll) {
 		this.roll = roll;
 	}
-	public String getUserMobile() {
-		return userMobile;
+	
+	public String getUserMobile1() {
+		return userMobile1;
 	}
-	public void setUserMobile(String userMobile) {
-		this.userMobile = userMobile;
+	public void setUserMobile1(String userMobile1) {
+		this.userMobile1 = userMobile1;
+	}
+	public String getUserMobile2() {
+		return userMobile2;
+	}
+	public void setUserMobile2(String userMobile2) {
+		this.userMobile2 = userMobile2;
 	}
 	public String getUserEmail() {
 		return userEmail;
@@ -87,7 +98,12 @@ public class User {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	
+	public String getUserGender() {
+		return userGender;
+	}
+	public void setUserGender(String userGender) {
+		this.userGender = userGender;
+	}
 	
 	
 	

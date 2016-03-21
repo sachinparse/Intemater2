@@ -74,14 +74,13 @@ div {
 }
 </style>
   <h5 align="left"> 
-			<a href="newUser.jsp">View Contacts</a> |
-		    <a href="newUser.jsp">Send Email</a> |
+			<a href="showCustomer.jsp">View Contacts</a> |
+		    <a href="sendEmail.jsp">Send Email</a> |
 			<a href="register.jsp">Create Contact</a> |
 			<a href="newUser.jsp">Create User</a> |
-		    <a href="newUser.jsp">Change Password</a> |
-		    <a href="showUser.jsp">Show Users</a> |
-		    <a href="newUser.jsp">Logout</a>
-  </h5>
+		    <a href="changePassword.jsp">Change Password</a> |
+		    <a href="logout.jsp">Logout</a>
+		</h5>
 <header class="main-header" role="banner">
   <img src="images/user.png" alt="Banner Image" align="center"  height="15%" width="15%"/>
 </header>
@@ -89,56 +88,29 @@ div {
 </head>
 <body>
 		<!-- <h1 align="center"><font color="#808000"><u>Create New Contact</u></font></h1> -->
-		<h2 align="center"><u>Add User</u></h2>
+		<h2 align="center"><u>User List</u></h2>
 
-	<form name="homePage" action="newUser.form" method="post">
+	<form name="homePage" action="" method="post">
 		
 		<table align="center" border="0">
 		
-			<tr> <td></td>
-				<!-- <td >First Name</td><td>:</td> --><td><input type="text" name="firstName" placeholder="First Name"></td> 
-				<!-- <td >Last Name</td><td>:</td> --><td><input type="text" name="lastName" placeholder="Last Name"></td> </tr>
-			<tr> <td></td>
-				<!-- <td >Last Name</td><td>:</td><td><input type="text" name="lastName" placeholder="Last Name"></td> -->
-			<!-- <td align="center">Gender</td><td>:</td> --><td>
-					
-				</td></tr>	
+			<c:forEach var="userList" items="${listOfUser}">
+			  <tr>	
+				<td>${userL.userId }</td>
+				<td>${userList.firstName }</td>
+				<td>${userList.lastName}</td>
+				<td>${userList.userGender }</td>
+				<td>${userList.roll }</td>
+				<td>${userList.userMobile1 }</td>
+				<td>${userList.userMobile2 }</td>
+				<td>${userList.userEmail }</td>
 				
-			 </tr>	
-				
-			<tr> <td></td>
-				<!-- <td>Mobile No.</td><td>:</td> --> <td><input type="text" name="userMobile1" placeholder=" 1st Mobile " ></td>
-				                              <td><input type="text" name="userMobile2" placeholder=" 2nd Mobile " ></td> </tr>
-				
-			<tr> <td></td>
-				<!-- <td>Password</td><td>:</td> --><td><input type="text" name="userPassword" placeholder="Password"> </td>
-				<!-- <td>Confirm Password</td><td>:</td> --><td><input type="text" name="confirmPassword" placeholder="Confirm Password"> </td> </tr>
-				
-			<tr> <td></td>
-				<!-- <td>Email Id</td><td>:</td> --><td><input type="text" name="userEmail" placeholder=" Email Id" ></td> </tr>
-							
-				<tr>
-						<!-- <td align="center">User Roll</td><td>:</td>-->
-						<td></td>
-					<td>
-					 <select class="select-style gender" name="roll">
-				            <option value="select">Select User Roll</option>
-				            <option value="admin">Admin</option>
-				            <option value="normal">Normal</option>
-				      </select>
-				     </td>
-				     <td>
-				     	<select class="select-style gender" name="gender">
-				            <option value="select">Select Gender</option>
-				            <option value="male">Male</option>
-				            <option value="female">Female</option>
-				            <option value="others">Other</option>
-				     	</select>
-				  </td>	
-				</tr>
-				
-				<tr> <td></td><td></td><td></td>
-					<td colspan="4" align="center"> <input type="submit" name="save" value="Create User"> </td> </tr>
+				<td>  <a href="">Edit</a>  &nbsp;/ &nbsp;  
+					  <a href=""><font color="red">Delete</font></a>   
+			    </td>
+		 	 </tr>		
+		   </c:forEach>
+							   
 		</table>
 	
 	</form>

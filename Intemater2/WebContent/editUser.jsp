@@ -81,7 +81,7 @@ div {
 		    <a href="newUser.jsp">Change Password</a> |
 		    <a href="showUser.jsp">Show Users</a> |
 		    <a href="newUser.jsp">Logout</a>
-  </h5>
+		</h5>
 <header class="main-header" role="banner">
   <img src="images/user.png" alt="Banner Image" align="center"  height="15%" width="15%"/>
 </header>

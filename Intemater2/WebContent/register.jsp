@@ -67,13 +67,14 @@ div {
 }
 </style>
 	<h5 align="left"> 
-			<a href="newUser.jsp">View Customers</a> |
-		    <a href="newUser.jsp">Send Email</a> |
+			<a href="showCustomer.jsp">View Contacts</a> |
+		    <a href="sendEmail.jsp">Send Email</a> |
 			<a href="register.jsp">Create Contact</a> |
 			<a href="newUser.jsp">Create New User</a> |
-		    <a href="newUser.jsp">Change Password</a> |
-		    <a href="newUser.jsp">Logout</a>
-		</h5>
+		    <a href="changePassword.jsp">Change Password</a> |
+		    <a href="showUser.form">Show Users</a> |
+		    <a href="logout.jsp">Logout</a>
+	</h5>
 <header class="main-header" role="banner">
   <img src="images/Contact-Banner.png" alt="Banner Image" align="center"/>
 </header>
