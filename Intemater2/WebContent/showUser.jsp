@@ -22,19 +22,22 @@
 		    <a href="changePassword.jsp">Change Password</a> |
 		    <a href="logout.jsp">Logout</a>
 		</h5>
-<header class="main-header" role="banner">
+<!-- <header class="main-header" role="banner">
   <img src="images/user.png" alt="Banner Image" align="center"  height="12%" width="12%"/>
-</header>
+</header> -->
 
-<style>
-
-	th {
-        background-color: #4CAF50;
-        color: white;
-    }
-    tr:nth-child(even) {background-color: #f2f2f2}
-
-</style>
+	<style>
+	
+		th {
+	        background-color: #4CAF50;
+	        color: white;
+	    }
+	    
+	    tr:nth-child(even) {background-color: #f2f2f2}
+	
+		h2   {color: #6a6363;}
+		
+	</style>
 </head>
 <body>
 		<h2 align="center"><u>User List</u></h2>
@@ -42,7 +45,8 @@
 		<table  class="responstable" align="center">
 		
 			<tr>
-			   <th>User ID</th> <th>First Name</th> <th>Last Name</th> <th>Gender</th> <th>Role</th> <th>Contact 1</th> <th>Contact 2</th> <th>Email ID</th><th>Edit / Delete</th>
+			   <th>User ID</th> <th>First Name</th> <th>Last Name</th> <th>Gender</th> <th>Role</th> <th>Contact 1</th> <th>Contact 2</th> 
+			   <th>Email ID</th> <th>Status</th> <th>Edit / Delete</th>
 			</tr>
 		
 			<c:forEach var="userList" items="${listOfUser}">
@@ -64,8 +68,14 @@
 				</td>
 				<td>${userList.userEmail }</td>
 				
-				<td>  <a href="">Edit</a>  &nbsp;/ &nbsp;  
-					  <a href=""><font color="red">Delete</font></a>   
+				<td> ${userList.userStatus }</td>
+				
+				<td>  <a href='editUser.form?userId=${userList.userId }'>Edit</a>  
+					  
+					   <c:if test="${userList.userStatus eq 'A'}">
+					    	&nbsp;/ &nbsp;  
+					  		<a href='deleteUser.form?userId=${userList.userId }'><font color="red">Delete</font></a>   
+					  </c:if>
 			    </td>
 		 	 </tr>		
 		   </c:forEach>

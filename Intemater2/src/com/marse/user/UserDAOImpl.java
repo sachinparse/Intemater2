@@ -19,7 +19,6 @@ import org.hibernate.Transaction;
 
 import com.marse.crypto.CryptoUtil;
 import com.marse.hibernate.util.HibernateUtils;
-import com.marse.model.Customer;
 import com.marse.model.User;
 
 public class UserDAOImpl implements UserDAO {
@@ -37,8 +36,7 @@ public class UserDAOImpl implements UserDAO {
 		User objUser=(User) session.get(User.class, userId); 
 		if (null != objUser) {    // this condition for whether the user is exist or not
 			
-			//if (objUser.getUserPassword().equals(password)) {
-			if (new CryptoUtil().decrypt(objUser.getUserPassword()).equals(password)) {
+			if (new CryptoUtil().decrypt(objUser.getUserPassword()).equals(password) && objUser.getUserStatus().equals("A")) {
 				
 				loginStatus=true;
 			} else {
@@ -75,8 +73,20 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public void deleteUser() {
+	public void deleteUser(int userId) {
+		
+		SessionFactory factory=HibernateUtils.getInstance();
+		Session session=factory.openSession();
+		Transaction tx=session.beginTransaction();
+			String hql="UPDATE User u SET u.userStatus= :status WHERE u.userId= :userId";
 
+			int updatedRow=session.createQuery(hql)
+						.setString("status", "I")
+						.setInteger("userId",userId)
+						.executeUpdate();
+			System.out.println("Rows updated from deleteUser() count : "+updatedRow);
+			tx.commit();
+			session.close();
 	}
 
 	@Override
@@ -98,5 +108,36 @@ public class UserDAOImpl implements UserDAO {
 		
 		return list;
 	
+	}
+
+	@Override
+	public void updateUser(User objUser) {
+
+		SessionFactory factory=HibernateUtils.getInstance();
+		Session session=factory.openSession();
+		Transaction tx=session.beginTransaction();
+		
+		session.saveOrUpdate(objUser);
+		
+		tx.commit();
+		session.close();
+		
+		/*String hql="UPDATE User u SET u.firstName= :firstName, u.lastName= :lastName, u.userGender= :userGender, u.userMobile1= :userMobile1," +
+				   " u.userMobile2, u.userEmail= :userEmail, u.roll= :roll, u.userStatus= :userStatus   WHERE u.userId= :userId";
+
+		int updatedRow=session.createQuery(hql)
+					.setString("firstName", objUser.getFirstName())
+					.setString("lastName", objUser.getLastName())
+					.setString("userGender",objUser.getUserGender())
+					.setString("userMobile1", objUser.getUserMobile1())
+					.setString("userMobile2", objUser.getUserMobile2())
+					.setString("userEmail", objUser.getUserEmail())
+					.setString("roll", objUser.getRoll())
+					.setString("userStatus", objUser.getUserStatus())
+					.setInteger("userId",objUser.getUserId())
+					.executeUpdate();
+		System.out.println("Rows updated from deleteUser() count : "+updatedRow);*/
+		
+		
 	}
 }

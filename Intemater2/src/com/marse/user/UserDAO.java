@@ -22,8 +22,9 @@ public interface UserDAO {
 																 IllegalBlockSizeException, BadPaddingException, IOException; 
 	public User getUser(int userId);          // getting current user record
 	public void addUser(User objUser);                    // adding new user.
-	public void deleteUser();				  // deleting an existing user by userId.
+	public void deleteUser(int userId);				  // deleting an existing user by userId.
 	public void changePassword();			  // Changing password of the user
 	public List<User> listOfUser(); // fetching list of all users
+	public void updateUser(User objUser);    // updating the user details
 	
 }

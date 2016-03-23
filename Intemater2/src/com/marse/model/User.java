@@ -45,10 +45,17 @@ public class User {
 	private String userMobile2;
 	@Column()
 	private String userEmail;
-	
+	@Column(length=1)
+	private String userStatus;
 	
 	// setters and getters
 	
+	public String getUserStatus() {
+		return userStatus;
+	}
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
+	}
 	public int getUserId() {
 		return userId;
 	}

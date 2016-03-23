@@ -116,15 +116,16 @@ public class IntematerController {
 	// new user
 	
 	@RequestMapping(value="newUser.form", method=RequestMethod.POST)
-	public  ModelAndView createNewUser(@RequestParam String firstName,
-													@RequestParam String lastName,
-													@RequestParam String gender,
-													@RequestParam String userMobile1,
-													@RequestParam(required=false) String userMobile2,
-													@RequestParam String userPassword,
-													@RequestParam String userEmail,
-													@RequestParam String roll,
-													HttpServletRequest request) throws InvalidKeyException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidAlgorithmParameterException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException{
+	public  ModelAndView createNewUser( @RequestParam String firstName,
+										@RequestParam String lastName,
+										@RequestParam String gender,
+										@RequestParam String userMobile1,
+										@RequestParam(required=false) String userMobile2,
+										@RequestParam String userPassword,
+										@RequestParam String userEmail,
+										@RequestParam String roll,
+										@RequestParam String userStatus,
+										HttpServletRequest request) throws InvalidKeyException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidAlgorithmParameterException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException{
 		
 		ModelAndView objModel=new ModelAndView(); 
 		// first checking session
@@ -159,6 +160,7 @@ public class IntematerController {
 				objUser.setUserMobile2(userMobile2);
 				objUser.setUserGender(gender);
 				objUser.setUserPassword(new CryptoUtil().encrypt(userPassword));
+				objUser.setUserStatus(userStatus);
 				
 				UserDAO objUserDAO=DAOFactory.getInstanceOfUser();
 
@@ -203,11 +205,140 @@ public class IntematerController {
 						List<User> listOfUser=objUserDAO.listOfUser();
 						
 						objModel.addObject("listOfUser", listOfUser );
-						objModel.setViewName("showuser");
+						objModel.setViewName("showUser");
 						
 						return objModel;
 					}
 				}
+	}
+
+	// fetch the user details of the selected userId and displays on the ediUser.jsp page
+	@RequestMapping(value="editUser.form", method=RequestMethod.GET)
+	public ModelAndView editUser(@RequestParam int userId, HttpServletRequest request){
+		
+		ModelAndView objModel=new ModelAndView();
+		
+		HttpSession objSession= request.getSession(false);
+		
+		if(objSession==null){
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			if(objSession.getAttribute("objUser")==null){
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+					UserDAO objUserDAO=DAOFactory.getInstanceOfUser();
+					User objUser=new User();
+					objUser=objUserDAO.getUser(userId);  //  fetched whole record of the deleting user
+					
+					objModel.addObject("objUser", objUser);
+					objModel.setViewName("editUser");
+					
+					return objModel;
+			}
+		}
+		
+	}
+	
+	
+	// updating the selected user
+	@RequestMapping(value="updateUser.form", method=RequestMethod.POST)
+	public ModelAndView updateUser( @RequestParam int userId,
+									@RequestParam String firstName,
+									@RequestParam String lastName,
+									@RequestParam String gender,
+									@RequestParam String userMobile1,
+									@RequestParam(required=false) String userMobile2,
+									@RequestParam String userEmail,
+									@RequestParam String roll,
+									@RequestParam String userStatus,
+									HttpServletRequest request){
+							
+		ModelAndView objModel=new ModelAndView();
+		
+		HttpSession objSession= request.getSession(false);
+		
+		if(objSession==null){
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			if(objSession.getAttribute("objUser")==null){
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+					UserDAO objUserDAO=DAOFactory.getInstanceOfUser();
+					User objUser=new User();
+					
+					// keeping all values of updated user into the User object
+					objUser.setUserId(userId);
+					objUser.setFirstName(firstName);
+					objUser.setLastName(lastName);
+					objUser.setRoll(roll);
+					objUser.setUserEmail(userEmail);
+					objUser.setUserMobile1(userMobile1);
+					objUser.setUserMobile2(userMobile2);
+					objUser.setUserGender(gender);
+					objUser.setUserStatus(userStatus);
+					
+					objUserDAO.updateUser(objUser);
+					
+					List<User> listOfUser=objUserDAO.listOfUser();
+					
+					objModel.addObject("listOfUser", listOfUser);
+					objModel.setViewName("showUser");
+					
+					return objModel;
+			}
+		}
+		
+	}
+	
+	// deleting the selected user (nothing but update the status flag from 'A' to 'I')
+	
+	@RequestMapping(value="deleteUser.form", method=RequestMethod.GET)
+	public ModelAndView deleteUser( @RequestParam int userId,
+									HttpServletRequest request){
+		
+		System.out.println("In deleterUser() method Controller");
+        ModelAndView objModel=new ModelAndView();
+		HttpSession objSession= request.getSession(false);
+		if(objSession==null){
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			if(objSession.getAttribute("objUser")==null){
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+					UserDAO objUserDAO=DAOFactory.getInstanceOfUser();
+					
+					objUserDAO.deleteUser(userId);
+					
+					List<User> listOfUser=objUserDAO.listOfUser();
+					
+					objModel.addObject("listOfUser", listOfUser);
+					objModel.setViewName("showUser");	
+					
+				return objModel;	
+			}
+		}
+		
+		
+		
+		
 	}
 	
 }

@@ -107,15 +107,26 @@ div {
 			 </tr>	
 				
 			<tr> <td></td>
-				<!-- <td>Mobile No.</td><td>:</td> --> <td><input type="text" name="userMobile1" placeholder=" 1st Mobile " ></td>
-				                              <td><input type="text" name="userMobile2" placeholder=" 2nd Mobile " ></td> </tr>
+				<!-- <td>Mobile No.</td><td>:</td> --> <td><input type="text" name="userMobile1" placeholder="1st Mobile " ></td>
+				                              <td><input type="text" name="userMobile2" placeholder="2nd Mobile " ></td> </tr>
 				
 			<tr> <td></td>
 				<!-- <td>Password</td><td>:</td> --><td><input type="text" name="userPassword" placeholder="Password"> </td>
 				<!-- <td>Confirm Password</td><td>:</td> --><td><input type="text" name="confirmPassword" placeholder="Confirm Password"> </td> </tr>
 				
 			<tr> <td></td>
-				<!-- <td>Email Id</td><td>:</td> --><td><input type="text" name="userEmail" placeholder=" Email Id" ></td> </tr>
+				<!-- <td>Email Id</td><td>:</td> --><td><input type="text" name="userEmail" placeholder=" Email Id" ></td> 
+				
+						
+				  <td>
+					 <select class="select-style gender" name="userStatus">
+				            <option value="select">Select Status</option>
+				           
+				            		<option value="A">Active</option>
+				            		<option value="I">Inactive</option>
+				      </select>
+				  </td>
+			  </tr>
 							
 				<tr>
 						<!-- <td align="center">User Roll</td><td>:</td>-->

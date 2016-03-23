@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-<title>Home</title>
+<title>Edit User</title>
 <%@ include file="genericinclude.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -18,6 +18,7 @@
 body {background-color:white;}
 h2   {color:#2E9AFE;}
 h3   {color:#2E9AFE;}
+b    {color:#A4A4A4;}
 
 input[type=text], textarea {
   -webkit-transition: all 0.30s ease-in-out;
@@ -89,56 +90,78 @@ div {
 </head>
 <body>
 		<!-- <h1 align="center"><font color="#808000"><u>Create New Contact</u></font></h1> -->
-		<h2 align="center"><u>Add User</u></h2>
+		<h2 align="center"><u>Update User</u></h2>
 
-	<form name="homePage" action="newUser.form" method="post">
+	<form name="updateUserPage" action="updateUser.form" method="post">
+		
+		<input type="hidden" name="userId" value="${objUser.userId}">
+		
 		
 		<table align="center" border="0">
-		
+			<tr><td></td><td><font size="2 px"><b>First Name:</b></font></td> <td><font size="2 px"><b>Last Name:</b></font></td></tr>
 			<tr> <td></td>
-				<!-- <td >First Name</td><td>:</td> --><td><input type="text" name="firstName" placeholder="First Name"></td> 
-				<!-- <td >Last Name</td><td>:</td> --><td><input type="text" name="lastName" placeholder="Last Name"></td> </tr>
+				<td><input type="text" name="firstName" id="idMale" placeholder="First Name" value="${objUser.firstName}"></td> 
+				<td><input type="text" name="lastName" placeholder="Last Name" value="${objUser.lastName}"></td> </tr>
 			<tr> <td></td>
-				<!-- <td >Last Name</td><td>:</td><td><input type="text" name="lastName" placeholder="Last Name"></td> -->
-			<!-- <td align="center">Gender</td><td>:</td> --><td>
-					
-				</td></tr>	
+				<td></td>
+			</tr>	
+			<tr><td></td><td><font size="2 px"><b>Contact 1:</b></font></td> <td><font size="2 px"><b>Contact 2:</b></font></td></tr>	
+			<tr> <td></td>
+				<td><input type="text" name="userMobile1" placeholder=" 1st Mobile " value="${objUser.userMobile1}"></td>
+				<td><input type="text" name="userMobile2" placeholder=" 2nd Mobile " value="${objUser.userMobile2}"></td> </tr>
+			
+			<tr><td></td><td><font size="2 px"><b>Email Id:</b></font></td> <td><font size="2 px"><b>Status:</b></font></td></tr>	
+			<tr> <td></td>
+				<td><input type="text" name="userEmail" placeholder=" Email Id" value="${objUser.userEmail}"></td>
+				<td>
+					<select class="select-style gender" name="userStatus">
+				            <option value="select">Select Status</option>
+				           
+				            <c:if test="${objUser.userStatus eq 'A'}">
+				            		<option value="A" selected>Active</option>
+				            </c:if>
+				            <c:if test="${objUser.userStatus eq 'I'}">
+				            		<option value="I" selected>Inactive</option>
+				            </c:if>
+				      </select>
 				
-			 </tr>	
+				</td> </tr>
 				
-			<tr> <td></td>
-				<!-- <td>Mobile No.</td><td>:</td> --> <td><input type="text" name="userMobile1" placeholder=" 1st Mobile " ></td>
-				                              <td><input type="text" name="userMobile2" placeholder=" 2nd Mobile " ></td> </tr>
-				
-			<tr> <td></td>
-				<!-- <td>Password</td><td>:</td> --><td><input type="text" name="userPassword" placeholder="Password"> </td>
-				<!-- <td>Confirm Password</td><td>:</td> --><td><input type="text" name="confirmPassword" placeholder="Confirm Password"> </td> </tr>
-				
-			<tr> <td></td>
-				<!-- <td>Email Id</td><td>:</td> --><td><input type="text" name="userEmail" placeholder=" Email Id" ></td> </tr>
-							
+				<tr><td></td><td><font size="2 px"><b>Role:</b></font></td> <td><font size="2 px"><b>Normal:</b></font></td></tr>			
 				<tr>
-						<!-- <td align="center">User Roll</td><td>:</td>-->
 						<td></td>
 					<td>
 					 <select class="select-style gender" name="roll">
 				            <option value="select">Select User Roll</option>
-				            <option value="admin">Admin</option>
-				            <option value="normal">Normal</option>
+				           
+				            <c:if test="${objUser.roll eq 'admin'}">
+				            		<option value="admin" selected>Admin</option>
+				            </c:if>
+				            <c:if test="${objUser.roll eq 'normal'}">
+				            		<option value="admin" selected>Normal</option>
+				            </c:if>
+				            
 				      </select>
 				     </td>
 				     <td>
 				     	<select class="select-style gender" name="gender">
 				            <option value="select">Select Gender</option>
-				            <option value="male">Male</option>
-				            <option value="female">Female</option>
-				            <option value="others">Other</option>
+				            
+				            <c:if test="${objUser.userGender eq 'male'}">
+				            		<option value="male" selected>Male</option>
+				            </c:if>
+				            <c:if test="${objUser.userGender eq 'female'}">
+				            		<option value="female" selected>Female</option>
+				            </c:if>
+				            <c:if test="${objUser.userGender eq 'others'}">
+				            		<option value="others" selected>Others</option>
+				            </c:if>
 				     	</select>
 				  </td>	
 				</tr>
 				
 				<tr> <td></td><td></td><td></td>
-					<td colspan="4" align="center"> <input type="submit" name="save" value="Create User"> </td> </tr>
+					<td colspan="4" align="center"> <input type="submit" name="save" value="Update User"> </td> </tr>
 		</table>
 	
 	</form>
