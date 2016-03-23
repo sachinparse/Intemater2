@@ -6,7 +6,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.crypto.BadPaddingException;
@@ -58,6 +58,10 @@ public class IntematerController {
 			
 			objUser=objUserDAO.getUser(userId);  //  fetched whole record of the current user
 			
+			/*// fetching list of all the users
+			List<User> listOfUser=objUserDAO.listOfUser();
+			objModel.addObject("listOfUser", listOfUser );*/
+			
 			HttpSession objSession=request.getSession(false);
 			objSession.setAttribute("objUser", objUser);   // kept current user object into HttpSession for session handling
 			
@@ -76,7 +80,7 @@ public class IntematerController {
 	// creating new contact of Customer
 	
 	@RequestMapping(value="register.form", method=RequestMethod.POST)
-	public @ResponseBody ModelAndView createNewCustomer( HttpServletRequest request){
+	public  ModelAndView createNewCustomer( HttpServletRequest request){
 		
 		ModelAndView objModel=new ModelAndView(); 
 		// first checking session
@@ -112,7 +116,7 @@ public class IntematerController {
 	// new user
 	
 	@RequestMapping(value="newUser.form", method=RequestMethod.POST)
-	public @ResponseBody ModelAndView createNewUser(@RequestParam String firstName,
+	public  ModelAndView createNewUser(@RequestParam String firstName,
 													@RequestParam String lastName,
 													@RequestParam String gender,
 													@RequestParam String userMobile1,
@@ -175,32 +179,35 @@ public class IntematerController {
 	}
 	
 	// fetching list of users
-	@RequestMapping(value="showUser.form", method=RequestMethod.GET)
-	public @ResponseBody ModelAndView showUsers(){
+	@RequestMapping(value="showUsers.form", method=RequestMethod.GET)
+	public ModelAndView showUsers(HttpServletRequest request){
 	
-		ModelAndView objModel=new ModelAndView();
 		
-		UserDAO objUserDAO=DAOFactory.getInstanceOfUser();
-
-		// fetching list of all the users
-		List<User> listOfUser=objUserDAO.listOfUser();
-		
-		
-		/*Iterator<User> it=listOfUser.iterator();
-		
-		User u=new User();
-		while(it.hasNext()){
-			
-			u=it.next();
-			System.out.println(u.getUserId());
-			System.out.println(u.getFirstName()+" "+u.getLastName());
-			System.out.println(u.getUserGender()+" "+u.getUserEmail());
-		}*/
-		
-		
-		objModel.addObject("listOfUser", listOfUser);
-		objModel.setViewName("showUser");
-		return objModel;
+		// first checking session
+				HttpSession objSession= request.getSession(false);
+				ModelAndView objModel=new ModelAndView();
+				if(objSession==null){
+					String message="Time out,<br> Please login again...!";
+					objModel.addObject("message", message);
+					objModel.setViewName("login");
+					return objModel;
+				}else{
+					if(objSession.getAttribute("objUser")==null){
+						String message="Invalid Session,<br> Please login again...!";
+						objModel.addObject("message", message);
+						objModel.setViewName("login");
+						return objModel;
+					}else{
+						System.out.println("session objuser is not null");
+						UserDAO objUserDAO=DAOFactory.getInstanceOfUser();
+						List<User> listOfUser=objUserDAO.listOfUser();
+						
+						objModel.addObject("listOfUser", listOfUser );
+						objModel.setViewName("showuser");
+						
+						return objModel;
+					}
+				}
 	}
 	
 }

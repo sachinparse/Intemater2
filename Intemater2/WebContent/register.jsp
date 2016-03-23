@@ -72,7 +72,7 @@ div {
 			<a href="register.jsp">Create Contact</a> |
 			<a href="newUser.jsp">Create New User</a> |
 		    <a href="changePassword.jsp">Change Password</a> |
-		    <a href="showUser.form">Show Users</a> |
+		    <a href="showUsers.form">Show Users</a> |
 		    <a href="logout.jsp">Logout</a>
 	</h5>
 <header class="main-header" role="banner">
@@ -81,7 +81,6 @@ div {
 
 </head>
 <body>
-		
 		
 		<h2 align="center"><u>Create New Contact</u></h2>
 
@@ -153,6 +152,8 @@ div {
 					<td colspan="4" align="center"> <input type="submit" name="save" value="Save Contact"> </td> </tr>
 		</table>
 	
+	
+		
 	</form>
 
 </body>
