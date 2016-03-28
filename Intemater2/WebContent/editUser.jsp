@@ -75,13 +75,13 @@ div {
 }
 </style>
   <h5 align="left"> 
-			<a href="newUser.jsp">View Contacts</a> |
-		    <a href="newUser.jsp">Send Email</a> |
-			<a href="register.jsp">Create Contact</a> |
-			<a href="newUser.jsp">Create User</a> |
-		    <a href="newUser.jsp">Change Password</a> |
-		    <a href="showUser.jsp">Show Users</a> |
-		    <a href="newUser.jsp">Logout</a>
+			<a href="newUser.form">View Contacts</a> |
+		    <a href="newUser.form">Send Email</a> |
+			<a href="register.form">Create Contact</a> |
+			<a href="newUser.form">Create User</a> |
+		    <a href="newUser.form">Change Password</a> |
+		    <a href="showUser.form">Show Users</a> |
+		    <a href="newUser.form">Logout</a>
 		</h5>
 <header class="main-header" role="banner">
   <img src="images/user.png" alt="Banner Image" align="center"  height="15%" width="15%"/>
@@ -117,12 +117,18 @@ div {
 					<select class="select-style gender" name="userStatus">
 				            <option value="select">Select Status</option>
 				           
-				            <c:if test="${objUser.userStatus eq 'A'}">
+				            <%-- <c:if test="${objUser.userStatus eq 'A'}">
 				            		<option value="A" selected>Active</option>
+				            		<option value="I" >Inactive</option>
 				            </c:if>
 				            <c:if test="${objUser.userStatus eq 'I'}">
+				            		<option value="A" >Active</option>
 				            		<option value="I" selected>Inactive</option>
-				            </c:if>
+				            </c:if> --%>
+				            
+				            <option value="A" ${objUser.userStatus=="A"? 'selected':'' }>Active</option>
+						  <option value="I" ${objUser.userStatus=="I"? 'selected':'' }>Inactive</option>
+						  
 				      </select>
 				
 				</td> </tr>

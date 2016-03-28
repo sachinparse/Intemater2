@@ -49,7 +49,9 @@ public class Customer {
 
 	// bank details
 
-	@Column()
+	private Bank bank;
+	
+	/*@Column()
 	private String bankName;
 	@Column()
 	private String bankBranch;
@@ -58,7 +60,7 @@ public class Customer {
 	@Column()
 	private String ifsc;
 	@Column()
-	private String micr;
+	private String micr;*/
 	@Column()
 	private String catagory;
 
@@ -142,7 +144,7 @@ public class Customer {
 		this.address = address;
 	}
 
-	public String getBankName() {
+	/*public String getBankName() {
 		return bankName;
 	}
 
@@ -180,7 +182,7 @@ public class Customer {
 
 	public void setMicr(String micr) {
 		this.micr = micr;
-	}
+	}*/
 
 	public String getCatagory() {
 		return catagory;

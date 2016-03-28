@@ -15,12 +15,12 @@
 
 
   <h5 align="left"> 
-			<a href="showCustomer.jsp">View Contacts</a> |
-		    <a href="sendEmail.jsp">Send Email</a> |
-			<a href="register.jsp">Create Contact</a> |
-			<a href="newUser.jsp">Create User</a> |
-		    <a href="changePassword.jsp">Change Password</a> |
-		    <a href="logout.jsp">Logout</a>
+			<a href="showCustomer.form">View Contacts</a> |
+		    <a href="sendEmail.form">Send Email</a> |
+			<a href="register.form">Create Contact</a> |
+			<a href="newUser.form">Create User</a> |
+		    <a href="changePassword.form">Change Password</a> |
+		    <a href="logout.form">Logout</a>
 		</h5>
 <!-- <header class="main-header" role="banner">
   <img src="images/user.png" alt="Banner Image" align="center"  height="12%" width="12%"/>

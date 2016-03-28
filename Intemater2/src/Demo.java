@@ -15,9 +15,6 @@ public class Demo {
 		Customer objCustomer=new Customer();
 		
 		objCustomer.setName("rohit");
-		objCustomer.setAcc("4585475945");
-		objCustomer.setBankName("SBI");
-		objCustomer.setBankBranch("Mumbai");
 		objCustomer.setEmail("model@simple.com");
 		
 		customerDAO.addCustomer(objCustomer);
@@ -36,8 +33,6 @@ public class Demo {
 			System.out.println(objCustomer.getEmail());
 			System.out.println(objCustomer.getPan());
 			System.out.println(objCustomer.getAddress());
-			System.out.println(objCustomer.getBankName());
-			System.out.println(objCustomer.getAcc());
 			
 		}
 		
