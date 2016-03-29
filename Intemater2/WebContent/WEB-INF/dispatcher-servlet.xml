@@ -13,14 +13,15 @@
         				   http://www.springframework.org/schema/util/spring-util.xsd">
         				   
 	<context:component-scan base-package="com.marse.*"></context:component-scan>
+<!-- 
+	<bean id="customer" class="com.marse.model.Customer">
+		<constructor-arg>
+			<bean class="com.marse.model.Bank" />
+		</constructor-arg>
+	</bean> -->
 
-	<!-- Constructor injection -->
-	<bean id="customer"   class="com.marse.model.Customer">
-    	<constructor-arg ref="bank"/>
-	</bean>
+	<!-- <bean id="bank" class="com.marse.model.Bank"/> -->
 	
-	<bean id="bank"   class="com.marse.model.Bank" autowire="constructor"/>
-
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="jspViewResolver">
 		<property name="viewClass"  value="org.springframework.web.servlet.view.JstlView"></property>
 		<property name="prefix" value="/"></property>

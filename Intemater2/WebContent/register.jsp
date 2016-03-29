@@ -72,7 +72,7 @@ div {
 			<a href="register.form">Create Contact</a> |
 			<a href="newUser.form">Create New User</a> |
 		    <a href="changePassword.form">Change Password</a> |
-		    <a href="showUsers.form">Show Users</a> |
+		    <a href="showUsers.form?recperpage=25">Show Users</a> |
 		    <a href="logout.form">Logout</a>
 	</h5>
 <header class="main-header" role="banner">
@@ -85,6 +85,8 @@ div {
 		<h2 align="center"><u>Create New Contact</u></h2>
 
 	<form name="homePage" action="register.form" method="post">
+		
+		<input type="hidden" name="currentPage" value="0"/>
 		
 		<table align="center" border="0">
 		

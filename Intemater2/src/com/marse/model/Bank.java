@@ -1,7 +1,10 @@
 package com.marse.model;
 
 import javax.persistence.Column;
-
+import javax.persistence.Entity;
+import javax.persistence.Table;
+@Entity
+@Table(name="bank")
 public class Bank {
 	
 	@Column()
@@ -17,17 +20,6 @@ public class Bank {
 	@Column()
 	private String catagory;
 	
-
-	// Parameterized constructor 
-	public Bank(String bankName, String bankBranch, String acc, String ifsc, String micr, String catagory) {
-		super();
-		this.bankName = bankName;
-		this.bankBranch = bankBranch;
-		this.acc = acc;
-		this.ifsc = ifsc;
-		this.micr = micr;
-		this.catagory = catagory;
-	}
 	
 	// setters and getters
 	

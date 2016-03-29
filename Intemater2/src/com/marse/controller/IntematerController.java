@@ -168,7 +168,7 @@ public class IntematerController {
 				
 				// fetching list of all the users
 				
-				List<User> listOfUser=objUserDAO.listOfUser();
+				List<User> listOfUser=objUserDAO.listOfUser(0,15);
 				
 				objModel.addObject("listOfUser", listOfUser);
 				objModel.setViewName("showUser");
@@ -182,8 +182,20 @@ public class IntematerController {
 	
 	// fetching list of users
 	@RequestMapping(value="showUsers.form", method=RequestMethod.GET)
-	public ModelAndView showUsers(HttpServletRequest request){
+	public ModelAndView showUsers(@RequestParam (value="currentPage",required=false) String currentPage,
+								  @RequestParam (value="recperpage",required=false) String recperpage,
+								  HttpServletRequest request){
 	
+		int cPage=0;
+		if (null==currentPage) {
+			cPage=1;
+		}else{
+			cPage=Integer.parseInt(currentPage);
+		}
+		
+		System.out.println("Default page selected : "+recperpage);
+		int noOfRecordsPerPage=Integer.parseInt(recperpage);
+		System.out.println("noOfRecordsPerPage : "+noOfRecordsPerPage);
 		
 		// first checking session
 				HttpSession objSession= request.getSession(false);
@@ -201,12 +213,29 @@ public class IntematerController {
 						return objModel;
 					}else{
 						System.out.println("session objuser is not null");
-						UserDAO objUserDAO=DAOFactory.getInstanceOfUser();
-						List<User> listOfUser=objUserDAO.listOfUser();
 						
+						UserDAO objUserDAO=DAOFactory.getInstanceOfUser();
+						
+						int offSet=(cPage * noOfRecordsPerPage)-noOfRecordsPerPage;
+						System.out.println("offset="+offSet);
+						List<User> listOfUser=objUserDAO.listOfUser(offSet, noOfRecordsPerPage);
+						int userCount=objUserDAO.userCount();
+						
+						 int  noOfPages = (int) Math.ceil(userCount * 1.0 / noOfRecordsPerPage);
+						   
+						 	System.out.println("Total Pages= "+noOfPages);
+		  					System.out.println("new pageno="+cPage);
+		  					
+					    if(noOfPages<=0){
+						   noOfPages=1;
+					    }
+		   
 						objModel.addObject("listOfUser", listOfUser );
 						objModel.setViewName("showUser");
-						
+						objModel.addObject("noOfPages",noOfPages);
+						objModel.addObject("currentPage",cPage);
+						System.out.println("Putting value to objModel, No. of records per page :"+noOfRecordsPerPage);
+						objModel.addObject("noOfRecordsPerPage",noOfRecordsPerPage);
 						return objModel;
 					}
 				}
@@ -291,7 +320,7 @@ public class IntematerController {
 					
 					objUserDAO.updateUser(objUser);
 					
-					List<User> listOfUser=objUserDAO.listOfUser();
+					List<User> listOfUser=objUserDAO.listOfUser(0,15);
 					
 					objModel.addObject("listOfUser", listOfUser);
 					objModel.setViewName("showUser");
@@ -327,7 +356,7 @@ public class IntematerController {
 					
 					objUserDAO.deleteUser(userId);
 					
-					List<User> listOfUser=objUserDAO.listOfUser();
+					List<User> listOfUser=objUserDAO.listOfUser(0,15);
 					
 					objModel.addObject("listOfUser", listOfUser);
 					objModel.setViewName("showUser");	

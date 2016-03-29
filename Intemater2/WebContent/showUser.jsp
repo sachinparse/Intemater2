@@ -41,6 +41,30 @@
 </head>
 <body>
 		<h2 align="center"><u>User List</u></h2>
+	<form name="showForm" action="showUsers.form" method="get">
+		
+		<!-- <input type="hidden" name="recperpage" value="1"/> -->
+		<table class="responstable" align="center">
+				<tr> <td>No of Records/Page : </td>
+				<td> 
+					 <select	name="recperpage" id="idrecperpage" onchange="this.form.submit()">
+							
+							 <option value="25" ${"25"=="${noOfRecordsPerPage}"? 'selected':'' }>25</option>
+							 <option value="50" ${"50"=="${noOfRecordsPerPage}"? 'selected':'' }>50</option>
+							 <option value="75" ${"75"=="${noOfRecordsPerPage}"? 'selected':'' }>75</option>
+							 <option value="100" ${"100"=="${noOfRecordsPerPage}"? 'selected':'' }>100</option>
+							 <option value="150" ${"150"=="${noOfRecordsPerPage}"? 'selected':'' }>150</option>
+							 <option value="200" ${"200"=="${noOfRecordsPerPage}"? 'selected':'' }>200</option>
+							 <option value="500" ${"500"=="${noOfRecordsPerPage}"? 'selected':'' }>500</option>
+							 <option value="1000" ${"1000"=="${noOfRecordsPerPage}"? 'selected':'' }>1000</option>
+					</select>
+			
+			
+			
+				</td>
+			</tr>
+		</table>
+		<br>
 
 		<table  class="responstable" align="center">
 		
@@ -81,6 +105,25 @@
 		   </c:forEach>
 							   
 		</table>
-
+		<br>
+		<table align="center">
+		  <tr>
+		  		 <td>Pages :</td>
+			<c:forEach begin="1" end="${noOfPages}" var="i">
+			      <td></td>
+			      <td>
+					<c:choose>
+						<c:when test="${currentPage eq i}">
+						    <a href="showUsers.form?currentPage=${i}&recperpage=${noOfRecordsPerPage}"><font color="red">${i}</font></a>
+						</c:when>
+						<c:otherwise>
+							<a href="showUsers.form?currentPage=${i}&recperpage=${noOfRecordsPerPage}">${i}</a>
+						</c:otherwise>
+					</c:choose>
+   				  </td>				
+			</c:forEach>
+		</tr>	
+		</table>
+	</form>
 </body>
 </html>

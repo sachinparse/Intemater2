@@ -12,10 +12,12 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 
 import com.marse.crypto.CryptoUtil;
 import com.marse.hibernate.util.HibernateUtils;
@@ -94,7 +96,7 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 
-	public List<User> listOfUser(){
+	public List<User> listOfUser(int offSet, int records){
 		
 		SessionFactory factory=HibernateUtils.getInstance();
 		Session session=factory.openSession();
@@ -103,7 +105,8 @@ public class UserDAOImpl implements UserDAO {
 		String hqlQuery="From User u";
 		
 		Query query=session.createQuery(hqlQuery);
-		
+		query.setFirstResult(offSet);
+		query.setMaxResults(records);
 		List<User> list=query.list();
 		
 		return list;
@@ -139,5 +142,21 @@ public class UserDAOImpl implements UserDAO {
 		System.out.println("Rows updated from deleteUser() count : "+updatedRow);*/
 		
 		
+	}
+
+	@Override
+	public int userCount() {
+
+		SessionFactory factory=HibernateUtils.getInstance();
+		Session session=factory.openSession();
+		
+		String hqlQuery="SELECT count(*) From User u";
+		
+		long count = (Long)session.createQuery(hqlQuery).uniqueResult();
+		
+		int cnt=(int) count;
+		
+		System.out.println("User count: "+count);
+		return cnt;
 	}
 }

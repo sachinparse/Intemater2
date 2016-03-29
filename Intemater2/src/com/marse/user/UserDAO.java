@@ -24,7 +24,8 @@ public interface UserDAO {
 	public void addUser(User objUser);                    // adding new user.
 	public void deleteUser(int userId);				  // deleting an existing user by userId.
 	public void changePassword();			  // Changing password of the user
-	public List<User> listOfUser(); // fetching list of all users
+	public List<User> listOfUser(int offSet, int records); // fetching list of all users
 	public void updateUser(User objUser);    // updating the user details
+	public int userCount();            // getting the count of all users
 	
 }

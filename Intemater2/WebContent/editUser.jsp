@@ -127,7 +127,7 @@ div {
 				            </c:if> --%>
 				            
 				            <option value="A" ${objUser.userStatus=="A"? 'selected':'' }>Active</option>
-						  <option value="I" ${objUser.userStatus=="I"? 'selected':'' }>Inactive</option>
+						    <option value="I" ${objUser.userStatus=="I"? 'selected':'' }>Inactive</option>
 						  
 				      </select>
 				
