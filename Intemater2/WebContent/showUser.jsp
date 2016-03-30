@@ -48,19 +48,17 @@
 				<tr> <td>No of Records/Page : </td>
 				<td> 
 					 <select	name="recperpage" id="idrecperpage" onchange="this.form.submit()">
-							
-							 <option value="25" ${"25"=="${noOfRecordsPerPage}"? 'selected':'' }>25</option>
-							 <option value="50" ${"50"=="${noOfRecordsPerPage}"? 'selected':'' }>50</option>
-							 <option value="75" ${"75"=="${noOfRecordsPerPage}"? 'selected':'' }>75</option>
-							 <option value="100" ${"100"=="${noOfRecordsPerPage}"? 'selected':'' }>100</option>
-							 <option value="150" ${"150"=="${noOfRecordsPerPage}"? 'selected':'' }>150</option>
-							 <option value="200" ${"200"=="${noOfRecordsPerPage}"? 'selected':'' }>200</option>
-							 <option value="500" ${"500"=="${noOfRecordsPerPage}"? 'selected':'' }>500</option>
-							 <option value="1000" ${"1000"=="${noOfRecordsPerPage}"? 'selected':'' }>1000</option>
+					    <%-- <option value="2" ${noOfRecordsPerPage==2?'selected':'' }>2</option> --%>
+						<option value="25" ${noOfRecordsPerPage==25?'selected':'' }>25</option>
+						<option value="50" ${noOfRecordsPerPage==50?'selected':'' }>50</option>
+						<option value="100" ${noOfRecordsPerPage==100?'selected':'' }>100</option>
+						<option value="200" ${noOfRecordsPerPage==200?'selected':'' }>200</option>
+						<option value="300" ${noOfRecordsPerPage==300?'selected':'' }>300</option>
+						<option value="500" ${noOfRecordsPerPage==500?'selected':'' }>500</option>
+						<option value="800" ${noOfRecordsPerPage==800?'selected':'' }>800</option>
+						<option value="1000" ${noOfRecordsPerPage==1000?'selected':'' }>1000</option>
+						<option value="2000" ${noOfRecordsPerPage==2000?'selected':'' }>2000</option>
 					</select>
-			
-			
-			
 				</td>
 			</tr>
 		</table>

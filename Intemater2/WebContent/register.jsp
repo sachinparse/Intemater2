@@ -72,7 +72,7 @@ div {
 			<a href="register.form">Create Contact</a> |
 			<a href="newUser.form">Create New User</a> |
 		    <a href="changePassword.form">Change Password</a> |
-		    <a href="showUsers.form?recperpage=25">Show Users</a> |
+		    <a href="showUsers.form?recperpage=2">Show Users</a> |
 		    <a href="logout.form">Logout</a>
 	</h5>
 <header class="main-header" role="banner">
@@ -138,7 +138,7 @@ div {
 					<td>
 						<select name="category">
 								<option value="0">Select Category</option>
-								<option vlaue="sale">Sale</option>
+								<option value="sale">Sale</option>
 								<option value="service">Service</option>
 								<option value="excise">Excise</option>
 								<option value="income">Income</option>

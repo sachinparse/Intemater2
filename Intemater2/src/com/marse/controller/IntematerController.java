@@ -113,7 +113,7 @@ public class IntematerController {
 		}// end of else
 	}
 	
-	// new user
+// 30032016 17:04  new user ****************************USER MODULE CODE********************************************************************
 	
 	@RequestMapping(value="newUser.form", method=RequestMethod.POST)
 	public  ModelAndView createNewUser( @RequestParam String firstName,
@@ -193,9 +193,7 @@ public class IntematerController {
 			cPage=Integer.parseInt(currentPage);
 		}
 		
-		System.out.println("Default page selected : "+recperpage);
 		int noOfRecordsPerPage=Integer.parseInt(recperpage);
-		System.out.println("noOfRecordsPerPage : "+noOfRecordsPerPage);
 		
 		// first checking session
 				HttpSession objSession= request.getSession(false);
@@ -229,12 +227,11 @@ public class IntematerController {
 					    if(noOfPages<=0){
 						   noOfPages=1;
 					    }
-		   
+					    
 						objModel.addObject("listOfUser", listOfUser );
 						objModel.setViewName("showUser");
 						objModel.addObject("noOfPages",noOfPages);
 						objModel.addObject("currentPage",cPage);
-						System.out.println("Putting value to objModel, No. of records per page :"+noOfRecordsPerPage);
 						objModel.addObject("noOfRecordsPerPage",noOfRecordsPerPage);
 						return objModel;
 					}
@@ -370,4 +367,5 @@ public class IntematerController {
 		
 	}
 	
+// *******************************************************USER MODULE CODE COMPLETED********************************************************
 }
