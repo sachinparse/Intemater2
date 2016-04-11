@@ -6,7 +6,6 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.crypto.BadPaddingException;
@@ -19,11 +18,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.marse.category.CategoryDAO;
 import com.marse.crypto.CryptoUtil;
 import com.marse.daofactory.DAOFactory;
+import com.marse.model.Category;
 import com.marse.model.User;
 import com.marse.user.UserDAO;
 
@@ -368,4 +368,160 @@ public class IntematerController {
 	}
 	
 // *******************************************************USER MODULE CODE COMPLETED********************************************************
+	
+	
+	
+	@RequestMapping(value="showCategory.form", method=RequestMethod.GET)
+	public ModelAndView showCategory(HttpServletRequest request){
+		
+		
+		ModelAndView objModel=new ModelAndView();
+		
+		HttpSession objSession= request.getSession(false);
+		
+		if(objSession==null){
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			if(objSession.getAttribute("objUser")==null){
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+					CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
+					
+					List<Category> listOfCategory=objCategoryDAO.listOfCategory();
+					
+					objModel.addObject("listOfCategory", listOfCategory);
+					objModel.setViewName("showCategory");
+					
+					return objModel;
+			}
+		}
+		
+	}
+	// adding new category 
+	@RequestMapping(value="addCategory.form", method=RequestMethod.POST)
+	public ModelAndView addCategory( @RequestParam String categoryName,
+									 HttpServletRequest request){
+		
+		
+		ModelAndView objModel=new ModelAndView();
+		HttpSession objSession= request.getSession(false);
+		
+		if(objSession==null){
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			if(objSession.getAttribute("objUser")==null){
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+					CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
+					Category objCategory=new Category();
+
+					objCategory.setCategoryName(categoryName);
+				
+					objCategoryDAO.addCategory(objCategory);
+					
+					List<Category> listOfCategory=objCategoryDAO.listOfCategory();
+					
+					objModel.addObject("listOfCategory", listOfCategory);
+					objModel.setViewName("showCategory");
+					
+					return objModel;
+			}
+		}
+		
+	}
+	// updating category by using Id
+	@RequestMapping(value="updateCategory.form", method=RequestMethod.POST)
+	public ModelAndView updateCategory(@RequestParam int categoryId,
+									   @RequestParam String categoryName,
+									   HttpServletRequest request){
+		
+		
+		ModelAndView objModel=new ModelAndView();
+		HttpSession objSession= request.getSession(false);
+		
+		if(objSession==null){
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			if(objSession.getAttribute("objUser")==null){
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+					CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
+					Category objCategory=new Category();
+
+					objCategory.setCategoryId(categoryId);
+					objCategory.setCategoryName(categoryName);
+				
+					objCategoryDAO.updateCategory(objCategory);
+					
+					List<Category> listOfCategory=objCategoryDAO.listOfCategory();
+					
+					objModel.addObject("listOfCategory", listOfCategory);
+					objModel.setViewName("showCategory");
+					
+					return objModel;
+			}
+		}
+		
+	}
+	
+	
+	// deleting category by using Id
+	
+	@RequestMapping(value="deleteCategory.form", method=RequestMethod.POST)
+	public ModelAndView deleteCategory(@RequestParam int deleteId,
+									   HttpServletRequest request){
+		
+		
+		ModelAndView objModel=new ModelAndView();
+		HttpSession objSession= request.getSession(false);
+		
+		if(objSession==null){
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			if(objSession.getAttribute("objUser")==null){
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+					CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
+					Category objCategory=new Category();
+
+					objCategory.setCategoryId(deleteId);
+					objCategoryDAO.deleteCategory(objCategory);
+					
+					List<Category> listOfCategory=objCategoryDAO.listOfCategory();
+					
+					objModel.addObject("listOfCategory", listOfCategory);
+					objModel.setViewName("showCategory");
+					
+					return objModel;
+			}
+		}
+		
+	}
+	
+	
+	
 }
