@@ -46,6 +46,13 @@ public class IntematerController {
 		
 		ModelAndView objModel=new ModelAndView(); 
 
+		System.out.println("Remote Address : "+request.getRemoteAddr());
+		System.out.println("Remote Host : "+request.getRemoteHost());
+		System.out.println("Remote Port : "+request.getRemotePort());
+		System.out.println("Remote User : "+request.getRemoteUser());
+		System.out.println("Requested Session Id : "+request.getRequestedSessionId());
+		System.out.println("Requested URI : "+request.getRequestURI());
+		
 		// Checking authentication
 		
 		UserDAO objUserDAO=DAOFactory.getInstanceOfUser();
@@ -68,6 +75,13 @@ public class IntematerController {
 			objModel.setViewName("register");
 		} else {
 
+			System.out.println("Remote Address : "+request.getRemoteAddr());
+			System.out.println("Remote Host : "+request.getRemoteHost());
+			System.out.println("Remote Port : "+request.getRemotePort());
+			System.out.println("Remote User : "+request.getRemoteUser());
+			System.out.println("Requested Session Id : "+request.getRequestedSessionId());
+			System.out.println("Requested URI : "+request.getRequestURI());
+			
 			String message="Invalid User Id or password<br> Please check..!";
 			objModel.addObject("message", message);
 			objModel.setViewName("login");

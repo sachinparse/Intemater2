@@ -17,6 +17,9 @@
 body {background-color:white;}
 h2   {color:#808000;}
 h3   {color:#2E9AFE;}
+p{ 	font-family: "Times New Roman", Times, serif;
+	font-style: oblique;
+	font-size:15px;}
 
 input[type=text], textarea {
   -webkit-transition: all 0.30s ease-in-out;
@@ -44,6 +47,7 @@ select {
     cursor:pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px; 
+    hight:"15";
 }
 input[type=submit] {
     padding:5px 15px; 
@@ -53,6 +57,7 @@ input[type=submit] {
     cursor:pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px; 
+    hight:"15";
 }
 
 .main-header {
@@ -60,17 +65,19 @@ input[type=submit] {
 
 }
 
-div {
+div,h5 {
+	align: left;
     width: 100%;
-    height: 10px;
-    border: 3px solid #73AD21;
+    height: 20px;
+    /* border: 2px solid #73AD21; */
+    background:#ccc;
 }
 </style>
 	<h5 align="left"> 
 			<a href="showCustomer.form">View Contacts</a> |
 		    <a href="sendEmail.form">Send Email</a> |
 			<a href="register.form">Create Contact</a> |
-			<a href="newUser.form">Create New User</a> |
+			<a href="newUser.jsp">Create New User</a> |
 		    <a href="changePassword.form">Change Password</a> |
 		    <a href="showUsers.form?recperpage=25">Show Users</a> |
 		    <a href="showCategory.form">Category</a> |
@@ -158,6 +165,9 @@ div {
 	
 		
 	</form>
-
+	<div>
+		<p align="right">Copyright &copy; 2016 &middot; All Rights Reserved. Contact information: 
+		<a href="mailto:sachin.parse@gmail.com">sachin.parse@gmail.com</a>.</p>
+	</div>
 </body>
 </html>
