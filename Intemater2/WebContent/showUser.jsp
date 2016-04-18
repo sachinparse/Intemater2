@@ -12,7 +12,34 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="js/stdlib/jquery-1-9-1-min.js"></script>
-
+<style>
+	p{ 	font-family: "Times New Roman", Times, serif;
+	font-style: oblique;
+	font-size:15px;}
+	footer {
+    clear: both;
+    position: relative;
+    z-index: 10;
+    height: 3em;
+    margin-top: 30.5em;
+    }
+    
+    footer{display: block;}
+	.Footer {
+    	background: none repeat scroll 0% 0% #3A3A3A;
+    	background-color: #3A3A3A;
+		background-image: none;
+		background-repeat: repeat;
+		background-attachment: scroll;
+		background-position: 0% 0%;
+		background-clip: border-box;
+		background-origin: padding-box;
+		background-size: auto auto;
+    	color: #FFF;
+    	padding-bottom: 30px;
+    	clear: both;
+	}
+</style>
 
   <h5 align="left"> 
 			<a href="showCustomer.form">View Contacts</a> |
@@ -36,19 +63,25 @@
 	    tr:nth-child(even) {background-color: #f2f2f2}
 	
 		h2   {color: #6a6363;}
-		
+		div,h5 {
+			align: left;
+    		width: 100%;
+    		height: 20px;
+    		/* border: 2px solid #73AD21; */
+    		background:#ccc;
+    		
+}
 	</style>
 </head>
 <body>
 		<h2 align="center"><u>User List</u></h2>
-	<form name="showForm" action="showUsers.form" method="get">
+	<form name="showForm" action="showUsers.form" method="post">
 		
 		<!-- <input type="hidden" name="recperpage" value="1"/> -->
 		<table class="responstable" align="center">
 				<tr> <td>No of Records/Page : </td>
 				<td> 
 					 <select	name="recperpage" id="idrecperpage" onchange="this.form.submit()">
-					    <%-- <option value="2" ${noOfRecordsPerPage==2?'selected':'' }>2</option> --%>
 						<option value="25" ${noOfRecordsPerPage==25?'selected':'' }>25</option>
 						<option value="50" ${noOfRecordsPerPage==50?'selected':'' }>50</option>
 						<option value="100" ${noOfRecordsPerPage==100?'selected':'' }>100</option>
@@ -123,5 +156,9 @@
 		</tr>	
 		</table>
 	</form>
+	<footer class="Footer">
+		<p align="right">Copyright &copy; 2016 &middot; All Rights Reserved. Contact information: 
+		<a href="mailto:sachin.parse@gmail.com">sachin.parse@gmail.com</a>.</p>
+	</footer>
 </body>
 </html>

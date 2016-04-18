@@ -67,11 +67,15 @@ input[type=submit] {
   left: 80%;
   margin-left: -499px; */
 }
-
-div {
+p{ 	font-family: "Times New Roman", Times, serif;
+	font-style: oblique;
+	font-size:15px;}
+div,h5 {
+	align: left;
     width: 100%;
-    height: 10px;
-    border: 3px solid #73AD21;
+    height: 20px;
+    /* border: 2px solid #73AD21; */
+    background:#ccc;
 }
 </style>
 
@@ -161,6 +165,13 @@ th {
 	    tr:nth-child(even) {background-color: #f2f2f2}
 	
 		h2   {color: #6a6363;}
+		footer {
+    		clear: both;
+    		position: relative;
+    		z-index: 10;
+    		height: 3em;
+    		margin-top: 30.5em;
+    	}
 </style>		
   <h5 align="left"> 
 			<a href="newUser.form">View Contacts</a> |
@@ -216,13 +227,5 @@ th {
 		</table>
 
 	</form>
-
-
-
-
-
-
-
-
 </body>
 </html>

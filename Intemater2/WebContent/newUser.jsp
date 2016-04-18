@@ -66,11 +66,15 @@ input[type=submit] {
   left: 80%;
   margin-left: -499px; */
 }
-
-div {
+p{ 	font-family: "Times New Roman", Times, serif;
+	font-style: oblique;
+	font-size:15px;}
+div,h5 {
+	align: left;
     width: 100%;
-    height: 10px;
-    border: 3px solid #73AD21;
+    height: 20px;
+    /* border: 2px solid #73AD21; */
+    background:#ccc;
 }
 </style>
   <h5 align="left"> 
@@ -154,5 +158,10 @@ div {
 	
 	</form>
 
+	<div>
+		<p align="right">Copyright &copy; 2016 &middot; All Rights Reserved. Contact information: 
+		<a href="mailto:sachin.parse@gmail.com">sachin.parse@gmail.com</a>.</p>
+	</div>
+	
 </body>
 </html>
