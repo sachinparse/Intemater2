@@ -81,7 +81,8 @@ div,h5 {
 		    <a href="changePassword.form">Change Password</a> |
 		    <a href="showUsers.form?recperpage=25">Show Users</a> |
 		    <a href="showCategory.form">Category</a> |
-		    <a href="logout.form">Logout</a>
+		    <a href="logout.form">Logout</a> |
+		    <a href="saveMessage.form">Save Message</a>
 	</h5>
 <header class="main-header" role="banner">
   <img src="images/Contact-Banner.png" alt="Banner Image" align="center"/>
@@ -100,19 +101,19 @@ div,h5 {
 		
 		 <tr><td><h3>Customer Details</h3></td></tr>	
 			<tr> <td></td>
-				<td >Name</td><td>:</td><td><input type="text" name="name" placeholder="Enter Customer Name"></td> </tr>
+				<td >Name</td><td>:</td><td><input type="text" name="custName" placeholder="Enter Customer Name"></td> </tr>
 				
 			<tr> <td></td>
-				<td>Mobile No.</td><td>:</td> <td><input type="text" name="mobile1" placeholder=" 1st Mobile " ></td>
-				                              <td><input type="text" name="mobile2" placeholder=" 2nd Mobile " ></td> </tr>
+				<td>Mobile No.</td><td>:</td> <td><input type="text" name="custMobile1" placeholder=" 1st Mobile " ></td>
+				                              <td><input type="text" name="custMobile2" placeholder=" 2nd Mobile " ></td> </tr>
 				
 			<tr> <td></td>
-				<td>Occupation</td><td>:</td><td><input type="text" name="work" placeholder="Occupation"> </td> </tr>
+				<td>Occupation</td><td>:</td><td><input type="text" name="custWork" placeholder="Occupation"> </td> </tr>
 				
 			<tr> <td></td>
-				<td>Email Id</td><td>:</td><td><input type="text" name="email" placeholder=" Email Id" ></td> 
+				<td>Email Id</td><td>:</td><td><input type="text" name="custEmail" placeholder=" Email Id" ></td> 
 				<td align="center">Gender</td><td>:</td><td>
-					 <select class="select-style gender" name="gender">
+					 <select class="select-style gender" name="custGender">
 				            <option value="select">I am..</option>
 				            <option value="male">Male</option>
 				            <option value="female">Female</option>
@@ -121,11 +122,11 @@ div,h5 {
 				</td></tr>
 				
 			<tr> <td></td>
-				<td>PAN No.</td><td>:</td><td><input type="text" name="pan" placeholder=" PAN Number" ></td> 
-				<td align="center">Date of Birth</td><td>:</td><td><input class="birthday" type="text" name="dob" placeholder="dd/mm/yyyy" ></td> </tr>
+				<td>PAN No.</td><td>:</td><td><input type="text" name="custPan" placeholder=" PAN Number" ></td> 
+				<td align="center">Date of Birth</td><td>:</td><td><input class="birthday" type="text" name="custDob" placeholder="mm/dd/yyyy" ></td> </tr>
 			
 			<tr> <td></td>
-				<td>Address</td><td>:</td><td><input type="text" name="address" placeholder=" Address"> </td> </tr>
+				<td>Address</td><td>:</td><td><input type="text" name="custAddress" placeholder=" Address"> </td> </tr>
 			
 		<!-- <tr><td><div style="color:#B914FF">Bank Details</div></td></tr> -->	
 		<tr><td><h3>Bank Details</h3></td></tr>

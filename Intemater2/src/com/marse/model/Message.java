@@ -19,12 +19,19 @@ public class Message {
 	private int messageId;
 	@Column()
 	private String messageData;
-	
+	@Column()
+	private String msgDate;
 	
 	// setters and getters
 	
 	public int getMessageId() {
 		return messageId;
+	}
+	public String getMsgDate() {
+		return msgDate;
+	}
+	public void setMsgDate(String msgDate) {
+		this.msgDate = msgDate;
 	}
 	public void setMessageId(int messageId) {
 		this.messageId = messageId;

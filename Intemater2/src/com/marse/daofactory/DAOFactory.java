@@ -4,6 +4,8 @@ import com.marse.category.CategoryDAO;
 import com.marse.category.CategoryDAOImpl;
 import com.marse.customer.CustomerDAO;
 import com.marse.customer.CustomerDAOImpl;
+import com.marse.message.MessageDAO;
+import com.marse.message.MessageDAOImpl;
 import com.marse.user.UserDAO;
 import com.marse.user.UserDAOImpl;
 
@@ -24,4 +26,8 @@ public class DAOFactory {
 		return new CategoryDAOImpl();    // returns object of the CategoryDAOImpl class
 	}
 	
+	public static MessageDAO getInstancOfMessage(){
+		
+		return new MessageDAOImpl();    // returns object of the MessageDAOImpl class
+	}
 }

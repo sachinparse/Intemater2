@@ -21,9 +21,10 @@ public class CustomerDAOImpl implements CustomerDAO {
 		Transaction tx=session.beginTransaction();
 		
 		session.save(objCustomer);
+		System.out.println("Customer saved ID: "+objCustomer.getCustId());
 		tx.commit();
 		session.close();
-		
+
 	}
 
 	@Override

@@ -6,6 +6,9 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.crypto.BadPaddingException;
@@ -22,8 +25,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.marse.category.CategoryDAO;
 import com.marse.crypto.CryptoUtil;
+import com.marse.customer.CustomerDAO;
 import com.marse.daofactory.DAOFactory;
+import com.marse.message.MessageDAO;
+import com.marse.message.MessageDAOImpl;
 import com.marse.model.Category;
+import com.marse.model.Customer;
+import com.marse.model.Message;
 import com.marse.model.User;
 import com.marse.user.UserDAO;
 
@@ -34,6 +42,31 @@ public class IntematerController {
 	@RequestMapping(value="login.form", method=RequestMethod.POST)
 	public ModelAndView loginPage(){
 		return new ModelAndView("login");
+	}
+	
+	// Testing of the message functionality
+	@RequestMapping(value="saveMessage.form", method=RequestMethod.GET)
+	public ModelAndView saveMessage(){
+		
+		
+		String m="This is a 2nd Message";
+		
+		Calendar cal = Calendar.getInstance();
+	    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+	    String strDate = sdf.format(cal.getTime());
+	    
+		Message objMessage=new Message();
+		
+		objMessage.setMessageData(m);
+		objMessage.setMsgDate(strDate);
+		
+		MessageDAO objMessageDAO=new MessageDAOImpl();
+		
+		int msgId=objMessageDAO.saveMessage(objMessage);
+		
+		System.out.println("Controller: MSG Id :- "+msgId);
+		
+		return new ModelAndView("register");
 	}
 	
 	// authentication logic
@@ -90,11 +123,26 @@ public class IntematerController {
 		return objModel;
 	}
 	
-	
+	//################################################ CUSTOMER 21042016 ############################################################################	
 	// creating new contact of Customer
 	
 	@RequestMapping(value="register.form", method=RequestMethod.POST)
-	public  ModelAndView createNewCustomer( HttpServletRequest request){
+	public  ModelAndView createNewCustomer( @RequestParam String custName,
+											@RequestParam String custMobile1,
+											@RequestParam(required=false) String custMobile2,
+											@RequestParam String custWork,
+											@RequestParam (required=false) String custEmail,
+											@RequestParam (required=false) String custPan,
+											@RequestParam Date custDob,
+											@RequestParam String custGender,
+											@RequestParam String custAddress,
+											@RequestParam (required=false) String bankName,
+											@RequestParam (required=false) String branch,
+											@RequestParam (required=false) String accNo,
+											@RequestParam (required=false) String ifsc,
+											@RequestParam (required=false) String micr,
+											@RequestParam String category,
+											HttpServletRequest request){
 		
 		ModelAndView objModel=new ModelAndView(); 
 		// first checking session
@@ -116,8 +164,35 @@ public class IntematerController {
 				return objModel;
 			}else{
 				System.out.println("session objuser is not null");
-
 				// bussiness logic
+				
+				Customer objCustomer=new Customer();
+				
+				objCustomer.setName(custName);
+				objCustomer.setMobile1(custMobile1);
+				objCustomer.setMobile2(custMobile2);
+				objCustomer.setWork(custWork);
+				objCustomer.setEmail(custEmail);
+				objCustomer.setPan(custPan);
+				objCustomer.setDob(custDob);
+				objCustomer.setGender(custGender);
+				objCustomer.setAddress(custAddress);
+				objCustomer.setBankName(bankName);
+				objCustomer.setBankBranch(branch);
+				objCustomer.setIfsc(ifsc);
+				objCustomer.setMicr(micr);
+				objCustomer.setCatagory(category);
+				objCustomer.setAcc(accNo);
+				objCustomer.setStatus("A");
+				// calling to the DAO methods to save the Customer details
+				
+				CustomerDAO objCustomerDAO=DAOFactory.getInstanceOfCustomer();
+				
+				objCustomerDAO.addCustomer(objCustomer);
+				objCustomer.toString();
+				
+				
+				objModel.setViewName("register");
 				
 				return objModel;    
 		        
@@ -126,6 +201,8 @@ public class IntematerController {
 			
 		}// end of else
 	}
+//###################################################### CUSTOMER ##########################################################################
+	
 	
 // 30032016 17:04  new user ****************************USER MODULE CODE********************************************************************
 	

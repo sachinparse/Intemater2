@@ -44,6 +44,8 @@ public class Customer {
 	@Column()
 	private Date dob;
 	@Column()
+	private String gender;
+	@Column()
 	private String address;
 
 
@@ -55,6 +57,14 @@ public class Customer {
 		super();
 		this.bank = bank;
 	}*/
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
 	@Column()
 	private String bankName;
@@ -205,7 +215,18 @@ public class Customer {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [custId=" + custId + ", name=" + name + ", mobile1="
+				+ mobile1 + ", mobile2=" + mobile2 + ", work=" + work
+				+ ", email=" + email + ", pan=" + pan + ", dob=" + dob
+				+ ", gender=" + gender + ", address=" + address + ", bankName="
+				+ bankName + ", bankBranch=" + bankBranch + ", acc=" + acc
+				+ ", ifsc=" + ifsc + ", micr=" + micr + ", catagory="
+				+ catagory + ", status=" + status + "]";
+	}
 
+	
 
 
 }
