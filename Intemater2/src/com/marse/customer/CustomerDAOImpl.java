@@ -41,12 +41,12 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	// fetching the list of all customers
 	@Override
-	public List<Customer> listOfCustomer() {
+	public List<Customer> listOfCustomer(String categoryName) {
 
 		SessionFactory factory=HibernateUtils.getInstance();
 		Session session=factory.openSession();
 		
-		String hqlQuery="From Customer c";
+		String hqlQuery="From Customer c WHERE c.category='"+categoryName+"'";
 		
 		Query query=session.createQuery(hqlQuery);
 		
@@ -55,10 +55,10 @@ public class CustomerDAOImpl implements CustomerDAO {
 		return list;
 	}
 
-	@Override
+	/*@Override
 	public List<Customer> listOfCatagory() {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 }

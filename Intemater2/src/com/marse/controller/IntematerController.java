@@ -181,7 +181,7 @@ public class IntematerController {
 				objCustomer.setBankBranch(branch);
 				objCustomer.setIfsc(ifsc);
 				objCustomer.setMicr(micr);
-				objCustomer.setCatagory(category);
+				objCustomer.setCategory(category);
 				objCustomer.setAcc(accNo);
 				objCustomer.setStatus("A");
 				// calling to the DAO methods to save the Customer details
@@ -189,7 +189,15 @@ public class IntematerController {
 				CustomerDAO objCustomerDAO=DAOFactory.getInstanceOfCustomer();
 				
 				objCustomerDAO.addCustomer(objCustomer);
-				objCustomer.toString();
+				
+				// getting the list of the current inserted Customers category type
+				
+				CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
+				
+				List<Category> objlstCategory=objCategoryDAO.listOfCategory();
+				
+				
+				
 				
 				
 				objModel.setViewName("register");
@@ -201,6 +209,68 @@ public class IntematerController {
 			
 		}// end of else
 	}
+	
+// 22042016
+	
+	// fetching list of Customer
+	
+		@RequestMapping(value="showCustomers.form", method=RequestMethod.GET)
+		public ModelAndView listOfCustomers(@RequestParam (value="currentPage",required=false) String currentPage,
+									  @RequestParam (value="recperpage",required=false) String recperpage,
+									  HttpServletRequest request){
+		
+			int cPage=0;
+			if (null==currentPage) {
+				cPage=1;
+			}else{
+				cPage=Integer.parseInt(currentPage);
+			}
+			
+			int noOfRecordsPerPage=Integer.parseInt(recperpage);
+			
+			// first checking session
+					HttpSession objSession= request.getSession(false);
+					ModelAndView objModel=new ModelAndView();
+					if(objSession==null){
+						String message="Time out,<br> Please login again...!";
+						objModel.addObject("message", message);
+						objModel.setViewName("login");
+						return objModel;
+					}else{
+						if(objSession.getAttribute("objUser")==null){
+							String message="Invalid Session,<br> Please login again...!";
+							objModel.addObject("message", message);
+							objModel.setViewName("login");
+							return objModel;
+						}else{
+							System.out.println("session objuser is not null");
+							
+							UserDAO objUserDAO=DAOFactory.getInstanceOfUser();
+							
+							int offSet=(cPage * noOfRecordsPerPage)-noOfRecordsPerPage;
+							System.out.println("offset="+offSet);
+							List<User> listOfUser=objUserDAO.listOfUser(offSet, noOfRecordsPerPage);
+							int userCount=objUserDAO.userCount();
+							
+							 int  noOfPages = (int) Math.ceil(userCount * 1.0 / noOfRecordsPerPage);
+							   
+							 	System.out.println("Total Pages= "+noOfPages);
+			  					System.out.println("new pageno="+cPage);
+			  					
+						    if(noOfPages<=0){
+							   noOfPages=1;
+						    }
+						    
+							objModel.addObject("listOfUser", listOfUser );
+							objModel.setViewName("showUser");
+							objModel.addObject("noOfPages",noOfPages);
+							objModel.addObject("currentPage",cPage);
+							objModel.addObject("noOfRecordsPerPage",noOfRecordsPerPage);
+							return objModel;
+						}
+					}
+		}
+	
 //###################################################### CUSTOMER ##########################################################################
 	
 	

@@ -2,10 +2,12 @@ package com.marse.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -76,8 +78,9 @@ public class Customer {
 	private String ifsc;
 	@Column()
 	private String micr;
+	
 	@Column()
-	private String catagory;
+	private String category;
 
 	// flag for Active / Inactive customer
 	@Column(length=1)
@@ -89,6 +92,14 @@ public class Customer {
 
 	public int getCustId() {
 		return custId;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public void setCustId(int custId) {
@@ -199,14 +210,6 @@ public class Customer {
 		this.micr = micr;
 	}
 
-	public String getCatagory() {
-		return catagory;
-	}
-
-	public void setCatagory(String catagory) {
-		this.catagory = catagory;
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -215,18 +218,5 @@ public class Customer {
 		this.status = status;
 	}
 
-	@Override
-	public String toString() {
-		return "Customer [custId=" + custId + ", name=" + name + ", mobile1="
-				+ mobile1 + ", mobile2=" + mobile2 + ", work=" + work
-				+ ", email=" + email + ", pan=" + pan + ", dob=" + dob
-				+ ", gender=" + gender + ", address=" + address + ", bankName="
-				+ bankName + ", bankBranch=" + bankBranch + ", acc=" + acc
-				+ ", ifsc=" + ifsc + ", micr=" + micr + ", catagory="
-				+ catagory + ", status=" + status + "]";
-	}
-
 	
-
-
 }
