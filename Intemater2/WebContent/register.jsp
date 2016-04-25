@@ -74,7 +74,7 @@ div,h5 {
 }
 </style>
 	<h5 align="left"> 
-			<a href="showCustomer.form">View Contacts</a> |
+			<a href="showCustomers.form?recperpage=25">View Contacts</a> |
 		    <a href="sendEmail.form">Send Email</a> |
 			<a href="register.form">Create Contact</a> |
 			<a href="newUser.jsp">Create New User</a> |
@@ -147,13 +147,16 @@ div,h5 {
 					<td>
 						<select name="category">
 								<option value="0">Select Category</option>
-								<option value="sale">Sale</option>
+								<!-- <option value="sale">Sale</option>
 								<option value="service">Service</option>
 								<option value="excise">Excise</option>
 								<option value="income">Income</option>
 								<option value="wealth">Wealth</option>
-								<option value="frined">Friend</option>												
-						
+								<option value="frined">Friend</option>	 -->
+								
+							<c:forEach var="category" items="${objlstCategory}">
+							  	<option value="${category.categoryId}">${category.categoryName}</option>
+							</c:forEach>											
 						</select>
 					</td>
 				

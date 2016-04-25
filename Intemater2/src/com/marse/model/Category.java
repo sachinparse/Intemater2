@@ -18,7 +18,7 @@ public class Category {
 	@GeneratedValue(generator="catIdGenerator")
 	@Column()
 	private int categoryId;
-	@Column()
+	@Column(nullable = false)
 	private String categoryName;
 	
 	

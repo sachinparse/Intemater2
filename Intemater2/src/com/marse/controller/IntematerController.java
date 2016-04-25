@@ -7,6 +7,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -98,13 +99,18 @@ public class IntematerController {
 			
 			objUser=objUserDAO.getUser(userId);  //  fetched whole record of the current user
 			
+			// fetching existing categories
+			
+			List<Category> objlstCategory=new ArrayList<Category>();
+			objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();
+			
 			/*// fetching list of all the users
 			List<User> listOfUser=objUserDAO.listOfUser();
 			objModel.addObject("listOfUser", listOfUser );*/
 			
 			HttpSession objSession=request.getSession(false);
 			objSession.setAttribute("objUser", objUser);   // kept current user object into HttpSession for session handling
-			
+			objModel.addObject("objlstCategory", objlstCategory);
 			objModel.setViewName("register");
 		} else {
 
@@ -141,7 +147,7 @@ public class IntematerController {
 											@RequestParam (required=false) String accNo,
 											@RequestParam (required=false) String ifsc,
 											@RequestParam (required=false) String micr,
-											@RequestParam String category,
+											@RequestParam int category,
 											HttpServletRequest request){
 		
 		ModelAndView objModel=new ModelAndView(); 
@@ -196,10 +202,6 @@ public class IntematerController {
 				
 				List<Category> objlstCategory=objCategoryDAO.listOfCategory();
 				
-				
-				
-				
-				
 				objModel.setViewName("register");
 				
 				return objModel;    
@@ -216,8 +218,9 @@ public class IntematerController {
 	
 		@RequestMapping(value="showCustomers.form", method=RequestMethod.GET)
 		public ModelAndView listOfCustomers(@RequestParam (value="currentPage",required=false) String currentPage,
-									  @RequestParam (value="recperpage",required=false) String recperpage,
-									  HttpServletRequest request){
+									  		@RequestParam (value="recperpage",required=false) String recperpage,
+									  		@RequestParam (value="categoryId",required=false) String categoryId,
+									  		HttpServletRequest request){
 		
 			int cPage=0;
 			if (null==currentPage) {
@@ -245,27 +248,46 @@ public class IntematerController {
 						}else{
 							System.out.println("session objuser is not null");
 							
-							UserDAO objUserDAO=DAOFactory.getInstanceOfUser();
+							// checking whether categoryId selected or not
 							
-							int offSet=(cPage * noOfRecordsPerPage)-noOfRecordsPerPage;
-							System.out.println("offset="+offSet);
-							List<User> listOfUser=objUserDAO.listOfUser(offSet, noOfRecordsPerPage);
-							int userCount=objUserDAO.userCount();
+							int offSet=0;
+							int  noOfPages=0;
 							
-							 int  noOfPages = (int) Math.ceil(userCount * 1.0 / noOfRecordsPerPage);
-							   
-							 	System.out.println("Total Pages= "+noOfPages);
-			  					System.out.println("new pageno="+cPage);
-			  					
-						    if(noOfPages<=0){
-							   noOfPages=1;
-						    }
-						    
-							objModel.addObject("listOfUser", listOfUser );
-							objModel.setViewName("showUser");
+							List<Customer> listOfCustomer=null;
+							
+							if (null != categoryId) {
+								
+								int catId=Integer.parseInt(categoryId);
+								CustomerDAO objCustomerDAO=DAOFactory.getInstanceOfCustomer();
+								
+								offSet=(cPage * noOfRecordsPerPage)-noOfRecordsPerPage;
+								System.out.println("offset="+offSet);
+								listOfCustomer=objCustomerDAO.listOfCustomer(catId,offSet, noOfRecordsPerPage);
+								int customerCount=objCustomerDAO.customerCount(catId);
+								
+								
+								noOfPages = (int) Math.ceil(customerCount * 1.0 / noOfRecordsPerPage);
+								   
+								 	System.out.println("Total Pages= "+noOfPages);
+				  					System.out.println("new pageno="+cPage);
+				  					
+							    if(noOfPages<=0){
+								   noOfPages=1;
+							    }
+								
+							}
+							
+						    // fetching existing categories
+							
+							List<Category> objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();//new ArrayList<Category>();
+							//objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();
+							
+							objModel.addObject("objlstCategory", objlstCategory);
+							objModel.addObject("listOfCustomer", listOfCustomer );
 							objModel.addObject("noOfPages",noOfPages);
 							objModel.addObject("currentPage",cPage);
 							objModel.addObject("noOfRecordsPerPage",noOfRecordsPerPage);
+							objModel.setViewName("showCustomers");
 							return objModel;
 						}
 					}

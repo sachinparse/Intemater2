@@ -2,6 +2,7 @@ package com.marse.category;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -77,5 +78,20 @@ public class CategoryDAOImpl implements CategoryDAO {
 		
 	}
 	
+	@Override
+	public List<Category> listOfCatagory() {
+
+		SessionFactory factory=HibernateUtils.getInstance();
+		Session session=factory.openSession();
+		
+		Criteria crit = (Criteria) session.
+                 		 createCriteria(Category.class).
+                 		 setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+
+		List<Category> list = crit.list();
+		
+		return list;
+		
+	}
 
 }

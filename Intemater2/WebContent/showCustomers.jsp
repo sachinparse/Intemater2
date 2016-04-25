@@ -93,13 +93,66 @@ div,h5 {
 	| <a href="saveMessage.form">Save Message</a>
 </h5>
 
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+	$("#idCategoryId").change(function(){
+		
+		 if(($("#idCategoryId").val() !=0) ){
+			 this.form.submit();
+		 }
+		
+		});
+	
+	
+  });
+
+
+</script>
 </head>
 <body>
 
 			
 		<form name="showCustomerForm" action="showCustomers.form" method="post">
 			
+			<input type="hidden" name="currentPage" value="0"/>
 			
+			<center>
+			</center>
+			<table align="left">
+			  <tr>
+			     <td width="400px"></td>
+			     <td width="100px" align="left">
+					<select name="categoryId" id="idCategoryId">
+								<option value="0">Select Category</option>					
+					    <c:forEach var="category" items="${objlstCategory}">
+							  	<option value="${category.categoryId}">${category.categoryName}</option>
+					    </c:forEach>
+					</select>
+				</td>
+			  
+			  <td width="200px"></td>
+			  
+			    <td  align="right"></td>
+			    <td>Records/Page : </td>
+				<td> 
+					 <select	name="recperpage" id="idrecperpage" onchange="this.form.submit()">
+						<option value="25" ${noOfRecordsPerPage==25?'selected':'' }>25</option>
+						<option value="50" ${noOfRecordsPerPage==50?'selected':'' }>50</option>
+						<option value="100" ${noOfRecordsPerPage==100?'selected':'' }>100</option>
+						<option value="200" ${noOfRecordsPerPage==200?'selected':'' }>200</option>
+						<option value="300" ${noOfRecordsPerPage==300?'selected':'' }>300</option>
+						<option value="500" ${noOfRecordsPerPage==500?'selected':'' }>500</option>
+						<option value="800" ${noOfRecordsPerPage==800?'selected':'' }>800</option>
+						<option value="1000" ${noOfRecordsPerPage==1000?'selected':'' }>1000</option>
+						<option value="2000" ${noOfRecordsPerPage==2000?'selected':'' }>2000</option>
+					</select>
+				</td>
+			  </tr>
+			</table>
+		
+		  <!-- show the customer data -->
 			
 		
 		

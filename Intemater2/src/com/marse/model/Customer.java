@@ -80,7 +80,7 @@ public class Customer {
 	private String micr;
 	
 	@Column()
-	private String category;
+	private int category;
 
 	// flag for Active / Inactive customer
 	@Column(length=1)
@@ -94,11 +94,11 @@ public class Customer {
 		return custId;
 	}
 
-	public String getCategory() {
+	public int getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(int category) {
 		this.category = category;
 	}
 
