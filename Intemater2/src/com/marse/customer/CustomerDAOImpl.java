@@ -31,14 +31,26 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	@Override
-	public void updateCustomer() {
-		// TODO Auto-generated method stub
-
+	public void updateCustomer(int customerId) {
+		
 	}
 
 	@Override
-	public void deleteCustomer() {
-		// TODO Auto-generated method stub
+	public void deleteCustomer(int customerId) {
+		
+
+		SessionFactory factory=HibernateUtils.getInstance();
+		Session session=factory.openSession();
+		Transaction tx=session.beginTransaction();
+			String hql="UPDATE User u SET u.userStatus= :status WHERE u.userId= :userId";
+
+			int updatedRow=session.createQuery(hql)
+						.setString("status", "I")
+						.setInteger("userId",customerId)
+						.executeUpdate();
+			System.out.println("Rows updated from deleteUser() count : "+updatedRow);
+			tx.commit();
+			session.close();
 
 	}
 

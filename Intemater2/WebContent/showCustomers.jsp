@@ -13,76 +13,52 @@
 <script type="text/javascript" src="js/stdlib/jquery-1-9-1-min.js"></script>
 
 <style>
-body {
-	background-color: white;
-}
-
-h2 {
-	color: #808000;
-}
-
-h3 {
-	color: #2E9AFE;
-}
-
-p {
-	font-family: "Times New Roman", Times, serif;
+	p{ 	font-family: "Times New Roman", Times, serif;
 	font-style: oblique;
-	font-size: 15px;
-}
-
-input[type=text],textarea {
-	-webkit-transition: all 0.30s ease-in-out;
-	-moz-transition: all 0.30s ease-in-out;
-	-ms-transition: all 0.30s ease-in-out;
-	-o-transition: all 0.30s ease-in-out;
-	outline: none;
-	padding: 3px 0px 3px 3px;
-	margin: 5px 1px 3px 0px;
-	border: 1px solid #DDDDDD;
-}
-
-input[type=text]:focus,textarea:focus {
-	box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-	padding: 3px 0px 3px 3px;
-	margin: 5px 1px 3px 0px;
-	border: 1px solid rgba(81, 203, 238, 1);
-}
-
-select {
-	padding: 5px 15px;
-	background: #ccc;
-	/*  background:#26A2E0; */
-	border: 0 none;
-	cursor: pointer;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	hight: "15";
-}
-
-input[type=submit] {
-	padding: 5px 15px;
-	/* background:#ccc; */
-	background: #8AB6CB;
-	border: 0 none;
-	cursor: pointer;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	hight: "15";
-}
-
-.main-header {
-	text-align: center;
-}
-
-div,h5 {
-	align: left;
-	width: 100%;
-	height: 20px;
-	/* border: 2px solid #73AD21; */
-	background: #ccc;
-}
+	font-size:15px;}
+	footer {
+    clear: both;
+    position: relative;
+    z-index: 10;
+    height: 3em;
+    margin-top: 30.5em;
+    }
+    
+    footer{display: block;}
+	.Footer {
+    	background: none repeat scroll 0% 0% #3A3A3A;
+    	background-color: #3A3A3A;
+		background-image: none;
+		background-repeat: repeat;
+		background-attachment: scroll;
+		background-position: 0% 0%;
+		background-clip: border-box;
+		background-origin: padding-box;
+		background-size: auto auto;
+    	color: #FFF;
+    	padding-bottom: 30px;
+    	clear: both;
+	}
+	
+	th {
+	        background-color: #4CAF50;
+	        color: white;
+	    }
+	    
+	    tr:nth-child(even) {background-color: #f2f2f2}
+	
+		h2   {color: #6a6363;}
+		div,h5 {
+			align: left;
+    		width: 100%;
+    		height: 20px;
+    		/* border: 2px solid #73AD21; */
+    		background:#ccc;
+     }
+     
 </style>
+
+
 <h5 align="left">
 	<a href="showCustomer.form">View Contacts</a> | <a
 		href="sendEmail.form">Send Email</a> | <a href="register.form">Create
@@ -105,18 +81,24 @@ $(document).ready(function(){
 		
 		});
 	
-	
-  });
+});
 
+ function onload(){
+	 
+	 var t1=document.getElementById("idCategoryId").value;
+	 document.getElementById("idcurrentPage").value=t1;
+	 
+	 
+ }
 
 </script>
 </head>
-<body>
+<body onLoad="onload()">
 
 			
-		<form name="showCustomerForm" action="showCustomers.form" method="post">
+		<form name="showCustomerForm" action="showCustomers.form" method="get">
 			
-			<input type="hidden" name="currentPage" value="0"/>
+			<input type="hidden" name="currentPage" id="idcurrentPage" value="0"/>
 			
 			<center>
 			</center>
@@ -127,7 +109,7 @@ $(document).ready(function(){
 					<select name="categoryId" id="idCategoryId">
 								<option value="0">Select Category</option>					
 					    <c:forEach var="category" items="${objlstCategory}">
-							  	<option value="${category.categoryId}">${category.categoryName}</option>
+							  	<option value="${category.categoryId}" ${category.categoryId==categoryId ? 'selected':'' }>${category.categoryName}</option>
 					    </c:forEach>
 					</select>
 				</td>
@@ -153,13 +135,51 @@ $(document).ready(function(){
 			</table>
 		
 		  <!-- show the customer data -->
+			<table  class="responstable" align="center">
+				<tr>
+				  <th>Customer ID</th> 
+				  <th>Customer Name</th> <th>Mobile</th> <th>Email ID</th> <th>PAN No.</th> <th>Address</th> <th>DOB</th> <th>Edit / Delete</th>
+				</tr>
 			
+			  <c:forEach var="custList" items="${listOfCustomer}">
+							  	<br>
+		        <tr align="center">
+		          <td>${custList.custId} </td>  <td>${custList.name } </td>  <td>${custList.mobile1} </td>  <td>${custList.email} </td>  <td>${custList.pan} </td>
+		          <td>${custList.address}</td> <td>${custList.dob}</td>
+		          
+		          <td>  <a href='editCustomer.form?custId=${custList.custId}'>Edit</a>  
+					  
+					   <c:if test="${custList.status eq 'A'}">
+					    	&nbsp;/ &nbsp;  
+					  		<a href='deleteUser.form?userId=${userList.userId }'><font color="red">Delete</font></a>   
+					  </c:if>
+			      </td>
+		        
+		        </tr>
+		      </c:forEach>
+		    </table>
 		
-		
+			<table align="center">
+		 		 <tr>
+		  			 	<td>Pages :</td>
+				   <c:forEach begin="1" end="${noOfPages}" var="i">
+			      	<td></td>
+			      	<td>
+					  <c:choose>
+						<c:when test="${currentPage eq i}">
+						    <a href="showCustomers.form?currentPage=${i}&recperpage=${noOfRecordsPerPage}"><font color="red">${i}</font></a>
+						    
+						</c:when>
+						<c:otherwise>
+							<a href="showCustomers.form?currentPage=${i}&recperpage=${noOfRecordsPerPage}">${i}</a>
+						</c:otherwise>
+					  </c:choose>
+   				  	</td>				
+			       </c:forEach>
+				 </tr>	
+			 </table>
 		
 		</form>	
-			
-			
 			
 </body>
 </html>

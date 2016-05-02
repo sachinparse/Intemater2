@@ -222,6 +222,7 @@ public class IntematerController {
 									  		@RequestParam (value="categoryId",required=false) String categoryId,
 									  		HttpServletRequest request){
 		
+			System.out.println("CP: "+currentPage);
 			int cPage=0;
 			if (null==currentPage) {
 				cPage=1;
@@ -274,6 +275,9 @@ public class IntematerController {
 							    if(noOfPages<=0){
 								   noOfPages=1;
 							    }
+							    if(cPage<=0){
+									   cPage=1;
+								}
 								
 							}
 							
@@ -281,7 +285,9 @@ public class IntematerController {
 							
 							List<Category> objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();//new ArrayList<Category>();
 							//objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();
+							System.out.println("cPage "+cPage);
 							
+							objModel.addObject("categoryId", categoryId);
 							objModel.addObject("objlstCategory", objlstCategory);
 							objModel.addObject("listOfCustomer", listOfCustomer );
 							objModel.addObject("noOfPages",noOfPages);

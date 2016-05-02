@@ -125,23 +125,6 @@ public class UserDAOImpl implements UserDAO {
 		tx.commit();
 		session.close();
 		
-		/*String hql="UPDATE User u SET u.firstName= :firstName, u.lastName= :lastName, u.userGender= :userGender, u.userMobile1= :userMobile1," +
-				   " u.userMobile2, u.userEmail= :userEmail, u.roll= :roll, u.userStatus= :userStatus   WHERE u.userId= :userId";
-
-		int updatedRow=session.createQuery(hql)
-					.setString("firstName", objUser.getFirstName())
-					.setString("lastName", objUser.getLastName())
-					.setString("userGender",objUser.getUserGender())
-					.setString("userMobile1", objUser.getUserMobile1())
-					.setString("userMobile2", objUser.getUserMobile2())
-					.setString("userEmail", objUser.getUserEmail())
-					.setString("roll", objUser.getRoll())
-					.setString("userStatus", objUser.getUserStatus())
-					.setInteger("userId",objUser.getUserId())
-					.executeUpdate();
-		System.out.println("Rows updated from deleteUser() count : "+updatedRow);*/
-		
-		
 	}
 
 	@Override
