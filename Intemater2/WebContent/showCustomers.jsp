@@ -147,11 +147,11 @@ $(document).ready(function(){
 		          <td>${custList.custId} </td>  <td>${custList.name } </td>  <td>${custList.mobile1} </td>  <td>${custList.email} </td>  <td>${custList.pan} </td>
 		          <td>${custList.address}</td> <td>${custList.dob}</td>
 		          
-		          <td>  <a href='editCustomer.form?custId=${custList.custId}'>Edit</a>  
+		          <td>  <a href='editCustomer.form?customerId=${custList.custId}'>Edit</a>  
 					  
 					   <c:if test="${custList.status eq 'A'}">
 					    	&nbsp;/ &nbsp;  
-					  		<a href='deleteUser.form?userId=${userList.userId }'><font color="red">Delete</font></a>   
+					  		<a href='deleteCustomer.form?customerId=${custList.custId}&categoryId=${custList.category}'><font color="red">Delete</font></a>   
 					  </c:if>
 			      </td>
 		        

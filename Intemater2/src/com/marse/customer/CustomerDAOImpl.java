@@ -42,13 +42,13 @@ public class CustomerDAOImpl implements CustomerDAO {
 		SessionFactory factory=HibernateUtils.getInstance();
 		Session session=factory.openSession();
 		Transaction tx=session.beginTransaction();
-			String hql="UPDATE User u SET u.userStatus= :status WHERE u.userId= :userId";
+			String hql="UPDATE Customer c SET c.status= :status WHERE c.custId= :customerId";
 
 			int updatedRow=session.createQuery(hql)
 						.setString("status", "I")
-						.setInteger("userId",customerId)
+						.setInteger("customerId",customerId)
 						.executeUpdate();
-			System.out.println("Rows updated from deleteUser() count : "+updatedRow);
+			System.out.println("Rows updated from deleteCustomer() count : "+updatedRow);
 			tx.commit();
 			session.close();
 
@@ -89,6 +89,16 @@ public class CustomerDAOImpl implements CustomerDAO {
 		
 		System.out.println("Customer count: "+count);
 		return cnt;
+	}
+
+	@Override
+	public Customer getCustomer(int customerId) {
+
+		SessionFactory factory=HibernateUtils.getInstance();
+		Session session=factory.openSession();
+		Customer objCustomer=(Customer) session.get(User.class, customerId); 
+		
+		return objCustomer;
 	}
 
 

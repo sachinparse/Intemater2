@@ -282,7 +282,6 @@ public class IntematerController {
 							}
 							
 						    // fetching existing categories
-							
 							List<Category> objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();//new ArrayList<Category>();
 							//objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();
 							System.out.println("cPage "+cPage);
@@ -297,6 +296,93 @@ public class IntematerController {
 							return objModel;
 						}
 					}
+		}
+		
+		
+		@RequestMapping(value="deleteCustomer.form", method=RequestMethod.GET)
+		public ModelAndView deleteCustomer( @RequestParam int customerId,
+											@RequestParam int categoryId,
+											HttpServletRequest request){
+			
+			System.out.println("In deleterCustomer() method Controller");
+	        ModelAndView objModel=new ModelAndView();
+			HttpSession objSession= request.getSession(false);
+			if(objSession==null){
+				String message="Time out,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+				if(objSession.getAttribute("objUser")==null){
+					String message="Invalid Session,<br> Please login again...!";
+					objModel.addObject("message", message);
+					objModel.setViewName("login");
+					return objModel;
+				}else{
+					
+						int offSet=0;
+						int  noOfPages=0;
+						int noOfRecordsPerPage=25;
+						
+						CustomerDAO objCustomerDAO=DAOFactory.getInstanceOfCustomer();
+						objCustomerDAO.deleteCustomer(customerId);
+
+						List<Customer> listOfCustomer=objCustomerDAO.listOfCustomer(categoryId, offSet, noOfRecordsPerPage);
+						
+						int customerCount=objCustomerDAO.customerCount(categoryId);
+						
+						noOfPages = (int) Math.ceil(customerCount * 1.0 / noOfRecordsPerPage);
+						
+						
+						 // fetching existing categories
+						List<Category> objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();//new ArrayList<Category>();
+						
+						objModel.addObject("categoryId", categoryId);
+						objModel.addObject("objlstCategory", objlstCategory);
+						objModel.addObject("listOfCustomer", listOfCustomer);
+						objModel.setViewName("showCustomers");	
+						
+					return objModel;	
+				}
+			}
+		}
+		
+		
+		@RequestMapping(value="editCustomer.form", method=RequestMethod.GET)
+		public ModelAndView editCustomer(@RequestParam int customerId,
+										 HttpServletRequest request){
+			
+			ModelAndView objModel=new ModelAndView();
+			
+			HttpSession objSession= request.getSession(false);
+			
+			if(objSession==null){
+				String message="Time out,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+				if(objSession.getAttribute("objUser")==null){
+					String message="Invalid Session,<br> Please login again...!";
+					objModel.addObject("message", message);
+					objModel.setViewName("login");
+					return objModel;
+				}else{
+						CustomerDAO objCustomerDAO=DAOFactory.getInstanceOfCustomer();
+						Customer objCustomer=new Customer();
+						objCustomerDAO.getCustomer(customerId); //  fetched whole record of the deleting user
+						
+						 // fetching existing categories
+						List<Category> objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();//new ArrayList<Category>();
+						
+						objModel.addObject("objlstCategory", objlstCategory);
+						objModel.addObject("objCustomer", objCustomer);
+						objModel.setViewName("editCustomer");
+						
+						return objModel;
+				}
+			}
+			
 		}
 	
 //###################################################### CUSTOMER ##########################################################################
