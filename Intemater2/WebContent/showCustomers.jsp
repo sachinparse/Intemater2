@@ -100,11 +100,11 @@ $(document).ready(function(){
 			
 			<input type="hidden" name="currentPage" id="idcurrentPage" value="0"/>
 			
-			<center>
-			</center>
-			<table align="left">
+		<center>
+		</center>	
+			<table align="center">
 			  <tr>
-			     <td width="400px"></td>
+			     <!-- <td width="400px"></td> -->
 			     <td width="100px" align="left">
 					<select name="categoryId" id="idCategoryId">
 								<option value="0">Select Category</option>					
@@ -133,7 +133,7 @@ $(document).ready(function(){
 				</td>
 			  </tr>
 			</table>
-		
+		 <br>
 		  <!-- show the customer data -->
 			<table  class="responstable" align="center">
 				<tr>
