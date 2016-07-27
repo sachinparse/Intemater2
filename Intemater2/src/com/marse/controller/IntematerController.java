@@ -45,6 +45,11 @@ public class IntematerController {
 		return new ModelAndView("login");
 	}
 	
+	@RequestMapping(value="newUser.form", method=RequestMethod.GET)
+	public ModelAndView newUser(){
+		return new ModelAndView("newUser");
+	}
+	
 	// Testing of the message functionality
 	@RequestMapping(value="saveMessage.form", method=RequestMethod.GET)
 	public ModelAndView saveMessage(){
@@ -98,7 +103,7 @@ public class IntematerController {
 			User objUser=new User();
 			
 			objUser=objUserDAO.getUser(userId);  //  fetched whole record of the current user
-			
+			 
 			// fetching existing categories
 			
 			List<Category> objlstCategory=new ArrayList<Category>();

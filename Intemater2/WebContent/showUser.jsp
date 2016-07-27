@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	if (null == session.getAttribute("objUser")) {
+		response.sendRedirect("login.jsp");
+	} else {
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -42,12 +47,12 @@
 </style>
 
   <h5 align="left"> 
-			<a href="showCustomer.form">View Contacts</a> |
+			<a href="showCustomers.jsp">View Contacts</a> |
 		    <a href="sendEmail.form">Send Email</a> |
-			<a href="register.form">Create Contact</a> |
-			<a href="newUser.form">Create User</a> |
-		    <a href="changePassword.form">Change Password</a> |
-		    <a href="logout.form">Logout</a>
+			<a href="register.jsp">Create Contact</a> |
+			<a href="newUser.jsp">Create User</a> |
+		    <a href="changePassword.jsp">Change Password</a> |
+		    <a href="logout.jsp">Logout</a>
 		</h5>
 <!-- <header class="main-header" role="banner">
   <img src="images/user.png" alt="Banner Image" align="center"  height="12%" width="12%"/>
@@ -162,3 +167,6 @@
 	</footer>
 </body>
 </html>
+<%
+}
+%>

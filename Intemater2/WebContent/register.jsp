@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+	if (null == session.getAttribute("objUser")) {
+		response.sendRedirect("login.jsp");
+	} else {
+%>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -77,7 +83,7 @@ div,h5 {
 			<a href="showCustomers.form?recperpage=25">View Contacts</a> |
 		    <a href="sendEmail.form">Send Email</a> |
 			<a href="register.form">Create Contact</a> |
-			<a href="newUser.jsp">Create New User</a> |
+			<a href="newUser.form">Create New User</a> |
 		    <a href="changePassword.form">Change Password</a> |
 		    <a href="showUsers.form?recperpage=25">Show Users</a> |
 		    <a href="showCategory.form">Category</a> |
@@ -175,3 +181,6 @@ div,h5 {
 	</div>
 </body>
 </html>
+<%
+}
+%>
