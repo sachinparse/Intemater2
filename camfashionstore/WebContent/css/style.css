@@ -293,6 +293,15 @@ body a{
 	background-position: center;
 	min-height:500px;
 }
+.career {
+	background: url(../images/career.jpg) no-repeat center top;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-position: center;
+	min-height:500px;
+}
 .banner_desc{
 	padding-top:9em;
 	position: relative;

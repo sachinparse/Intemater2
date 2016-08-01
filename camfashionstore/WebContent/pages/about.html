@@ -13,18 +13,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <meta name="keywords" content="Buy_shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!-- Custom Theme files -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />
-<script src="js/simpleCart.min.js"> </script>
+<link href="../css/style.css" rel='stylesheet' type='text/css' />
+<script src="../js/simpleCart.min.js"> </script>
 <!-- Custom Theme files -->
 <!--webfont-->
 <link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
-<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
 <!-- start menu -->
-<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/megamenu.js"></script>
+<link href="../css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="../js/megamenu.js"></script>
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 </head>
 <body>
@@ -33,27 +33,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="one-fifth column row_1">
 			<span class="selection-box"><select class="domains valid" name="domains">
 		       <option>English</option>
-		       <option>French</option>
-		       <option>German</option>
+		    <!--    <option>French</option>
+		       <option>German</option> -->
 		    </select></span>
          </div>
-         <div class="cssmenu">
+         <!-- <div class="cssmenu">
 			<ul>
 			   <li class="active"><a href="login.html">My Account</a></li> 
 			</ul>
-		 </div>
+		 </div> -->
 	</div>
 </div>	
 <div class="header_bottom men_border">
 	    <div class="container">
 			<div class="col-xs-8 header-bottom-left">
 				<div class="col-xs-2 logo">
-					<h1><a href="index.html"><span>Buy</span>shop</a></h1>
+					<h1><a href="index.html"><!-- <span>Buy</span>shop</a> --></h1>
+					<span> <img src="../images/logo.jpg" class="img-responsive" alt="" ></span>
 				</div>
 				<div class="col-xs-6 menu">
 		            <ul class="megamenu skyblue">
 				      <li><a class="color1" href="index.html">Men</a><div class="megapanel">
-						<div class="row">
+						<!-- <div class="row">
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
@@ -104,12 +105,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</ul>	
 								</div>												
 							</div>
-						  </div>
+						  </div> -->
 						</div>
 					</li>
-				    <li class="grid"><a class="color2" href="#">Women</a>
+				    <li class="grid"><a class="color2" href="#">Enquiry</a>
 					  <div class="megapanel">
-						<div class="row">
+						<!-- <div class="row">
 							<div class="col1">
 								<div class="h_nav">
 									<ul>
@@ -160,7 +161,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</ul>	
 								</div>												
 							</div>
-						  </div>
+						  </div> -->
 						</div>
 			    </li>
 				<li class="active grid"><a class="color4" href="about.html">About</a></li>				
@@ -170,18 +171,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 		</div>
 	    <div class="col-xs-4 header-bottom-right">
-	       <div class="box_1-cart">
+	    	
+	    	<ul class="footer_social">
+			  <li><a href=""> <i class="fb"> </i> </a></li>
+			  <li><a href=""><i class="tw"> </i> </a></li>
+			  <li><a href=""><i class="google"> </i> </a></li>
+			  <li><a href=""><i class="instagram"> </i> </a></li>
+		    </ul>
+		
+	     <!--   <div class="box_1-cart">
 		     <div class="box_11"><a href="checkout.html">
 		      <h4><p>Cart: <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</p><img src="images/bag.png" alt=""/><div class="clearfix"> </div></h4>
 		      </a></div>
 	          <p class="empty"><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
 	          <div class="clearfix"> </div>
-	        </div>
-	        <div class="search">	  
+	        </div> -->
+	        <!-- <div class="search">	  
 				<input type="text" name="s" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
 				<input type="submit" value="Subscribe" id="submit" name="submit">
 				<div id="response"> </div>
-		     </div>
+		     </div> -->
 	         <div class="clearfix"></div>
          </div>
         <div class="clearfix"></div>
@@ -192,7 +201,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	  <div class="box_4">
 	  	<div class="col-md-8 about_left">
 	  		<h1>Lorem Ipsum is simply dummy text </h1>
-	        <img src="images/banner.jpg" class="img-responsive" alt=""/>
+	        <img src="../images/banner.jpg" class="img-responsive" alt=""/>
 		    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 	       <div class="faqs">
 				       <h2>Why Choose Us</h2>
@@ -224,7 +233,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	  	</div>
 	  	<div class="clearfix"> </div>
 	  </div>
-   <h3 class="m_2">Related Products</h3>
+   <!-- <h3 class="m_2">Related Products</h3>
          <div class="container">
           		<div class="box_3">
           			<div class="col-md-3">
@@ -261,7 +270,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			        </div>
 			        <div class="clearfix"> </div>
           		</div>
-          	</div>
+          	</div> -->
        </div>
 </div>      
 <div class="footer">
@@ -270,13 +279,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="col-md-4 box_3">
 			<h3>Our Stores</h3>
 			<address class="address">
-              <p>9870 St Vincent Place, <br>Glasgow, DC 45 Fr 45.</p>
+              <p>Samata Nagar, <br>Osmanabad - 413501.</p>
               <dl>
                  <dt></dt>
-                 <dd>Freephone:<span> +1 800 254 2478</span></dd>
-                 <dd>Telephone:<span> +1 800 547 5478</span></dd>
-                 <dd>FAX: <span>+1 800 658 5784</span></dd>
-                 <dd>E-mail:&nbsp; <a href="mailto@example.com">info(at)buyshop.com</a></dd>
+                 <!-- <dd>Freephone:<span> +1 800 254 2478</span></dd> -->
+                 <dd>Telephone:<span> 024 223344</span></dd>
+                 <dd>FAX: <span>+024 223345</span></dd>
+                 <dd>E-mail:&nbsp; <a href="mailto@example.com">info(at)camfashionstore.com</a></dd>
               </dl>
            </address>
            <ul class="footer_social">
