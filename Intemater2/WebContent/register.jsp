@@ -71,31 +71,61 @@ input[type=submit] {
 
 }
 
-div,h5 {
+div {
 	align: left;
     width: 100%;
     height: 20px;
     /* border: 2px solid #73AD21; */
     background:#ccc;
 }
+
+a:link, a:visited {
+    background-color: #088D79;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+a:hover, a:active {
+    background-color: #FF8000;
+}
 </style>
-	<h5 align="left"> 
-			<a href="showCustomers.form?recperpage=25">View Contacts</a> |
-		    <a href="sendEmail.form">Send Email</a> |
-			<a href="register.form">Create Contact</a> |
-			<a href="newUser.form">Create New User</a> |
-		    <a href="changePassword.form">Change Password</a> |
-		    <a href="showUsers.form?recperpage=25">Show Users</a> |
-		    <a href="showCategory.form">Category</a> |
-		    <a href="logout.form">Logout</a> |
+<!-- 	<h5> 
+			<a href="showCustomers.form?recperpage=25">View Contacts</a> 
+		    <a href="sendEmail.form">Send Email</a> 
+			<a href="register.form">Create Contact</a> 
+			<a href="newUser.form">Create New User</a> 
+		    <a href="changePassword.form">Change Password</a> 
+		    <a href="showUsers.form?recperpage=25">Show Users</a> 
+		    <a href="showCategory.form">Category</a> 
+		    <a href="logout.form">Logout</a> 
+		    <a href="saveMessage.form">Save Message</a>
+	</h5>
+<header class="main-header" role="banner">
+  <img src="images/Contact-Banner.png" alt="Banner Image" align="center"/>
+</header> -->
+
+</head>
+<body align="center">
+
+	<h5> 
+			<a href="showCustomers.form?recperpage=25">View Contacts</a> 
+		    <a href="sendEmail.form">Send Email</a> 
+			<a href="register.form">Create Contact</a> 
+			<a href="newUser.form">Create New User</a> 
+		    <a href="changePassword.form">Change Password</a> 
+		    <a href="showUsers.form?recperpage=25">Show Users</a> 
+		    <a href="showCategory.form">Category</a> 
+		    <a href="logout.form">Logout</a> 
 		    <a href="saveMessage.form">Save Message</a>
 	</h5>
 <header class="main-header" role="banner">
   <img src="images/Contact-Banner.png" alt="Banner Image" align="center"/>
 </header>
 
-</head>
-<body>
 		
 		<h2 align="center"><u>Create New Contact</u></h2>
 
@@ -135,7 +165,7 @@ div,h5 {
 				<td>Address</td><td>:</td><td><input type="text" name="custAddress" placeholder=" Address"> </td> </tr>
 			
 		<!-- <tr><td><div style="color:#B914FF">Bank Details</div></td></tr> -->	
-		<tr><td><h3>Bank Details</h3></td></tr>
+		<tr><td><h3 align="left">Bank Details</h3></td></tr>
 		
 		 	<tr> <td></td>
 				<td>Bank Name</td><td>:</td><td><input type="text" name="bankName" placeholder=" Bank Name"> </td>
