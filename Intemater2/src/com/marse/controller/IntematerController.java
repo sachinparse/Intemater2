@@ -6,6 +6,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,6 +50,32 @@ public class IntematerController {
 	public ModelAndView newUser(){
 		return new ModelAndView("newUser");
 	}
+	
+/*	// Register form from link
+	@RequestMapping(value="login.form", method=RequestMethod.POST)
+	public ModelAndView registerCustomer(){
+		
+// continues....
+		
+		User objUser=new User();
+		
+		objUser=objUserDAO.getUser(userId);  //  fetched whole record of the current user
+		 
+		// fetching existing categories
+		
+		List<Category> objlstCategory=new ArrayList<Category>();
+		objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();
+		
+		// fetching list of all the users
+		List<User> listOfUser=objUserDAO.listOfUser();
+		objModel.addObject("listOfUser", listOfUser );
+		
+		HttpSession objSession=request.getSession(false);
+		objSession.setAttribute("objUser", objUser);   // kept current user object into HttpSession for session handling
+		objModel.addObject("objlstCategory", objlstCategory);
+		objModel.setViewName("register");
+		
+	}*/
 	
 	// Testing of the message functionality
 	@RequestMapping(value="saveMessage.form", method=RequestMethod.GET)
@@ -375,7 +402,7 @@ public class IntematerController {
 				}else{
 						CustomerDAO objCustomerDAO=DAOFactory.getInstanceOfCustomer();
 						Customer objCustomer=new Customer();
-						objCustomerDAO.getCustomer(customerId); //  fetched whole record of the deleting user
+						objCustomer=objCustomerDAO.getCustomer(customerId); //  fetched whole record of the deleting user
 						
 						 // fetching existing categories
 						List<Category> objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();//new ArrayList<Category>();
@@ -387,6 +414,133 @@ public class IntematerController {
 						return objModel;
 				}
 			}
+			
+		}
+		
+		
+		
+		@RequestMapping(value="updateCustomer.form", method=RequestMethod.POST)
+		public ModelAndView updateCustomer( @RequestParam int custId,
+											@RequestParam String custName,
+											@RequestParam String custMobile1,
+											@RequestParam(required=false) String custMobile2,
+											@RequestParam String custWork,
+											@RequestParam (required=false) String custEmail,
+											@RequestParam (required=false) String custPan,
+											@RequestParam String custDob,
+											@RequestParam String custGender,
+											@RequestParam String custAddress,
+											@RequestParam (required=false) String bankName,
+											@RequestParam (required=false) String branch,
+											@RequestParam (required=false) String accNo,
+											@RequestParam (required=false) String ifsc,
+											@RequestParam (required=false) String micr,
+											@RequestParam int category,
+											@RequestParam String status,
+											HttpServletRequest request){
+			
+			
+			ModelAndView objModel=new ModelAndView();
+			
+			HttpSession objSession= request.getSession(false);
+			
+			if(objSession==null){
+				String message="Time out,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+				if(objSession.getAttribute("objUser")==null){
+					String message="Invalid Session,<br> Please login again...!";
+					objModel.addObject("message", message);
+					objModel.setViewName("login");
+					return objModel;
+				}else{
+
+					List<Customer> listOfCustomer=null;
+					int cPage=1;
+					
+					// Date functionality
+					 SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+					 Date date=null;
+
+					 try {
+
+				            date = formatter.parse(custDob);
+				            System.out.println("1: "+date);
+				            System.out.println("2 : "+formatter.format(date));
+
+				        } catch (ParseException e) {
+				            e.printStackTrace();
+				        }
+						
+				        Customer objCustomer=new Customer();
+						
+						objCustomer.setCustId(custId);
+						objCustomer.setName(custName);
+						objCustomer.setMobile1(custMobile1);
+						objCustomer.setMobile2(custMobile2);
+						objCustomer.setWork(custWork);
+						objCustomer.setEmail(custEmail);
+						objCustomer.setPan(custPan);
+						objCustomer.setDob(date);
+						objCustomer.setGender(custGender);
+						objCustomer.setAddress(custAddress);
+						objCustomer.setBankName(bankName);
+						objCustomer.setBankBranch(branch);
+						objCustomer.setIfsc(ifsc);
+						objCustomer.setMicr(micr);
+						objCustomer.setCategory(category);
+						objCustomer.setAcc(accNo);
+						objCustomer.setStatus(status);
+						
+						// calling to the DAO methods to update the Customer details
+						
+						CustomerDAO objCustomerDAO=DAOFactory.getInstanceOfCustomer();
+						
+						objCustomerDAO.updateCustomer(objCustomer);
+						
+						// fetching list of all customers of selected category.
+						
+						int offSet=0;
+						int  noOfPages=0;
+						
+							int catId=category;
+							
+							offSet=(1 * 25)-25;
+							System.out.println("offset="+offSet);
+							listOfCustomer=objCustomerDAO.listOfCustomer(catId,offSet, 25);
+							int customerCount=objCustomerDAO.customerCount(catId);
+							
+							
+							noOfPages = (int) Math.ceil(customerCount * 1.0 / 25);
+							   
+							 	System.out.println("Total Pages= "+noOfPages);
+			  					
+						    if(noOfPages<=0){
+							   noOfPages=1;
+						    }
+						    if(cPage<=0){
+								   cPage=1;
+							}
+							
+						    // fetching existing categories
+							List<Category> objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();//new ArrayList<Category>();
+							//objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();
+							System.out.println("cPage "+cPage);
+							
+							objModel.addObject("categoryId", category);
+							objModel.addObject("objlstCategory", objlstCategory);
+							objModel.addObject("listOfCustomer", listOfCustomer );
+							objModel.addObject("noOfPages",noOfPages);
+							objModel.addObject("currentPage",cPage);
+							objModel.addObject("noOfRecordsPerPage",25);
+							objModel.setViewName("showCustomers");
+							
+							return objModel;
+						}
+						
+				}
 			
 		}
 	

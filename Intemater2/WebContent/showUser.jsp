@@ -44,16 +44,32 @@
     	padding-bottom: 30px;
     	clear: both;
 	}
+	
+	a:link, a:visited {
+    background-color: #088D79;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+a:hover, a:active {
+    background-color: #FF8000;
+}
+
+a:link, a:visited {
+    background-color: #088D79;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
 </style>
 
-  <h5 align="left"> 
-			<a href="showCustomers.jsp">View Contacts</a> |
-		    <a href="sendEmail.form">Send Email</a> |
-			<a href="register.jsp">Create Contact</a> |
-			<a href="newUser.jsp">Create User</a> |
-		    <a href="changePassword.jsp">Change Password</a> |
-		    <a href="logout.jsp">Logout</a>
-		</h5>
+ 
 <!-- <header class="main-header" role="banner">
   <img src="images/user.png" alt="Banner Image" align="center"  height="12%" width="12%"/>
 </header> -->
@@ -71,14 +87,24 @@
 		div,h5 {
 			align: left;
     		width: 100%;
-    		height: 20px;
+    		height: 20px; 
     		/* border: 2px solid #73AD21; */
-    		background:#ccc;
+    		/* background:#ccc; */
     		
 }
 	</style>
 </head>
-<body>
+<body align="center">
+
+ <h5 align="center"> 
+			<a href="showCustomers.jsp">View Contacts</a>
+		    <a href="sendEmail.form">Send Email</a>
+			<a href="register.jsp">Create Contact</a>
+			<a href="newUser.jsp">Create User</a>
+		    <a href="changePassword.jsp">Change Password</a>
+		    <a href="logout.jsp">Logout</a>
+  </h5>
+		
 		<h2 align="center"><u>User List</u></h2>
 	<form name="showForm" action="showUsers.form" method="post">
 		
@@ -163,7 +189,7 @@
 	</form>
 	<footer class="Footer">
 		<p align="right">Copyright &copy; 2016 &middot; All Rights Reserved. Contact information: 
-		<a href="mailto:sachin.parse@gmail.com">sachin.parse@gmail.com</a>.</p>
+		<font color="blue">sachin.parse@gmail.com</font>.</p>
 	</footer>
 </body>
 </html>

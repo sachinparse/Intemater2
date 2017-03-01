@@ -58,21 +58,23 @@
     		width: 100%;
     		height: 20px;
     		/* border: 2px solid #73AD21; */
-    		background:#ccc;
+    		/* background:#ccc; */
      }
-     
+     	a:link, a:visited {
+    background-color: #088D79;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+   }
+
+
+   a:hover, a:active {
+    background-color: #FF8000;
+   }
 </style>
 
-
-<h5 align="left">
-	<!-- <a href="showCustomer.form">View Contacts</a> | --> <a
-		href="sendEmail.form">Send Email</a> | <a href="register.jsp">Create
-		Contact</a> | <a href="newUser.jsp">Create New User</a> | <a
-		href="changePassword.form">Change Password</a> | <a
-		href="showUsers.form?recperpage=25">Show Users</a> | <a
-		href="showCategory.jsp">Category</a> | <a href="logout.form">Logout</a>
-	| <a href="saveMessage.jsp">Save Message</a>
-</h5>
 
 <script type="text/javascript">
 
@@ -90,8 +92,9 @@ $(document).ready(function(){
 
  function onload(){
 	 
-	 var t1=document.getElementById("idCategoryId").value;
-	 document.getElementById("idcurrentPage").value=t1;
+	// var t1=document.getElementById("idCategoryId").value;
+	 //document.getElementById("idcurrentPage").value=t1;
+	 document.getElementById("idcurrentPage").value=${currentPage};
 	 
 	 
  }
@@ -100,6 +103,18 @@ $(document).ready(function(){
 </head>
 <body onLoad="onload()">
 
+
+	<h5 align="center">
+		<!-- <a href="showCustomer.form">View Contacts</a> | --> <a
+			href="sendEmail.form">Send Email</a>  
+			<a href="register.jsp">Create Contact</a> 
+			<a href="newUser.jsp">Create New User</a>
+			<a	href="changePassword.form">Change Password</a>
+			<a	href="showUsers.form?recperpage=25">Show Users</a> 
+			<a href="showCategory.jsp">Category</a>
+			<a href="logout.form">Logout</a>
+		    <a href="saveMessage.jsp">Save Message</a>
+	</h5>
 			
 		<form name="showCustomerForm" action="showCustomers.form" method="get">
 			
@@ -150,7 +165,9 @@ $(document).ready(function(){
 							  	<br>
 		        <tr align="center">
 		          <td>${custList.custId} </td>  <td>${custList.name } </td>  <td>${custList.mobile1} </td>  <td>${custList.email} </td>  <td>${custList.pan} </td>
-		          <td>${custList.address}</td> <td>${custList.dob}</td>
+		          <td>${custList.address}</td> 
+		          <!-- JSTL split() function to separate the date and time 05092016-->
+		          <td>&nbsp;${fn:split(custList.dob,' ')[0]}&nbsp;&nbsp;</td>
 		          
 		          <td>  <a href='editCustomer.form?customerId=${custList.custId}'>Edit</a>  
 					  

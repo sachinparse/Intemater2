@@ -79,16 +79,29 @@ div,h5 {
     width: 100%;
     height: 20px;
     /* border: 2px solid #73AD21; */
-    background:#ccc;
+   /*  background:#ccc; */
+}
+a:link, a:visited {
+    background-color: #088D79;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+a:hover, a:active {
+    background-color: #FF8000;
 }
 </style>
-  <h5 align="left"> 
-			<a href="showCustomers.form?recperpage=25">View Contacts</a> |
-		    <a href="newUser.jsp">Send Email</a> |
-			<a href="register.jsp">Create Contact</a> |
-			<a href="newUser.jsp">Create User</a> |
-		    <a href="newUser.jsp">Change Password</a> |
-		    <a href="showUser.jsp">Show Users</a> |
+  <h5 align="center"> 
+			<a href="showCustomers.form?recperpage=25">View Contacts</a> 
+		    <a href="newUser.jsp">Send Email</a> 
+			<a href="register.jsp">Create Contact</a> 
+			<a href="newUser.jsp">Create User</a> 
+		    <a href="newUser.jsp">Change Password</a> 
+		     <a href="showUsers.form?recperpage=25">Show Users</a>  
 		    <a href="newUser.jsp">Logout</a>
   </h5>
 <header class="main-header" role="banner">
@@ -165,7 +178,7 @@ div,h5 {
 
 	<div>
 		<p align="right">Copyright &copy; 2016 &middot; All Rights Reserved. Contact information: 
-		<a href="mailto:sachin.parse@gmail.com">sachin.parse@gmail.com</a>.</p>
+		<!-- <a href="mailto:sachin.parse@gmail.com"> --><font color="blue">sachin.parse@gmail.com</font><!-- </a>. -->&nbsp;</p>
 	</div>
 	
 </body>

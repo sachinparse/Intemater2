@@ -159,7 +159,7 @@ a:hover, a:active {
 				
 			<tr> <td></td>
 				<td>PAN No.</td><td>:</td><td><input type="text" name="custPan" placeholder=" PAN Number" ></td> 
-				<td align="center">Date of Birth</td><td>:</td><td><input class="birthday" type="text" name="custDob" placeholder="mm/dd/yyyy" ></td> </tr>
+				<td align="center">Date of Birth</td><td>:</td><td><input class="birthday" type="text" name="custDob" placeholder="mm-dd-yyyy" ></td> </tr>
 			
 			<tr> <td></td>
 				<td>Address</td><td>:</td><td><input type="text" name="custAddress" placeholder=" Address"> </td> </tr>
@@ -207,7 +207,7 @@ a:hover, a:active {
 	</form>
 	<div>
 		<p align="right">Copyright &copy; 2016 &middot; All Rights Reserved. Contact information: 
-		<a href="mailto:sachin.parse@gmail.com">sachin.parse@gmail.com</a>.</p>
+		<!-- <a href="mailto:sachin.parse@gmail.com"> --><font color="blue">sachin.parse@gmail.com</font><!-- </a> -->&nbsp;</p>
 	</div>
 </body>
 </html>

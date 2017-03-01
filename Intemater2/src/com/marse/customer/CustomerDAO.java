@@ -9,7 +9,7 @@ public interface CustomerDAO {
 
 	public void addCustomer(Customer objCustomer);                // adding new customer details to the DB.
 	public Customer getCustomer(int customerId); // getting the details of the Customer of given customer id.
-	public void updateCustomer(int customerId);             // updating an existing customer details of given customerId.
+	public void updateCustomer(Customer objCutomer);             // updating an existing customer details of given customerId.
 	public void deleteCustomer(int customerId);             // deactivating an existing customer of given customerId.
 	public List<Customer> listOfCustomer(int categoryId,int offSet, int noOfRecordsPerPage);   // getting the list of all the customers of selected category.
 	public int customerCount(int categoryId);// getting the count of the selected category customers count.

@@ -82,6 +82,20 @@ div,h5 {
     /* border: 2px solid #73AD21; */
     background:#ccc;
 }
+	a:link, a:visited {
+    background-color: #088D79;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+a:hover, a:active {
+    background-color: #FF8000;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -178,18 +192,18 @@ th {
     		margin-top: 30.5em;
     	}
 </style>		
-  <h5 align="left"> 
-			<a href="newUser.form">View Contacts</a> |
-		    <a href="newUser.form">Send Email</a> |
-			<a href="register.form">Create Contact</a> |
-			<a href="newUser.form">Create User</a> |
-		    <a href="newUser.form">Change Password</a> |
-		    <a href="showUser.form">Show Users</a> |
-		    <a href="newUser.form">Logout</a>
-		</h5>
-
 </head>
 <body>
+
+ <h5 align="left"> 
+			<a href="newUser.form">View Contacts</a>
+		    <a href="newUser.form">Send Email</a>
+			<a href="register.form">Create Contact</a>
+			<a href="newUser.form">Create User</a>
+		    <a href="newUser.form">Change Password</a>
+		    <a href="showUser.form">Show Users</a>
+		    <a href="newUser.form">Logout</a>
+</h5>
 	
 	<form name="categoryForm" id="idCategoryForm" action="actionCategory.form" method="post">
 	

@@ -78,8 +78,21 @@ div {
     height: 10px;
     border: 3px solid #73AD21;
 }
+a:link, a:visited {
+    background-color: #088D79;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+a:hover, a:active {
+    background-color: #FF8000;
+}
 </style>
-  <h5 align="left"> 
+        <h5 align="center"> 
 			<a href="newUser.form">View Contacts</a> |
 		    <a href="newUser.form">Send Email</a> |
 			<a href="register.form">Create Contact</a> |

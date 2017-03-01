@@ -30,10 +30,21 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	}
 
+
 	@Override
-	public void updateCustomer(int customerId) {
+	public void updateCustomer(Customer objCutomer) {
+
+		SessionFactory factory=HibernateUtils.getInstance();
+		Session session=factory.openSession();
+		
+		Transaction tx=session.beginTransaction();
+		session.update(objCutomer);
+		tx.commit();
+		session.close();
 		
 	}
+	
+	
 
 	@Override
 	public void deleteCustomer(int customerId) {
@@ -60,6 +71,8 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 		SessionFactory factory=HibernateUtils.getInstance();
 		Session session=factory.openSession();
+		
+		System.out.println("Category :"+categoryId+", OffSet :"+offSet+", No. of Records/page :"+noOfRecordsPerPage);
 		
 		String hqlQuery="From Customer c WHERE c.category="+categoryId+"";
 		
@@ -96,9 +109,15 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 		SessionFactory factory=HibernateUtils.getInstance();
 		Session session=factory.openSession();
-		Customer objCustomer=(Customer) session.get(User.class, customerId); 
+		Object objCustomer=session.get(Customer.class, customerId); 
 		
-		return objCustomer;
+		Customer customer=new Customer();
+		
+		customer= (Customer)objCustomer;
+		
+		System.out.println(customer.toString());
+		
+		return customer;
 	}
 
 

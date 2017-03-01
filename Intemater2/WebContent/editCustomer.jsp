@@ -75,10 +75,26 @@ div,h5 {
     width: 100%;
     height: 20px;
     /* border: 2px solid #73AD21; */
-    background:#ccc;
+    /* background:#ccc; */
 }
+
+
+a:link, a:visited {
+    background-color: #088D79;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+a:hover, a:active {
+    background-color: #FF8000;
+}
+
 </style>
-	<h5 align="left"> 
+	<h5 align="center" > 
 			<a href="showCustomers.form?recperpage=25">View Contacts</a> |
 		    <a href="sendEmail.form">Send Email</a> |
 			<a href="register.form">Create Contact</a> |
@@ -89,63 +105,75 @@ div,h5 {
 		    <a href="logout.form">Logout</a> |
 		    <a href="saveMessage.form">Save Message</a>
 	</h5>
-<header class="main-header" role="banner">
+<!-- <header class="main-header" role="banner">
   <img src="images/Contact-Banner.png" alt="Banner Image" align="center"/>
-</header>
+</header> -->
 
 </head>
 <body>
 		
-		<h2 align="center"><u>Create New Contact</u></h2>
+		<h2 align="center"><u>Edit Contact</u></h2>
 
-	<form name="homePage" action="register.form" method="post">
+	<form name="homePage" action="updateCustomer.form" method="post">
 		
 		<input type="hidden" name="currentPage" value="0"/>
+		
+		<input type="hidden" name="custId" value="${objCustomer.custId}">
 		
 		<table align="center" border="0">
 		
 		 <tr><td><h3>Customer Details</h3></td></tr>	
 			<tr> <td></td>
-				<td >Name</td><td>:</td><td><input type="text" name="custName" placeholder="Enter Customer Name"></td> </tr>
+				<td >Name</td><td>:</td><td><input type="text" name="custName" placeholder="Enter Customer Name" value="${objCustomer.name}"></td> </tr>
 				
 			<tr> <td></td>
-				<td>Mobile No.</td><td>:</td> <td><input type="text" name="custMobile1" placeholder=" 1st Mobile " ></td>
-				                              <td><input type="text" name="custMobile2" placeholder=" 2nd Mobile " ></td> </tr>
+				<td>Mobile No.</td><td>:</td> <td><input type="text" name="custMobile1" placeholder=" 1st Mobile " value="${objCustomer.mobile1}"></td>
+				                              <td><input type="text" name="custMobile2" placeholder=" 2nd Mobile " value="${objCustomer.mobile2}"></td> </tr>
 				
 			<tr> <td></td>
-				<td>Occupation</td><td>:</td><td><input type="text" name="custWork" placeholder="Occupation"> </td> </tr>
+				<td>Occupation</td><td>:</td><td><input type="text" name="custWork" placeholder="Occupation" value="${objCustomer.work}"> </td> </tr>
 				
 			<tr> <td></td>
-				<td>Email Id</td><td>:</td><td><input type="text" name="custEmail" placeholder=" Email Id" ></td> 
+				<td>Email Id</td><td>:</td><td><input type="text" name="custEmail" placeholder=" Email Id" value="${objCustomer.email}"></td> 
 				<td align="center">Gender</td><td>:</td><td>
 					 <select class="select-style gender" name="custGender">
 				            <option value="select">I am..</option>
-				            <option value="male">Male</option>
-				            <option value="female">Female</option>
-				            <option value="others">Other</option>
+				            <option value="male" ${objCustomer.gender=="male"? 'selected':'' }>Male</option>
+				            <option value="female" ${objCustomer.gender=="female"? 'selected':'' }>Female</option>
+				            <option value="others" ${objCustomer.gender=="others"? 'selected':'' }>Other</option>
 				     </select>
 				</td></tr>
 				
 			<tr> <td></td>
-				<td>PAN No.</td><td>:</td><td><input type="text" name="custPan" placeholder=" PAN Number" ></td> 
-				<td align="center">Date of Birth</td><td>:</td><td><input class="birthday" type="text" name="custDob" placeholder="mm/dd/yyyy" ></td> </tr>
-			
+				<td>PAN No.</td><td>:</td><td><input type="text" name="custPan" placeholder=" PAN Number"  value="${objCustomer.pan}"></td> 
+				<td align="center">Date of Birth</td><td>:</td><td><input class="birthday" type="text" name="custDob" placeholder="mm/dd/yyyy" value="${fn:split(objCustomer.dob, ' ')[0]}"></td><td>(yyyy-mm-dd)</td> </tr>
+																												
 			<tr> <td></td>
-				<td>Address</td><td>:</td><td><input type="text" name="custAddress" placeholder=" Address"> </td> </tr>
-			
+				<td>Address</td><td>:</td><td><input type="text" name="custAddress" placeholder=" Address" value="${objCustomer.address}"> </td>
+				<td align="center">Status</td><td>:</td>
+				<td>
+				
+				   <select class="select-style gender" name="status">
+				            <option value="select">Select Status</option>
+				            <option value="A" ${objCustomer.status=="A"? 'selected':'' }>Active</option>
+				            <option value="I" ${objCustomer.status=="I"? 'selected':'' }>In-Active</option>
+				   </select> 
+			    </td>
+			</tr>
+				
 		<!-- <tr><td><div style="color:#B914FF">Bank Details</div></td></tr> -->	
 		<tr><td><h3>Bank Details</h3></td></tr>
 		
 		 	<tr> <td></td>
-				<td>Bank Name</td><td>:</td><td><input type="text" name="bankName" placeholder=" Bank Name"> </td>
-			    <td align="center">Branch</td><td>:</td><td><input type="text" name="branch" placeholder=" Branch"> </td> </tr>
+				<td>Bank Name</td><td>:</td><td><input type="text" name="bankName" placeholder=" Bank Name" value="${objCustomer.bankName}"> </td>
+			    <td align="center">Branch</td><td>:</td><td><input type="text" name="branch" placeholder=" Branch" value="${objCustomer.bankBranch}"> </td> </tr>
 			
 			<tr> <td></td>
-				<td>Account No. </td><td>:</td><td><input type="text" name="accNo" placeholder=" Account Number"></td> </tr>    
+				<td>Account No. </td><td>:</td><td><input type="text" name="accNo" placeholder=" Account Number" value="${objCustomer.acc}"></td> </tr>    
 		
 			<tr> <td></td>
-				<td>IFSC</td><td>:</td> <td><input type="text" name="ifsc" placeholder=" IFSC Code"></td>
-				<td align="center">MICR</td><td>:</td> <td><input type="text" name="micr" placeholder=" MICR Code"></td> </tr>
+				<td>IFSC</td><td>:</td> <td><input type="text" name="ifsc" placeholder=" IFSC Code" value="${objCustomer.ifsc}"></td>
+				<td align="center">MICR</td><td>:</td> <td><input type="text" name="micr" placeholder=" MICR Code" value="${objCustomer.micr}"></td> </tr>
 				<tr></tr><tr></tr>
 				<tr> <td></td>
 					<td>Select Category</td><td>:</td> 
@@ -154,7 +182,7 @@ div,h5 {
 								<option value="0">Select Category</option>
 																
 							<c:forEach var="category" items="${objlstCategory}">
-							  	<option value="${category.categoryId}">${category.categoryName}</option>
+							  	<option value="${category.categoryId}" ${category.categoryId== objCustomer.category? 'selected':'' }>${category.categoryName}</option>
 							</c:forEach>											
 						</select>
 					</td>
@@ -170,7 +198,7 @@ div,h5 {
 	</form>
 	<div>
 		<p align="right">Copyright &copy; 2016 &middot; All Rights Reserved. Contact information: 
-		<a href="mailto:sachin.parse@gmail.com">sachin.parse@gmail.com</a>.</p>
+		<font color="blue">sachin.parse@gmail.com</font></p>
 	</div>
 </body>
 </html>

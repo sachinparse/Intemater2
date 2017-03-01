@@ -218,5 +218,16 @@ public class Customer {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [custId=" + custId + ", name=" + name + ", mobile1="
+				+ mobile1 + ", mobile2=" + mobile2 + ", work=" + work
+				+ ", email=" + email + ", pan=" + pan + ", dob=" + dob
+				+ ", gender=" + gender + ", address=" + address + ", bankName="
+				+ bankName + ", bankBranch=" + bankBranch + ", acc=" + acc
+				+ ", ifsc=" + ifsc + ", micr=" + micr + ", category="
+				+ category + ", status=" + status + "]";
+	}
+
 	
 }
