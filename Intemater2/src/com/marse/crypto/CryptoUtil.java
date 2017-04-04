@@ -106,7 +106,7 @@ public class CryptoUtil {
 	    
 	    // test code as main() method
 	    
-	    /*public static void main(String[] args) throws Exception {
+	   /* public static void main(String[] args) throws Exception {
 	        CryptoUtil cryptoUtil=new CryptoUtil();
 	       // String key="ezeon8547";   
 	        String plain="password";

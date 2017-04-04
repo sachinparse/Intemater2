@@ -130,9 +130,11 @@ function activateSaveButton(){
 	  
 	  if(document.getElementById("idUpdateButton").disabled==true){
 	       
-		  if(text1.value.length!=0 ){
+		  if(text1.value.trim().length!=0 ){
 		    
 			       document.getElementById("idAddButton").disabled=false;
+		  }else{
+			  	   document.getElementById("idAddButton").disabled=true;
 		  }
 	  }
 }
@@ -195,14 +197,25 @@ th {
 </head>
 <body>
 
- <h5 align="left"> 
-			<a href="newUser.form">View Contacts</a>
+ <h5 align="center"> 
+ 			
+ 			<a href="sendEmail.form">Send Email</a>
+			<a href="showCustomers.form?recperpage=25">View Contacts</a>
+			<a href="registerPage.form">Create Contact</a>
+			<!-- <a href="showCategory.form">Category</a> -->
+			<a href="saveMessage.form">Messages</a>
+			<a href="showUsers.form?recperpage=25">Show Users</a>
+			<a href="newUser.form">Create New User</a>
+			<a href="changePassword.form">Change Password</a>
+			<a href="logout.form">Logout</a>
+			
+			<!-- <a href="newUser.form">View Contacts</a>
 		    <a href="newUser.form">Send Email</a>
 			<a href="register.form">Create Contact</a>
 			<a href="newUser.form">Create User</a>
 		    <a href="newUser.form">Change Password</a>
 		    <a href="showUser.form">Show Users</a>
-		    <a href="newUser.form">Logout</a>
+		    <a href="newUser.form">Logout</a> -->
 </h5>
 	
 	<form name="categoryForm" id="idCategoryForm" action="actionCategory.form" method="post">

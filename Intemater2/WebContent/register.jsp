@@ -93,34 +93,30 @@ a:hover, a:active {
     background-color: #FF8000;
 }
 </style>
-<!-- 	<h5> 
-			<a href="showCustomers.form?recperpage=25">View Contacts</a> 
-		    <a href="sendEmail.form">Send Email</a> 
-			<a href="register.form">Create Contact</a> 
-			<a href="newUser.form">Create New User</a> 
-		    <a href="changePassword.form">Change Password</a> 
-		    <a href="showUsers.form?recperpage=25">Show Users</a> 
-		    <a href="showCategory.form">Category</a> 
-		    <a href="logout.form">Logout</a> 
-		    <a href="saveMessage.form">Save Message</a>
-	</h5>
-<header class="main-header" role="banner">
-  <img src="images/Contact-Banner.png" alt="Banner Image" align="center"/>
-</header> -->
 
 </head>
 <body align="center">
 
 	<h5> 
-			<a href="showCustomers.form?recperpage=25">View Contacts</a> 
+			<a href="sendEmail.form">Send Email</a>
+			<a href="showCustomers.form?recperpage=25">View Contacts</a>
+			<!-- <a href="register.form">Create Contact</a> -->
+			<a href="showCategory.form">Category</a>
+			<a href="saveMessage.form">Messages</a>
+			<a href="showUsers.form?recperpage=25">Show Users</a>
+			<a href="newUser.form">Create New User</a>
+			<a href="changePassword.form">Change Password</a>
+			<a href="logout.form">Logout</a>
+			
+			<!-- <a href="showCustomers.form?recperpage=25">View Contacts</a> 
 		    <a href="sendEmail.form">Send Email</a> 
 			<a href="register.form">Create Contact</a> 
 			<a href="newUser.form">Create New User</a> 
 		    <a href="changePassword.form">Change Password</a> 
 		    <a href="showUsers.form?recperpage=25">Show Users</a> 
 		    <a href="showCategory.form">Category</a> 
-		    <a href="logout.form">Logout</a> 
 		    <a href="saveMessage.form">Save Message</a>
+		    <a href="logout.form">Logout</a>  -->
 	</h5>
 <header class="main-header" role="banner">
   <img src="images/Contact-Banner.png" alt="Banner Image" align="center"/>
@@ -159,7 +155,7 @@ a:hover, a:active {
 				
 			<tr> <td></td>
 				<td>PAN No.</td><td>:</td><td><input type="text" name="custPan" placeholder=" PAN Number" ></td> 
-				<td align="center">Date of Birth</td><td>:</td><td><input class="birthday" type="text" name="custDob" placeholder="mm-dd-yyyy" ></td> </tr>
+				<td align="center">Date of Birth</td><td>:</td><td><input class="birthday" type="text" name="custStrDob" placeholder="yyyy-mm-dd" ></td> </tr>
 			
 			<tr> <td></td>
 				<td>Address</td><td>:</td><td><input type="text" name="custAddress" placeholder=" Address"> </td> </tr>

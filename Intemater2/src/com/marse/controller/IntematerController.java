@@ -6,12 +6,14 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -161,6 +163,52 @@ public class IntematerController {
 		return objModel;
 	}
 	
+	// Register Page
+	@RequestMapping(value="registerPage.form", method=RequestMethod.GET)
+	public ModelAndView registerPage(HttpServletRequest request) {
+		
+		ModelAndView objModel=new ModelAndView(); 
+		// first checking session
+		HttpSession objSession= request.getSession(false);
+		
+		if(objSession==null){
+			System.out.println("session is null");
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			System.out.println("session is not null");
+			if(objSession.getAttribute("objUser")==null){
+				System.out.println("session>objuser is null");
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+				System.out.println("session objuser is not null");
+				// bussiness logic
+		
+				// fetching existing categories
+				
+				List<Category> objlstCategory=new ArrayList<Category>();
+				objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();
+				
+				/*// fetching list of all the users
+				List<User> listOfUser=objUserDAO.listOfUser();
+				objModel.addObject("listOfUser", listOfUser );*/
+				
+				objModel.addObject("objlstCategory", objlstCategory);
+				objModel.setViewName("register");
+				
+				return objModel;  
+			}
+		}
+	}
+	
+	
+	
+	
 	//################################################ CUSTOMER 21042016 ############################################################################	
 	// creating new contact of Customer
 	
@@ -171,7 +219,7 @@ public class IntematerController {
 											@RequestParam String custWork,
 											@RequestParam (required=false) String custEmail,
 											@RequestParam (required=false) String custPan,
-											@RequestParam Date custDob,
+											@RequestParam String custStrDob,
 											@RequestParam String custGender,
 											@RequestParam String custAddress,
 											@RequestParam (required=false) String bankName,
@@ -185,6 +233,18 @@ public class IntematerController {
 		ModelAndView objModel=new ModelAndView(); 
 		// first checking session
 		HttpSession objSession= request.getSession(false);
+		
+		Date custDob=null; // yyyy-mm-dd
+		
+		try{
+			DateFormat format = new SimpleDateFormat("YYYY-MM-DD", Locale.ENGLISH);
+			custDob = format.parse(custStrDob);
+			System.out.println("customer Dob : "+custDob.toString());
+		}catch(Exception e){
+			System.err.println(e);
+		}
+		
+		
 		
 		if(objSession==null){
 			System.out.println("session is null");
@@ -232,7 +292,7 @@ public class IntematerController {
 				
 				CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
 				
-				List<Category> objlstCategory=objCategoryDAO.listOfCategory();
+				//List<Category> objlstCategory=objCategoryDAO.listOfCategory();
 				
 				objModel.setViewName("register");
 				
@@ -723,6 +783,9 @@ public class IntematerController {
 		
 		HttpSession objSession= request.getSession(false);
 		
+		int cPage=1;
+		int noOfRecordsPerPage=25;
+		
 		if(objSession==null){
 			String message="Time out,<br> Please login again...!";
 			objModel.addObject("message", message);
@@ -751,9 +814,24 @@ public class IntematerController {
 					
 					objUserDAO.updateUser(objUser);
 					
-					List<User> listOfUser=objUserDAO.listOfUser(0,15);
+					List<User> listOfUser=objUserDAO.listOfUser(0,25);
 					
+					int offSet=(cPage * noOfRecordsPerPage)-noOfRecordsPerPage;
+					System.out.println("offset="+offSet);
+					
+					int userCount=objUserDAO.userCount();
+					
+					 int  noOfPages = (int) Math.ceil(userCount * 1.0 / noOfRecordsPerPage);
+					   
+					 	System.out.println("Total Pages= "+noOfPages);
+	  					System.out.println("new pageno="+cPage);
+	  					
+				    if(noOfPages<=0){
+					   noOfPages=1;
+				    }
+				    
 					objModel.addObject("listOfUser", listOfUser);
+					objModel.addObject("noOfPages",noOfPages);
 					objModel.setViewName("showUser");
 					
 					return objModel;
@@ -771,6 +849,10 @@ public class IntematerController {
 		System.out.println("In deleterUser() method Controller");
         ModelAndView objModel=new ModelAndView();
 		HttpSession objSession= request.getSession(false);
+		
+		int cPage=1;
+		int noOfRecordsPerPage=25;
+		
 		if(objSession==null){
 			String message="Time out,<br> Please login again...!";
 			objModel.addObject("message", message);
@@ -789,7 +871,22 @@ public class IntematerController {
 					
 					List<User> listOfUser=objUserDAO.listOfUser(0,15);
 					
+					int offSet=(cPage * noOfRecordsPerPage)-noOfRecordsPerPage;
+					System.out.println("offset="+offSet);
+					
+					int userCount=objUserDAO.userCount();
+					
+					 int  noOfPages = (int) Math.ceil(userCount * 1.0 / noOfRecordsPerPage);
+					   
+					 	System.out.println("Total Pages= "+noOfPages);
+	  					System.out.println("new pageno="+cPage);
+	  					
+				    if(noOfPages<=0){
+					   noOfPages=1;
+				    }
+				    
 					objModel.addObject("listOfUser", listOfUser);
+					objModel.addObject("noOfPages",noOfPages);
 					objModel.setViewName("showUser");	
 					
 				return objModel;	
