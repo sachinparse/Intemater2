@@ -94,6 +94,19 @@ a:hover, a:active {
 }
 
 </style>
+
+<script>
+$(document).ready("onfocus", function() {
+        $( "#idCustDob" ).datepicker({
+            dateFormat : 'mm/dd/yy',
+            changeMonth : true,
+            changeYear : true,
+            yearRange: '-100y:c+nn',
+            maxDate: '-1d'
+        });
+});
+</script>
+
 	<h5 align="center" > 
 	
 			<a href="sendEmail.form">Send Email</a>
@@ -119,7 +132,7 @@ a:hover, a:active {
 <!-- <header class="main-header" role="banner">
   <img src="images/Contact-Banner.png" alt="Banner Image" align="center"/>
 </header> -->
-
+    
 </head>
 <body>
 		
@@ -157,7 +170,7 @@ a:hover, a:active {
 				
 			<tr> <td></td>
 				<td>PAN No.</td><td>:</td><td><input type="text" name="custPan" placeholder=" PAN Number"  value="${objCustomer.pan}"></td> 
-				<td align="center">Date of Birth</td><td>:</td><td><input class="birthday" type="text" name="custDob" placeholder="mm/dd/yyyy" value="${fn:split(objCustomer.dob, ' ')[0]}"></td><td>(yyyy-mm-dd)</td> </tr>
+				<td align="center">Date of Birth</td><td>:</td><td><input class="birthday" type="text" id="idCustDob" name="custDob" placeholder="mm/dd/yyyy" value="${fn:split(objCustomer.dob, ' ')[0]}"></td><td> </td> </tr>
 																												
 			<tr> <td></td>
 				<td>Address</td><td>:</td><td><input type="text" name="custAddress" placeholder=" Address" value="${objCustomer.address}"> </td>

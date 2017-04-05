@@ -237,7 +237,8 @@ public class IntematerController {
 		Date custDob=null; // yyyy-mm-dd
 		
 		try{
-			DateFormat format = new SimpleDateFormat("YYYY-MM-DD", Locale.ENGLISH);
+			/*DateFormat format = new SimpleDateFormat("YYYY-MM-DD", Locale.ENGLISH);*/
+			DateFormat format = new SimpleDateFormat("DD-MM-YYYY", Locale.ENGLISH);
 			custDob = format.parse(custStrDob);
 			System.out.println("customer Dob : "+custDob.toString());
 		}catch(Exception e){
@@ -521,7 +522,7 @@ public class IntematerController {
 					int cPage=1;
 					
 					// Date functionality
-					 SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+					 SimpleDateFormat formatter = new SimpleDateFormat("DD-MM-YYYY", Locale.ENGLISH);
 					 Date date=null;
 
 					 try {
