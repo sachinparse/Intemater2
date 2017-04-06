@@ -219,7 +219,7 @@ public class IntematerController {
 											@RequestParam String custWork,
 											@RequestParam (required=false) String custEmail,
 											@RequestParam (required=false) String custPan,
-											@RequestParam String custStrDob,
+											@RequestParam String custDob,
 											@RequestParam String custGender,
 											@RequestParam String custAddress,
 											@RequestParam (required=false) String bankName,
@@ -233,19 +233,6 @@ public class IntematerController {
 		ModelAndView objModel=new ModelAndView(); 
 		// first checking session
 		HttpSession objSession= request.getSession(false);
-		
-		Date custDob=null; // yyyy-mm-dd
-		
-		try{
-			/*DateFormat format = new SimpleDateFormat("YYYY-MM-DD", Locale.ENGLISH);*/
-			DateFormat format = new SimpleDateFormat("DD-MM-YYYY", Locale.ENGLISH);
-			custDob = format.parse(custStrDob);
-			System.out.println("customer Dob : "+custDob.toString());
-		}catch(Exception e){
-			System.err.println(e);
-		}
-		
-		
 		
 		if(objSession==null){
 			System.out.println("session is null");
@@ -263,6 +250,21 @@ public class IntematerController {
 				return objModel;
 			}else{
 				System.out.println("session objuser is not null");
+				
+				// Date functionality
+				 SimpleDateFormat formatter = new SimpleDateFormat("yy-MM-dd", Locale.ENGLISH);
+				 Date date=null;
+
+				 try {
+
+			            date = formatter.parse(custDob);
+			            System.out.println("1: "+date);
+			            System.out.println("2 : "+formatter.format(date));
+
+			     } catch (ParseException e) {
+			            e.printStackTrace();
+			     }
+				 
 				// bussiness logic
 				
 				Customer objCustomer=new Customer();
@@ -273,7 +275,7 @@ public class IntematerController {
 				objCustomer.setWork(custWork);
 				objCustomer.setEmail(custEmail);
 				objCustomer.setPan(custPan);
-				objCustomer.setDob(custDob);
+				objCustomer.setDob(date);
 				objCustomer.setGender(custGender);
 				objCustomer.setAddress(custAddress);
 				objCustomer.setBankName(bankName);
@@ -522,7 +524,7 @@ public class IntematerController {
 					int cPage=1;
 					
 					// Date functionality
-					 SimpleDateFormat formatter = new SimpleDateFormat("DD-MM-YYYY", Locale.ENGLISH);
+					 SimpleDateFormat formatter = new SimpleDateFormat("yy-MM-dd", Locale.ENGLISH);
 					 Date date=null;
 
 					 try {
@@ -531,9 +533,9 @@ public class IntematerController {
 				            System.out.println("1: "+date);
 				            System.out.println("2 : "+formatter.format(date));
 
-				        } catch (ParseException e) {
+				     } catch (ParseException e) {
 				            e.printStackTrace();
-				        }
+				     }
 						
 				        Customer objCustomer=new Customer();
 						

@@ -170,7 +170,7 @@ $(document).ready("onfocus", function() {
 				
 			<tr> <td></td>
 				<td>PAN No.</td><td>:</td><td><input type="text" name="custPan" placeholder=" PAN Number"  value="${objCustomer.pan}"></td> 
-				<td align="center">Date of Birth</td><td>:</td><td><input class="birthday" type="text" id="idCustDob" name="custDob" placeholder="mm/dd/yyyy" value="${fn:split(objCustomer.dob, ' ')[0]}"></td><td> </td> </tr>
+				<td align="center">Date of Birth</td><td>:</td><td><input class="birthday" type="text" id="idCustDob" name="custDob" placeholder="YYYY-MM-DD" value="${fn:split(objCustomer.dob, ' ')[0]}"></td><td> </td> </tr>
 																												
 			<tr> <td></td>
 				<td>Address</td><td>:</td><td><input type="text" name="custAddress" placeholder=" Address" value="${objCustomer.address}"> </td>
