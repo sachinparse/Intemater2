@@ -1056,6 +1056,45 @@ public class IntematerController {
 		
 	}
 	
+	// Logout Page
+	@RequestMapping(value="logout.form", method=RequestMethod.GET)
+	public ModelAndView logoutPage(HttpServletRequest request) {
+		
+		ModelAndView objModel=new ModelAndView(); 
+		// first checking session
+		HttpSession objSession= request.getSession(false);
+		
+		if(objSession==null){
+			System.out.println("session is null");
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			System.out.println("session is not null");
+			if(objSession.getAttribute("objUser")==null){
+				System.out.println("session>objuser is null");
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+				System.out.println("session objuser is not null");
+				
+				objSession.invalidate();
+				
+				objModel.addObject("message", "Logged out Successfully");
+				objModel.setViewName("logout");
+				
+				return objModel;  
+			}
+		}
+	}
 	
+	// Change Password Page
+	@RequestMapping(value="changePasswordPage.form", method=RequestMethod.POST)
+	public ModelAndView changePasswordPage(){
+		return new ModelAndView("changePassword");
+	}
 	
 }
