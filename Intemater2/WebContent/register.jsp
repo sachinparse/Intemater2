@@ -155,7 +155,7 @@ a:hover, a:active {
 				
 			<tr> <td></td>
 				<td>PAN No.</td><td>:</td><td><input type="text" name="custPan" placeholder=" PAN Number" ></td> 
-				<td align="center">Date of Birth</td><td>:</td><td><input class="birthday" type="text" name="custDob" placeholder="YYYY-MM-DD" ></td>(YYYY-MM-DD) </tr>
+				<td align="center">Date of Birth</td><td>:</td><td><input class="birthday" type="text" name="custDob" placeholder="YYYY-MM-DD" ></td><td>(YYYY-MM-DD)</td></tr>
 			
 			<tr> <td></td>
 				<td>Address</td><td>:</td><td><input type="text" name="custAddress" placeholder=" Address"> </td> </tr>
