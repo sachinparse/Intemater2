@@ -126,7 +126,7 @@ a:hover, a:active {
 		
 		$("#idClearBtn").click(function(){
 			
-			$("#currentPassword").val("");
+			$("#idCurrentPassword").val("");
 			$("#idNewPassword").val("");
 			$("#idConfirmPassword").val("");
 		});
@@ -150,20 +150,26 @@ a:hover, a:active {
 			<a href="logout.form">Logout</a>
 	</h5>
 <br>
-		<form align="center">
-                <center><b><h2><u><font color= '#566573'>Change Password</font></u></h2></b><br>
+		<form align="center" action="changePassword.form" method="post">
+                <center><b>
+                
+                <c:if test="${message ne null or message ne '' }">
+					${message }<br>
+			    </c:if>
+                
+                <h2><u><font color= '#566573'>Change Password</font></u></h2></b><br>
           <div align="center">      
           <br>
                 <table border="0" align="center">
                 	
                 	<tr>
-                		<td>Current Password</td> <td>:</td> <td><input type="password" class='textbox' id="currentPassword" /></td>
+                		<td>Current Password</td> <td>:</td> <td><input type="password" class='textbox' id="idCurrentPassword" name="currentPassword"/></td>
                 	</tr>
                 	<tr>
-                		<td>New Password</td> <td>:</td> <td><input type="password" class='textbox' id="idNewPassword" /></td>
+                		<td>New Password</td> <td>:</td> <td><input type="password" class='textbox' id="idNewPassword" name="newPassword"/></td>
                 	</tr>
                 	<tr>
-                		<td>Confirm Password</td> <td>:</td> <td><input type="password" class='textbox' id="idConfirmPassword" /></td>
+                		<td>Confirm Password</td> <td>:</td> <td><input type="password" class='textbox' id="idConfirmPassword" name="confirmPassword" /></td>
                 	</tr>
                 	<tr>
                 		<td>&nbsp;</td><td>&nbsp;</td>

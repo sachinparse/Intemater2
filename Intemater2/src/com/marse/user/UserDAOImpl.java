@@ -142,4 +142,29 @@ public class UserDAOImpl implements UserDAO {
 		System.out.println("User count: "+count);
 		return cnt;
 	}
+
+	@Override
+	public boolean changePassword(User objUser, String userOldPassword, String userNewPassword) throws InvalidKeyException, NoSuchAlgorithmException, InvalidKeySpecException,
+    							  NoSuchPaddingException, InvalidAlgorithmParameterException, UnsupportedEncodingException,
+    							  IllegalBlockSizeException, BadPaddingException, IOException {
+
+		SessionFactory factory=HibernateUtils.getInstance();
+		Session session=factory.openSession();
+		
+		User objUser2=(User) session.get(User.class, objUser.getUserId()); 
+		if (new CryptoUtil().decrypt(objUser2.getUserPassword()).equals(userOldPassword) && objUser2.getUserStatus().equals("A")) {
+			
+			// old password matched.
+			
+			objUser2.setUserPassword(new CryptoUtil().encrypt(userNewPassword));
+			
+			new UserDAOImpl().updateUser(objUser2);
+			
+			return true;
+			
+		} else {
+			return false;
+		}
+		
+	}
 }

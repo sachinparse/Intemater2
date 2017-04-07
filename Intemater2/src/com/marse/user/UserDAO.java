@@ -27,5 +27,8 @@ public interface UserDAO {
 	public List<User> listOfUser(int offSet, int records); // fetching list of all users
 	public void updateUser(User objUser);    // updating the user details
 	public int userCount();            // getting the count of all users
+	public boolean changePassword(User objUser, String userOldPassword, String userNewPassword) throws InvalidKeyException, NoSuchAlgorithmException, InvalidKeySpecException,
+    							  NoSuchPaddingException, InvalidAlgorithmParameterException, UnsupportedEncodingException,
+    							  IllegalBlockSizeException, BadPaddingException, IOException ; // changing customers password.
 	
 }

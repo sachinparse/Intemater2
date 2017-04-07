@@ -20,7 +20,7 @@
 			<div class="heading">
 				
 				<c:if test="${message ne null or message ne '' }">
-					<font color="red" align="center"><h3>${message }</h3></font><br>
+					${message }<br>
 			    </c:if>
 		
 				<h3 align="center">To login, click <a href='login.jsp'><u>here</u></a>.</h3>

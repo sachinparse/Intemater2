@@ -1083,7 +1083,7 @@ public class IntematerController {
 				
 				objSession.invalidate();
 				
-				objModel.addObject("message", "Logged out Successfully");
+				objModel.addObject("message", "<font color='red' align='center'><h3>Logged out Successfully.  </h3></font>");
 				objModel.setViewName("logout");
 				
 				return objModel;  
@@ -1093,8 +1093,95 @@ public class IntematerController {
 	
 	// Change Password Page
 	@RequestMapping(value="changePasswordPage.form", method=RequestMethod.POST)
-	public ModelAndView changePasswordPage(){
-		return new ModelAndView("changePassword");
+	public ModelAndView changePasswordPage(HttpServletRequest request){
+		
+		ModelAndView objModel=new ModelAndView(); 
+		// first checking session
+		HttpSession objSession= request.getSession(false);
+		
+		if(objSession==null){
+			System.out.println("session is null");
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			System.out.println("session is not null");
+			if(objSession.getAttribute("objUser")==null){
+				System.out.println("session>objuser is null");
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+				System.out.println("session objuser is not null");
+				
+				objModel.setViewName("changePassword");
+				
+				return objModel;  
+			}
+		}
 	}
+	
+	// Change Password
+	@RequestMapping(value="changePassword.form", method=RequestMethod.POST)
+	public ModelAndView changePassword( @RequestParam String currentPassword,
+										@RequestParam String newPassword,
+										HttpServletRequest request) throws InvalidKeyException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException,
+										 InvalidAlgorithmParameterException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException,
+										 IOException{
+		
+		ModelAndView objModel=new ModelAndView(); 
+		// first checking session
+		HttpSession objSession= request.getSession(false);
+		
+		if(objSession==null){
+			System.out.println("session is null");
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			System.out.println("session is not null");
+			if(objSession.getAttribute("objUser")==null){
+				System.out.println("session>objuser is null");
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+				System.out.println("session objuser is not null");
+				
+				UserDAO objUserDAO=DAOFactory.getInstanceOfUser();
+				
+				User objUser=(User) objSession.getAttribute("objUser");
+				
+				boolean reply=false;
+				
+				reply=objUserDAO.changePassword(objUser, currentPassword, newPassword);
+				
+				if (reply) {
+					
+					objSession.invalidate();
+					
+					objModel.addObject("message", "<font color='blue' align='center'><h3> Password changed Successfully" +
+												  " </h3></font>");
+					objModel.setViewName("logout");
+					
+					return objModel;  
+					
+				} else {
+					
+					objModel.addObject("message", "<font color='red' align='center'><h3>" +
+												  " Something wrong, please try again...</h3></font>");
+					objModel.setViewName("changePassword");
+					
+					return objModel;
+
+				}
+			}
+		}
+	}
+	
 	
 }

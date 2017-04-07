@@ -14,5 +14,4 @@ public interface CustomerDAO {
 	public List<Customer> listOfCustomer(int categoryId,int offSet, int noOfRecordsPerPage);   // getting the list of all the customers of selected category.
 	public int customerCount(int categoryId);// getting the count of the selected category customers count.
 	
-	
 }
