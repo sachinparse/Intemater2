@@ -1092,7 +1092,7 @@ public class IntematerController {
 	}
 	
 	// Change Password Page
-	@RequestMapping(value="changePasswordPage.form", method=RequestMethod.POST)
+	@RequestMapping(value="changePasswordPage.form", method=RequestMethod.GET)
 	public ModelAndView changePasswordPage(HttpServletRequest request){
 		
 		ModelAndView objModel=new ModelAndView(); 
@@ -1183,5 +1183,70 @@ public class IntematerController {
 		}
 	}
 	
+	// Send Email page
+	
+	@RequestMapping(value="sendEmailPage.form", method=RequestMethod.GET)
+	public ModelAndView sendEmailPage(HttpServletRequest request){
+		
+		
+		ModelAndView objModel=new ModelAndView();
+		HttpSession objSession= request.getSession(false);
+		
+		if(objSession==null){
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			if(objSession.getAttribute("objUser")==null){
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+					CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
+					List<Category> listOfCategory=objCategoryDAO.listOfCategory();
+					
+					objModel.addObject("objlstCategory", listOfCategory);
+					objModel.setViewName("sendEmail");
+					
+					return objModel;
+			}
+		}
+		
+	}
+	
+	// Sending Emails
+	
+	@RequestMapping(value="sendEmail.form", method=RequestMethod.POST)
+	public ModelAndView sendEmail(HttpServletRequest request){
+		
+		
+		ModelAndView objModel=new ModelAndView();
+		HttpSession objSession= request.getSession(false);
+		
+		if(objSession==null){
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			if(objSession.getAttribute("objUser")==null){
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+					CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
+					List<Category> listOfCategory=objCategoryDAO.listOfCategory();
+					
+					objModel.addObject("objlstCategory", listOfCategory);
+					objModel.setViewName("sendEmail");
+					
+					return objModel;
+			}
+		}
+		
+	}
 	
 }

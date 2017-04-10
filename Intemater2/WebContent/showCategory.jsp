@@ -206,7 +206,7 @@ th {
 			<a href="saveMessage.form">Messages</a>
 			<a href="showUsers.form?recperpage=25">Show Users</a>
 			<a href="newUser.form">Create New User</a>
-			<a href="changePassword.form">Change Password</a>
+			<a href="changePasswordPage.form">Change Password</a>
 			<a href="logout.form">Logout</a>
 			
 			<!-- <a href="newUser.form">View Contacts</a>

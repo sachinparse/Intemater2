@@ -98,14 +98,14 @@ a:hover, a:active {
 <body align="center">
 
 	<h5> 
-			<a href="sendEmail.form">Send Email</a>
+			<a href="sendEmailPage.form">Send Email</a>
 			<a href="showCustomers.form?recperpage=25">View Contacts</a>
 			<!-- <a href="register.form">Create Contact</a> -->
 			<a href="showCategory.form">Category</a>
 			<a href="saveMessage.form">Messages</a>
 			<a href="showUsers.form?recperpage=25">Show Users</a>
 			<a href="newUser.form">Create New User</a>
-			<a href="changePassword.jsp">Change Password</a>
+			<a href="changePasswordPage.form">Change Password</a>
 			<a href="logout.form">Logout</a>
 			
 			<!-- <a href="showCustomers.form?recperpage=25">View Contacts</a> 
