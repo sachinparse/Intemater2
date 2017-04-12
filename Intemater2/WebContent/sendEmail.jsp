@@ -6,9 +6,10 @@
 		response.sendRedirect("login.jsp");
 	} else {
 %>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+
 <title>Send Message</title>
 <%@ include file="genericinclude.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -88,10 +89,53 @@ a:hover, a:active {
     background-color: #FF8000;
 }
 </style>
-</head>
-<body align="center">
 
-     <h5> 
+<style>
+html, body { height: 70%; width: 100%; padding: 0; margin: 30; }
+div { width: 40%; height: 30%; float: left; }
+#div1 {  }
+#div2 {  }
+#div3 { }
+#div4 { }
+.style1 {
+	color: #006699;
+	font-weight: bold;
+}
+</style>
+
+<script>
+	$(document).ready(function(){
+		
+		$("#idCategoryId").change(function(){
+			$('#idSemdEmailForm').attr('action', 'getAllCustomers.form'); 
+			this.form.submit();	 
+		});
+		
+		$('#idButton').click(function(){
+			$('#idSemdEmailForm').attr('action', 'sendEmail.form');
+			this.form.submit();
+		});
+		
+		$('#idSelectAllCust').click(function(event) {
+			//alert("clicked");
+			if(	$('#idSelectAllCust').prop("checked")==true){
+				$('[id^=idCust_]').prop("checked",true);	
+			}else{
+				$('[id^=idCust_]').prop("checked",false);
+			}
+			
+		});
+		
+		
+	});
+
+</script>
+</head>
+
+<body>
+	   <!-- Link : http://www.raistudies.com/spring/spring-mvc/ajax-spring-mvc-3-annonations-jquery/ -->
+	   
+	<h5 align="center"> 
 			<!-- <a href="sendEmail.jsp">Send Email</a> -->
 			<a href="showCustomers.form?recperpage=25">View Contacts</a>
 			<!-- <a href="register.form">Create Contact</a> -->
@@ -101,101 +145,81 @@ a:hover, a:active {
 			<a href="newUser.form">Create New User</a>
 			<a href="changePasswordPage.form">Change Password</a>
 			<a href="logout.form">Logout</a>
-	</h5>
+	</h5>	
 	
-		<form action="sendEmail.form" method="post">
-		
-		<table>
-			<tr>
-			 <td>1</td><td>2</td> <td>3</td>
-			</tr>
-		</table>
-
-		<table>
-			<tr>
-				<td>4</td><td>5</td><td>6342</td>
-			</tr>
-		</table>
-
-
-
-		<table align="center" border="1">
-		  <tr>
-		   <td width="40%" >
-			<div align="left" style="width: 50%; height:40%">
+	<!-- <form action="sendEmail.form" method="post"> -->
+	<form action="" name="semdEmailForm" id="idSemdEmailForm" method="post">
+<div id="div1" align="center">
+    <br /><br /><br /><br />
 							<select name="categoryId" id="idCategoryId">
 								<option value="0">Select Category</option>					
 					    		<c:forEach var="category" items="${objlstCategory}">
 							  		<option value="${category.categoryId}" ${category.categoryId==categoryId ? 'selected':'' }>${category.categoryName}</option>
 					    		</c:forEach>
 							</select>
-			</div>
-		   </td>
-		   <td width="60%" rowspan="">	
-			<div align="right">
-				 <table>
-					<tr>
-						<td>Subject</td><td>:</td>
-						<td><input type="text" name="subject" id="idSubject" size="50"> </td>							 
-					</tr>
-					
-					<tr style="overflow:atuo">
-						<td>Message</td><td>:</td>
-						   <td><!-- <input type="textarea" name="message" id="idMessage" height="100px">  -->
-						    <textarea name="Text1" cols="49" rows="8"></textarea>
-						</td>							 
-					</tr>
-									 
-				 </table>
-			</div>
-		   </td>
-		  </tr>
-		  
-		  <tr>
-		    <td>
-		       <div align="left" style="width: 50%; height:10%">
-		          &nbsp;
-		       </div>
-		      </td>
-		  	
-		  	<td>
-		  		<div align="right" style="width: 50%; height:10%">
-						<input type="submit" name="submit" value="Send Emails" id=idSubmit"/>		  		
-		  		</div>
-		  	</td>
-		  </tr>
-		  <tr>
-		   <td>
-		  	<div align="left" style="width: 80%; height:60%">
-		          <center>
-		            <h3>Email has sent Successfully :</h3>
-		          </center>
-		          
-				  <table align="center">
-		            <tr>
-		              <th>Sr. No.</th>
-		              <th>Cust. ID</th>
-		              <th>Cust. Name</th>
-		              <th>Email Status</th>
-		            </tr>
-		            
-		            
-		          </table>
-		  	</div>
-		   </td>
-		  </tr>	
-		</table>
-		
-		
-		
-		
-		
-		
+</div>
+<div id="div2">
+      <table width="360" border="0">
+  <caption>
+    Email
+  </caption>
+  <tr>
+    <td width="66" height="22">Subject</td>
+    <td width="10">:</td>
+    <td width="390"><input type="text" name="subject" id="idSubject" size="49" value="${subject}"/></td>
+  </tr>
+  <tr>
+    <td>Message</td>
+    <td>:</td>
+    <td>  <textarea name="message"  id="idMessage" cols="49" rows="8" value="${messageBody}"></textarea> </td>
+  </tr>
+</table>
 
-		</form>
+</div>
+<br /><br />
+<div id="div3" style='height: 370px; overflow: auto;overflow-x:hidden;'>
+  <table width="100%" border="1" align="left" id="idCustTable">
+  <caption>
+    List
+  </caption>
+  <tr>
+    <td width="45" height="47"><span class="style1">Sr. No. </span></td>
+    <td width="65"><span class="style1">Cust. ID </span></td>
+    <td width="296"><span class="style1"><input type="checkbox" name="selectAllCust" id="idSelectAllCust" ${status eq 'N'?'disabled':'' } > Cust. Names </span></td>
+    <td width="86"><span class="style1">Email Status </span></td>
+  </tr>
+  
+  <c:forEach var="cust" items="${listOfCustomer }" varStatus="rec">
+  
+    <tr>
+  		<td>
+			<c:out value="${rec.index+1}"/>
+		</td>
+		<td>
+  			${cust.custId}
+  		</td>
+		<td>
+			<input type="checkbox" name="emp" id="idCust_${cust.custId }" class="test" value="${cust.custId}">
+			${cust.name} 
+  		</td>
+  		<td>
+  			
+  		</td>
+    </tr>
+  
+  </c:forEach>
+ 
+</table>
 
+</div>
+<div id="div4"  align="center">
+    <br /><br /><br />
+				<input type="button" name="button" value="Send Emails" id="idButton"/>
+</div>
+	</form>
 </body>
 </html>
+
 <%
 }
 %>

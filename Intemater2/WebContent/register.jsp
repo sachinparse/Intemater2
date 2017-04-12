@@ -98,7 +98,6 @@ a:hover, a:active {
 <body align="center">
 
 	<h5> 
-			<a href="test.jsp">Test</a>
 			<a href="sendEmailPage.form">Send Email</a>
 			<a href="showCustomers.form?recperpage=25">View Contacts</a>
 			<!-- <a href="register.form">Create Contact</a> -->

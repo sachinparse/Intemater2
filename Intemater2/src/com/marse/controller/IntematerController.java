@@ -393,6 +393,58 @@ public class IntematerController {
 					}
 		}
 		
+		// fetching list of All Customer of selected category
+		
+		@RequestMapping(value="getAllCustomers.form", method=RequestMethod.POST)
+		public ModelAndView listOfAllCustomers( @RequestParam (value="categoryId",required=false) String categoryId,
+												@RequestParam (value="subject",required=false) String subject,
+												@RequestParam (value="message",required=false) String messageBody,
+											    HttpServletRequest request){
+		
+			
+			// first checking session
+					HttpSession objSession= request.getSession(false);
+					ModelAndView objModel=new ModelAndView();
+					if(objSession==null){
+						String message="Time out,<br> Please login again...!";
+						objModel.addObject("message", message);
+						objModel.setViewName("login");
+						return objModel;
+					}else{
+						if(objSession.getAttribute("objUser")==null){
+							String message="Invalid Session,<br> Please login again...!";
+							objModel.addObject("message", message);
+							objModel.setViewName("login");
+							return objModel;
+						}else{
+							System.out.println("session objuser is not null");
+							
+							// checking whether categoryId selected or not
+							
+							List<Customer> listOfCustomer=null;
+							
+							if (null != categoryId) {
+								
+								int catId=Integer.parseInt(categoryId);
+								CustomerDAO objCustomerDAO=DAOFactory.getInstanceOfCustomer();
+								
+								listOfCustomer=objCustomerDAO.listOfAllCustomer(catId);
+							}
+							
+						    // fetching existing categories
+							List<Category> objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();//new ArrayList<Category>();
+							
+							objModel.addObject("subject", subject);
+							objModel.addObject("messageBody", messageBody);
+							objModel.addObject("categoryId", categoryId);
+							objModel.addObject("objlstCategory", objlstCategory);
+							objModel.addObject("listOfCustomer", listOfCustomer );
+							objModel.setViewName("sendEmail");
+							return objModel;
+						}
+					}
+		}		
+		
 		
 		@RequestMapping(value="deleteCustomer.form", method=RequestMethod.GET)
 		public ModelAndView deleteCustomer( @RequestParam int customerId,

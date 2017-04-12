@@ -120,4 +120,20 @@ public class CustomerDAOImpl implements CustomerDAO {
 		return customer;
 	}
 
+
+	@Override
+	public List<Customer> listOfAllCustomer(int categoryId) {
+
+		SessionFactory factory=HibernateUtils.getInstance();
+		Session session=factory.openSession();
+		
+		String hqlQuery="From Customer c WHERE c.category="+categoryId+"";
+		
+		Query query=session.createQuery(hqlQuery);
+		List<Customer> list=query.list();
+		
+		
+		return list;
+	}
+
 }
