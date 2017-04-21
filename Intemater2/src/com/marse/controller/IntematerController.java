@@ -291,6 +291,8 @@ public class IntematerController {
 				
 				objCustomerDAO.addCustomer(objCustomer);
 				
+				String message="New Contact Saved Successfully.";
+				
 				// getting the list of the current inserted Customers category type
 				
 				CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
@@ -298,7 +300,7 @@ public class IntematerController {
 				//List<Category> objlstCategory=objCategoryDAO.listOfCategory();
 				
 				objModel.setViewName("register");
-				
+				objModel.addObject("message", message);
 				return objModel;    
 		        
 		        

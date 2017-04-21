@@ -55,7 +55,7 @@ select {
     border-radius: 5px; 
     hight:"15";
 }
-input[type=submit] {
+input[type=button] {
     padding:5px 15px; 
     /* background:#ccc; */ 
     background:#8AB6CB;
@@ -94,6 +94,26 @@ a:hover, a:active {
 }
 </style>
 
+<script>
+
+	$(document).ready(function(){
+		
+		$( window ).load(function() {
+			$("#idCustName").val("");
+		});
+		
+		$("#idSave").click(function(){
+			
+			if($("#idCustName").val().trim() != null){
+				$('#idRegisterForm').submit();
+		    }
+		});
+		
+	});
+
+
+</script>
+
 </head>
 <body align="center">
 
@@ -124,8 +144,12 @@ a:hover, a:active {
 
 		
 		<h2 align="center"><u>Create New Contact</u></h2>
-
-	<form name="homePage" action="register.form" method="post">
+		<font color="blue">
+			<c:if test="${message ne null or message ne '' }">
+					${message }<br>
+			</c:if>
+		</font>
+	<form name="homePage" id="idRegisterForm" action="register.form" method="post">
 		
 		<input type="hidden" name="currentPage" value="0"/>
 		
@@ -133,7 +157,7 @@ a:hover, a:active {
 		
 		 <tr><td><h3>Customer Details</h3></td></tr>	
 			<tr> <td></td>
-				<td >Name</td><td>:</td><td><input type="text" name="custName" placeholder="Enter Customer Name"></td> </tr>
+				<td >Name</td><td>:</td><td><input type="text" id="idCustName" name="custName" placeholder="Enter Customer Name"></td> </tr>
 				
 			<tr> <td></td>
 				<td>Mobile No.</td><td>:</td> <td><input type="text" name="custMobile1" placeholder=" 1st Mobile " ></td>
@@ -195,7 +219,7 @@ a:hover, a:active {
 				</tr>
 				
 				<tr> <td></td><td></td><td></td>
-					<td colspan="4" align="center"> <input type="submit" name="save" value="Save Contact"> </td> </tr>
+					<td colspan="4" align="center"> <input type="button" id="idSave" name="save" value="Save Contact"> </td> </tr>
 		</table>
 	
 	

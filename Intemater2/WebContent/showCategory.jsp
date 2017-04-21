@@ -199,7 +199,7 @@ th {
 
  <h5 align="center"> 
  			
- 			<a href="sendEmail.form">Send Email</a>
+ 			<a href="sendEmailPage.form">Send Email</a>
 			<a href="showCustomers.form?recperpage=25">View Contacts</a>
 			<a href="registerPage.form">Create Contact</a>
 			<!-- <a href="showCategory.form">Category</a> -->
