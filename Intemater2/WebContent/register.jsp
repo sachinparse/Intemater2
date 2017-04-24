@@ -111,11 +111,24 @@ a:hover, a:active {
 		
 	});
 
+	function disableF5(e) { 
+		if ((e.which || e.keyCode) == 116){ 
+			e.preventDefault(); 
+		}
+	};
 
 </script>
 
+ <script type="text/javascript">
+    $(function () {
+        $(document).keydown(function (e) {
+            return (e.which || e.keyCode) != 116;
+        });
+    });
+</script>
+
 </head>
-<body align="center">
+<body align="center" onkeydown="return (event.keyCode != 116)">
 
 	<h5> 
 			<a href="sendEmailPage.form">Send Email</a>

@@ -126,8 +126,19 @@ div { width: 40%; height: 30%; float: left; }
 			
 		});
 		
+		$(document).on("keydown", disableF5);
+		
 		
 	});
+
+</script>
+
+<script>
+	function disableF5(e) { 
+		if ((e.which || e.keyCode) == 116) 
+			e.preventDefault(); 
+	};
+
 
 </script>
 </head>
@@ -138,7 +149,7 @@ div { width: 40%; height: 30%; float: left; }
 	<h5 align="center"> 
 			<!-- <a href="sendEmail.jsp">Send Email</a> -->
 			<a href="showCustomers.form?recperpage=25">View Contacts</a>
-			<!-- <a href="register.form">Create Contact</a> -->
+			<a href="registerPage.form">Create Contact</a>
 			<a href="showCategory.form">Category</a>
 			<a href="saveMessage.form">Messages</a>
 			<a href="showUsers.form?recperpage=25">Show Users</a>
@@ -195,7 +206,7 @@ div { width: 40%; height: 30%; float: left; }
   		<td>
 			<c:out value="${rec.index+1}"/>
 		</td>
-		<td>
+		<td align="center">
   			${cust.custId}
   		</td>
 		<td>

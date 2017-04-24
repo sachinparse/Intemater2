@@ -298,7 +298,9 @@ public class IntematerController {
 				CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
 				
 				//List<Category> objlstCategory=objCategoryDAO.listOfCategory();
+				List<Category> listOfCategory=objCategoryDAO.listOfCategory();
 				
+				objModel.addObject("objlstCategory", listOfCategory);
 				objModel.setViewName("register");
 				objModel.addObject("message", message);
 				return objModel;    
