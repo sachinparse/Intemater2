@@ -114,8 +114,10 @@ $(document).ready("onfocus", function() {
 			<a href="registerPage.form">Create Contact</a>
 			<a href="showCategory.form">Category</a>
 			<a href="saveMessage.form">Messages</a>
-			<a href="showUsers.form?recperpage=25">Show Users</a>
-			<a href="newUser.form">Create New User</a>
+			<c:if test="${objUser.roll eq 'admin' }">
+				<a href="showUsers.form?recperpage=25">Show Users</a>
+				<a href="newUser.form">Create New User</a>
+			</c:if>
 			<a href="changePasswordPage.form">Change Password</a>
 			<a href="logout.form">Logout</a>
 			

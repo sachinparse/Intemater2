@@ -136,20 +136,14 @@ a:hover, a:active {
 			<!-- <a href="register.form">Create Contact</a> -->
 			<a href="showCategory.form">Category</a>
 			<a href="saveMessage.form">Messages</a>
-			<a href="showUsers.form?recperpage=25">Show Users</a>
-			<a href="newUser.form">Create New User</a>
+			<c:if test="${objUser.roll eq 'admin' }">
+				<a href="showUsers.form?recperpage=25">Show Users</a>
+				<a href="newUser.form">Create New User</a>
+			</c:if>
 			<a href="changePasswordPage.form">Change Password</a>
 			<a href="logout.form">Logout</a>
 			
-			<!-- <a href="showCustomers.form?recperpage=25">View Contacts</a> 
-		    <a href="sendEmail.form">Send Email</a> 
-			<a href="register.form">Create Contact</a> 
-			<a href="newUser.form">Create New User</a> 
-		    <a href="changePassword.form">Change Password</a> 
-		    <a href="showUsers.form?recperpage=25">Show Users</a> 
-		    <a href="showCategory.form">Category</a> 
-		    <a href="saveMessage.form">Save Message</a>
-		    <a href="logout.form">Logout</a>  -->
+		
 	</h5>
 <header class="main-header" role="banner">
   <img src="images/Contact-Banner.png" alt="Banner Image" align="center"/>
