@@ -50,6 +50,7 @@ public class Customer {
 	@Column()
 	private String address;
 
+	private String emailSent;
 
 	// bank details
 
@@ -59,14 +60,6 @@ public class Customer {
 		super();
 		this.bank = bank;
 	}*/
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
 
 	@Column()
 	private String bankName;
@@ -218,6 +211,22 @@ public class Customer {
 		this.status = status;
 	}
 
+	public String getEmailSent() {
+		return emailSent;
+	}
+
+	public void setEmailSent(String emailSent) {
+		this.emailSent = emailSent;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	
 	@Override
 	public String toString() {
 		return "Customer [custId=" + custId + ", name=" + name + ", mobile1="

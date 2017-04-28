@@ -402,7 +402,7 @@ public class IntematerController {
 		@RequestMapping(value="getAllCustomers.form", method=RequestMethod.POST)
 		public ModelAndView listOfAllCustomers( @RequestParam (value="categoryId",required=false) String categoryId,
 												@RequestParam (value="subject",required=false) String subject,
-												@RequestParam (value="message",required=false) String messageBody,
+												@RequestParam (value="messageBody",required=false) String messageBody,
 											    HttpServletRequest request){
 		
 			
@@ -1275,8 +1275,17 @@ public class IntematerController {
 	// Sending Emails
 	
 	@RequestMapping(value="sendEmail.form", method=RequestMethod.POST)
-	public ModelAndView sendEmail(HttpServletRequest request){
+	public ModelAndView sendEmail( @RequestParam String custIds[],
+								   @RequestParam String subject,
+								   @RequestParam String messageBody,
+								   @RequestParam (value="categoryId",required=false) String categoryId,
+								   HttpServletRequest request){
 		
+		for (int i = 0; i < custIds.length; i++) {
+			System.out.println(custIds[i]);
+		}
+		
+		System.out.println("Message Body : "+messageBody);
 		
 		ModelAndView objModel=new ModelAndView();
 		HttpSession objSession= request.getSession(false);
@@ -1293,13 +1302,44 @@ public class IntematerController {
 				objModel.setViewName("login");
 				return objModel;
 			}else{
-					CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
-					List<Category> listOfCategory=objCategoryDAO.listOfCategory();
+				
+				// Converting string array to integer array
+				int[] ids = new int[custIds.length];
+				
+				//Integer[] id={};
+				
+				List<Customer> listOfCustomer=null;
+				
+				if(custIds.length>0){
 					
-					objModel.addObject("objlstCategory", listOfCategory);
-					objModel.setViewName("sendEmail");
+					Integer[] id=new Integer[custIds.length];
 					
-					return objModel;
+					for(int i = 0;i < custIds.length;i++)
+					{
+					   id[i] = Integer.parseInt(custIds[i]);
+					}
+					
+					System.out.println("Length of an Integer Array : "+id.length);
+		
+					CustomerDAO objCustomerDAO=DAOFactory.getInstanceOfCustomer();
+					listOfCustomer=objCustomerDAO.getCustomerforEmail(id);	
+					System.out.println("List made.");
+				
+				}
+				
+				
+			
+				CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
+				List<Category> listOfCategory=objCategoryDAO.listOfCategory();
+				
+				objModel.addObject("subject", subject);
+				objModel.addObject("messageBody", messageBody);
+				objModel.addObject("categoryId", categoryId);
+				objModel.addObject("objlstCategory", listOfCategory);
+				objModel.addObject("listOfCustomer", listOfCustomer );
+				objModel.setViewName("sendEmail");
+				
+				return objModel;
 			}
 		}
 		

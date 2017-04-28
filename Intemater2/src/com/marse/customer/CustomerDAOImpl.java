@@ -1,5 +1,6 @@
 package com.marse.customer;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -7,6 +8,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import com.marse.hibernate.util.HibernateUtils;
 import com.marse.model.Category;
@@ -54,15 +56,15 @@ public class CustomerDAOImpl implements CustomerDAO {
 		SessionFactory factory=HibernateUtils.getInstance();
 		Session session=factory.openSession();
 		Transaction tx=session.beginTransaction();
-			String hql="UPDATE Customer c SET c.status= :status WHERE c.custId= :customerId";
+		String hql="UPDATE Customer c SET c.status= :status WHERE c.custId= :customerId";
 
-			int updatedRow=session.createQuery(hql)
-						.setString("status", "I")
-						.setInteger("customerId",customerId)
-						.executeUpdate();
-			System.out.println("Rows updated from deleteCustomer() count : "+updatedRow);
-			tx.commit();
-			session.close();
+		int updatedRow=session.createQuery(hql)
+					.setString("status", "I")
+					.setInteger("customerId",customerId)
+					.executeUpdate();
+		System.out.println("Rows updated from deleteCustomer() count : "+updatedRow);
+		tx.commit();
+		session.close();
 
 	}
 
@@ -133,6 +135,23 @@ public class CustomerDAOImpl implements CustomerDAO {
 		Query query=session.createQuery(hqlQuery);
 		List<Customer> list=query.list();
 		
+		
+		return list;
+	}
+	
+	// This list of customer is for sending email whose are checked
+	public List<Customer> getCustomerforEmail(Integer[] ids){
+		
+		SessionFactory factory=HibernateUtils.getInstance();
+		Session session=factory.openSession();
+		
+		Criteria crit = (Criteria) session.createCriteria(Customer.class).
+        		 		add(
+        		 				//Restrictions.in("custId", new Integer[] {1,5,8,10})
+        		 				Restrictions.in("custId", ids)
+        		 		).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		
+		List<Customer> list=crit.list();
 		
 		return list;
 	}

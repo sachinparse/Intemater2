@@ -184,7 +184,7 @@ div { width: 40%; height: 30%; float: left; }
   <tr>
     <td>Message</td>
     <td>:</td>
-    <td>  <textarea name="message"  id="idMessage" cols="49" rows="8" value="${messageBody}"></textarea> </td>
+    <td>  <textarea name="messageBody"  id="idMessage" cols="49" rows="8" value="${messageBody}"></textarea> </td>
   </tr>
 </table>
 
@@ -212,7 +212,7 @@ div { width: 40%; height: 30%; float: left; }
   			${cust.custId}
   		</td>
 		<td>
-			<input type="checkbox" name="emp" id="idCust_${cust.custId }" class="test" value="${cust.custId}">
+			<input type="checkbox" name="custIds" id="idCust_${cust.custId }" class="test" value="${cust.custId}">
 			${cust.name} 
   		</td>
   		<td>

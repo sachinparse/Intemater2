@@ -14,4 +14,5 @@ public interface CustomerDAO {
 	public List<Customer> listOfCustomer(int categoryId,int offSet, int noOfRecordsPerPage);   // getting the list of all the customers of selected category.
 	public int customerCount(int categoryId);// getting the count of the selected category customers count.
 	public List<Customer> listOfAllCustomer(int categoryId);// All customers
+	public List<Customer> getCustomerforEmail(Integer[] ids);  // Fetching customer records to send emails which are checked.
 }
