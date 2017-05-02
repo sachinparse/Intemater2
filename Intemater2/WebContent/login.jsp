@@ -13,6 +13,25 @@
 
 <link rel="stylesheet" href="css/loginCss.css" />
 
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		$("#idButton").click(function(){
+			
+			if($("#idUserId").val().trim().length != 0 && $("#idPassword").val().trim().length == 0){
+				alert("Please Enter Password...");
+			}else if($("#idUserId").val().trim().length == 0 && $("#idPassword").val().trim().length != 0){
+				alert("Please Enter User ID...");
+			}else if($("#idUserId").val().trim().length == 0 && $("#idPassword").val().trim().length == 0){
+				alert("Please Enter User ID and Password...");
+			}else{
+				$('#idLoginForm').submit();
+			}
+		});
+	});
+
+</script>
 
 </head>
 <body>
@@ -30,19 +49,19 @@
 		
 		
 			<h2>Sign in</h2>
-			<form name="loginForm" action="LoginAuthenticate.form" method="post">
+			<form name="loginForm" id="idLoginForm" action="LoginAuthenticate.form" method="post">
 
 				<div class="input-group input-group-lg">
 					<span class="input-group-addon"><i class="fa fa-user"></i></span> 
-					<input type="text" name="userId" class="form-control" placeholder="User Id">
+					<input type="text" name="userId" id="idUserId" class="form-control" placeholder="User Id">
 				</div>
 
 				<div class="input-group input-group-lg">
 					<span class="input-group-addon"><i class="fa fa-lock"></i></span> 
-					  <input type="password" name="password" class="form-control" placeholder="Password">
+					  <input type="password" name="password" id="idPassword" class="form-control" placeholder="Password">
 				</div>
 
-				<button type="submit" name="login" class="float">Login</button>
+				<button type="button" id="idButton" name="login" class="float">Login</button>
 			</form>
 		</div>
 	</div>
