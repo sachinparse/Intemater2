@@ -6,7 +6,6 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,6 +36,8 @@ import com.marse.model.Category;
 import com.marse.model.Customer;
 import com.marse.model.Message;
 import com.marse.model.User;
+import com.marse.sendemail.EmailService;
+import com.marse.sendemail.EmailStats;
 import com.marse.user.UserDAO;
 
 @Controller
@@ -435,6 +436,7 @@ public class IntematerController {
 								listOfCustomer=objCustomerDAO.listOfAllCustomer(catId);
 							}
 							
+							new EmailStats().setReply("");
 						    // fetching existing categories
 							List<Category> objlstCategory=DAOFactory.getInstancOfCategory().listOfCatagory();//new ArrayList<Category>();
 							
@@ -1324,14 +1326,23 @@ public class IntematerController {
 					CustomerDAO objCustomerDAO=DAOFactory.getInstanceOfCustomer();
 					listOfCustomer=objCustomerDAO.getCustomerforEmail(id);	
 					System.out.println("List made.");
-				
+					
+					// Sending emails...
+					
+					EmailService objEmailService=new EmailService();
+					
+					listOfCustomer=objEmailService.sendEmail(listOfCustomer, subject, messageBody);
+					
 				}
 				
+				String reply=new EmailStats().getReply();
+				System.out.println("Reply: "+reply);
 				
-			
+				
 				CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
 				List<Category> listOfCategory=objCategoryDAO.listOfCategory();
 				
+				objModel.addObject("reply", reply);
 				objModel.addObject("subject", subject);
 				objModel.addObject("messageBody", messageBody);
 				objModel.addObject("categoryId", categoryId);

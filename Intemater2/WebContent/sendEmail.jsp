@@ -184,7 +184,7 @@ div { width: 40%; height: 30%; float: left; }
   <tr>
     <td>Message</td>
     <td>:</td>
-    <td>  <textarea name="messageBody"  id="idMessage" cols="49" rows="8" value="${messageBody}"></textarea> </td>
+    <td>  <textarea name="messageBody"  id="idMessage" cols="49" rows="8" value="">${fn:trim(messageBody)}</textarea> </td>
   </tr>
 </table>
 
@@ -193,7 +193,7 @@ div { width: 40%; height: 30%; float: left; }
 <div id="div3" style='height: 370px; overflow: auto;overflow-x:hidden;'>
   <table width="100%" border="1" align="left" id="idCustTable">
   <caption>
-    List
+    List  &nbsp; ${reply} 
   </caption>
   <tr>
     <td width="45" height="47"><span class="style1">Sr. No. </span></td>
@@ -216,7 +216,7 @@ div { width: 40%; height: 30%; float: left; }
 			${cust.name} 
   		</td>
   		<td>
-  			
+  			${null eq cust.emailSent ?'-':cust.emailSent eq 'Y'?'Email Sent':cust.emailSent eq 'N'?'Email Sending Failed':'' }
   		</td>
     </tr>
   
