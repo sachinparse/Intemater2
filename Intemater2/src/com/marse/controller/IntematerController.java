@@ -80,7 +80,7 @@ public class IntematerController {
 		
 	}*/
 	
-	// Testing of the message functionality
+/*	// Testing of the message functionality
 	@RequestMapping(value="saveMessage.form", method=RequestMethod.GET)
 	public ModelAndView saveMessage(){
 		
@@ -103,7 +103,7 @@ public class IntematerController {
 		System.out.println("Controller: MSG Id :- "+msgId);
 		
 		return new ModelAndView("register");
-	}
+	}*/
 	
 	// authentication logic
 	@RequestMapping(value="LoginAuthenticate.form", method=RequestMethod.POST)
@@ -1335,6 +1335,28 @@ public class IntematerController {
 					
 				}
 				
+				// Saving message...
+				// Date functionality
+				 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+				 //System.out.println(new SimpleDateFormat("yyyy-MM-dd").format(myDate));
+				 Date date=null;
+
+				 try {
+			            date = formatter.parse(new Date().toString());
+			     } catch (ParseException e) {
+			            e.printStackTrace();
+			     }
+				// message 
+				MessageDAO objMessageDAO=DAOFactory.getInstancOfMessage();
+				Message objMessage=new Message();
+				
+				objMessage.setSubject(subject);
+				objMessage.setMessageData(messageBody);
+				objMessage.setMsgDate(date);
+				
+				objMessageDAO.saveMessage(objMessage);
+				
+				//setting stats for user
 				String reply=new EmailStats().getReply();
 				System.out.println("Reply: "+reply);
 				

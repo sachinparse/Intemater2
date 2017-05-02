@@ -1,5 +1,7 @@
 package com.marse.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="message")
@@ -17,20 +20,29 @@ public class Message {
 	@GeneratedValue(generator="msgIdGenerator")
 	@Column()
 	private int messageId;
-	@Column()
+	@Column(length = 65535,columnDefinition="Text")
 	private String messageData;
 	@Column()
-	private String msgDate;
+	private Date msgDate;
+	
+	private String subject;
 	
 	// setters and getters
 	
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 	public int getMessageId() {
 		return messageId;
 	}
-	public String getMsgDate() {
+
+	public Date getMsgDate() {
 		return msgDate;
 	}
-	public void setMsgDate(String msgDate) {
+	public void setMsgDate(Date msgDate) {
 		this.msgDate = msgDate;
 	}
 	public void setMessageId(int messageId) {
