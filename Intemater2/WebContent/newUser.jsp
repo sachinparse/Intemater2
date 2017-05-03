@@ -95,6 +95,33 @@ a:hover, a:active {
     background-color: #FF8000;
 }
 </style>
+
+<script>
+	$(document).ready(function(){
+		
+		$("#idConfirmPassword").focusout(function(){
+	
+			if($("#idUserPassword").val() != $("#idConfirmPassword").val()){
+				alert("Password not matching, try again: "+ $("#idUserPassword").val() +"& "+ $("#idConfirmPassword").val());
+				$("#idConfirmPassword").focus();
+			}		
+		});
+		
+		$("#idSaveButton").click(function(){
+			
+			if($("#idUserPassword").val().length !=0 && $("#idFirstName").val().length !=0 && $("#idUserStatus").val() != "select"
+				 && $("#idGender").val() != "select"){
+				
+				$("#idHomePage").submit();
+				
+			}else{
+				alert("Please, Check Inputs...");	
+			}
+		});
+	});
+
+</script>
+
   <h5 align="center"> 
   
   			<a href="sendEmailPage.form">Send Email</a>
@@ -127,12 +154,12 @@ a:hover, a:active {
 		<!-- <h1 align="center"><font color="#808000"><u>Create New Contact</u></font></h1> -->
 		<h2 align="center"><u>Add User</u></h2>
 
-	<form name="homePage" action="newUser.form" method="post">
+	<form name="homePage" id="idHomePage" action="newUser.form" method="post">
 		
 		<table align="center" border="0">
 		
 			<tr> <td></td>
-				<!-- <td >First Name</td><td>:</td> --><td><input type="text" name="firstName" placeholder="First Name"></td> 
+				<!-- <td >First Name</td><td>:</td> --><td><input type="text" id="idFirstName" name="firstName" placeholder="First Name"></td> 
 				<!-- <td >Last Name</td><td>:</td> --><td><input type="text" name="lastName" placeholder="Last Name"></td> </tr>
 			<tr> <td></td>
 				<!-- <td >Last Name</td><td>:</td><td><input type="text" name="lastName" placeholder="Last Name"></td> -->
@@ -147,15 +174,15 @@ a:hover, a:active {
 				                              <td><input type="text" name="userMobile2" placeholder="2nd Mobile " ></td> </tr>
 				
 			<tr> <td></td>
-				<!-- <td>Password</td><td>:</td> --><td><input type="text" name="userPassword" placeholder="Password"> </td>
-				<!-- <td>Confirm Password</td><td>:</td> --><td><input type="text" name="confirmPassword" placeholder="Confirm Password"> </td> </tr>
+				<td><input type="text" id="idUserPassword" name="userPassword" placeholder="Password"> </td>
+				<td><input type="text" id="idConfirmPassword" name="confirmPassword" placeholder="Confirm Password"> </td> </tr>
 				
 			<tr> <td></td>
 				<!-- <td>Email Id</td><td>:</td> --><td><input type="text" name="userEmail" placeholder=" Email Id" ></td> 
 				
 						
 				  <td>
-					 <select class="select-style gender" name="userStatus">
+					 <select class="select-style gender" id="idUserStatus" name="userStatus">
 				            <option value="select">Select Status</option>
 				           
 				            		<option value="A">Active</option>
@@ -175,7 +202,7 @@ a:hover, a:active {
 				      </select>
 				     </td>
 				     <td>
-				     	<select class="select-style gender" name="gender">
+				     	<select class="select-style gender" id="idGender" name="gender">
 				            <option value="select">Select Gender</option>
 				            <option value="male">Male</option>
 				            <option value="female">Female</option>
@@ -185,7 +212,7 @@ a:hover, a:active {
 				</tr>
 				
 				<tr> <td></td><td></td><td></td>
-					<td colspan="4" align="center"> <input type="submit" name="save" value="Create User"> </td> </tr>
+					<td colspan="4" align="center"> <input type="button" id="idSaveButton" name="save" value="Create User"> </td> </tr>
 		</table>
 	
 	</form>
