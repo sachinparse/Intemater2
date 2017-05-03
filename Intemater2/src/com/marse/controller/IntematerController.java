@@ -1336,23 +1336,12 @@ public class IntematerController {
 				}
 				
 				// Saving message...
-				// Date functionality
-				 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-				 //System.out.println(new SimpleDateFormat("yyyy-MM-dd").format(myDate));
-				 Date date=null;
-
-				 try {
-			            date = formatter.parse(new Date().toString());
-			     } catch (ParseException e) {
-			            e.printStackTrace();
-			     }
-				// message 
 				MessageDAO objMessageDAO=DAOFactory.getInstancOfMessage();
 				Message objMessage=new Message();
 				
 				objMessage.setSubject(subject);
 				objMessage.setMessageData(messageBody);
-				objMessage.setMsgDate(date);
+				objMessage.setMsgDate(new Date());
 				
 				objMessageDAO.saveMessage(objMessage);
 				

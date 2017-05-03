@@ -7,9 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="message")
@@ -23,6 +24,7 @@ public class Message {
 	@Column(length = 65535,columnDefinition="Text")
 	private String messageData;
 	@Column()
+	@Temporal(TemporalType.DATE)
 	private Date msgDate;
 	
 	private String subject;
