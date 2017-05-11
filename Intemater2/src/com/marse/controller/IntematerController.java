@@ -1308,7 +1308,15 @@ public class IntematerController {
 				// Converting string array to integer array
 				int[] ids = new int[custIds.length];
 				
-				//Integer[] id={};
+				// Saving message...
+				MessageDAO objMessageDAO=DAOFactory.getInstancOfMessage();
+				Message objMessage=new Message();
+				
+				objMessage.setSubject(subject);
+				objMessage.setMessageData(messageBody);
+				objMessage.setMsgDate(new Date());
+				
+				int msgId= objMessageDAO.saveMessage(objMessage);
 				
 				List<Customer> listOfCustomer=null;
 				
@@ -1331,19 +1339,9 @@ public class IntematerController {
 					
 					EmailService objEmailService=new EmailService();
 					
-					listOfCustomer=objEmailService.sendEmail(listOfCustomer, subject, messageBody);
+					listOfCustomer=objEmailService.sendEmail(listOfCustomer, subject, messageBody, msgId);
 					
 				}
-				
-				// Saving message...
-				MessageDAO objMessageDAO=DAOFactory.getInstancOfMessage();
-				Message objMessage=new Message();
-				
-				objMessage.setSubject(subject);
-				objMessage.setMessageData(messageBody);
-				objMessage.setMsgDate(new Date());
-				
-				objMessageDAO.saveMessage(objMessage);
 				
 				//setting stats for user
 				String reply=new EmailStats().getReply();

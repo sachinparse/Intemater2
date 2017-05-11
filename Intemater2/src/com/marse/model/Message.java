@@ -26,11 +26,18 @@ public class Message {
 	@Column()
 	@Temporal(TemporalType.DATE)
 	private Date msgDate;
-	
 	private String subject;
+	@Column(length = 65535,columnDefinition="Text")
+	private String receivers;
 	
 	// setters and getters
 	
+	public String getReceivers() {
+		return receivers;
+	}
+	public void setReceivers(String receivers) {
+		this.receivers = receivers;
+	}
 	public String getSubject() {
 		return subject;
 	}

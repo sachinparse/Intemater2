@@ -34,4 +34,25 @@ public class MessageDAOImpl implements MessageDAO {
 		return null;
 	}
 
+	@Override
+	public void updateReceivers(int msgId, String receivers) {
+
+		Message objMessage=new Message();
+		objMessage.setMessageId(msgId);
+		objMessage.setReceivers(receivers);
+		
+		SessionFactory factory=HibernateUtils.getInstance();
+		Session session=factory.openSession();
+		
+		Transaction tx=session.beginTransaction();
+		session.update(objMessage);
+		tx.commit();
+		session.close();
+		
+		
+		
+	}
+	
+	
+
 }

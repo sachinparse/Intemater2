@@ -16,15 +16,20 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import com.marse.daofactory.DAOFactory;
+import com.marse.message.MessageDAO;
 import com.marse.model.Customer;
 
 public class EmailService {
 
 	
-	public List<Customer> sendEmail(List<Customer> objlstCustomer, String subject, String messageBody){
+	public List<Customer> sendEmail(List<Customer> objlstCustomer, String subject, String messageBody,  int msgId){
 
 		   String temp="Mail to be Send : <font color='blue'>"+objlstCustomer.size()+"</font> ";
 		
+		   // For Receivers record
+		   String receivers="";
+		   
 		   List<Customer> templstCustomer=new ArrayList<Customer>();
 		   
 		   // Sender's email ID needs to be mentioned
@@ -119,6 +124,8 @@ public class EmailService {
 			         
 			         customer.setEmailSent("Y");
 			         
+			         receivers=receivers+customer.getCustId()+",";
+			         
 			      }catch (MessagingException e) {
 			         e.getMessage();
 			         e.printStackTrace();
@@ -133,6 +140,12 @@ public class EmailService {
 			    	 //throw new RuntimeException(e);
 				  }
 			
+			   // saving receivers
+			   System.out.println("Receivers for msgId: "+msgId+" => "+receivers.substring(0, receivers.length()-1));
+			   
+			   MessageDAO objMessageDAO=DAOFactory.getInstancOfMessage();
+			   objMessageDAO.updateReceivers(msgId, receivers.substring(0, receivers.length()-1));
+			   
 			   templstCustomer.add(customer);
 		   }// end while()
 		   
