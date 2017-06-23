@@ -106,7 +106,7 @@ public class CryptoUtil {
 	    
 	    // test code as main() method
 	    
-	   /* public static void main(String[] args) throws Exception {
+	    public static void main(String[] args) throws Exception {
 	        CryptoUtil cryptoUtil=new CryptoUtil();
 	       // String key="ezeon8547";   
 	        String plain="password";
@@ -115,6 +115,6 @@ public class CryptoUtil {
 	        System.out.println("Encrypted text: "+enc);
 	        String plainAfter=cryptoUtil.decrypt(enc);
 	        System.out.println("Original text after decryption: "+plainAfter);
-	    }*/
+	    }
 
 }

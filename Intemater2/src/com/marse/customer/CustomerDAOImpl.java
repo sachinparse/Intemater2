@@ -155,5 +155,25 @@ public class CustomerDAOImpl implements CustomerDAO {
 		
 		return list;
 	}
+	
+	
+	// not used
+	@Override
+	public List<Customer> getCustomers(String receivers) {
+
+		String ids[]= receivers.split(",");
+		
+		SessionFactory factory=HibernateUtils.getInstance();
+		Session session=factory.openSession();
+		
+		String hqlQuery="From Customer c WHERE custId IN (:receivers)";
+		
+		Query query=session.createQuery(hqlQuery);
+		query.setParameterList("receivers", ids);
+		
+		List<Customer> list=query.list();
+		
+		return list;
+	}
 
 }

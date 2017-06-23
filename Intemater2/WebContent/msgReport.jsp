@@ -217,10 +217,10 @@ a:hover, a:active {
 		
 	</h5>
 	
- <form action="#" method="post">
+ <form action="msgReport.form" method="post">
   <center>
-  		<caption><h2><b><u>Sent Message Report</u></b></h2></caption>
 	<table align="center">
+	   <caption><h2><b><u>Sent Message Report</u></b></h2></caption>
 		<tr>
 		    <td  width="31%" valign="top" nowrap bgcolor="#C5EFFA"><span class="regtext">Start: &nbsp;&nbsp;</span>
                 <input type="text" name="startDate" id="datepickerStart" readonly value="${startDate }"></td>
@@ -232,7 +232,7 @@ a:hover, a:active {
   </center>
  </form>		
 
-
+	
 
 
 

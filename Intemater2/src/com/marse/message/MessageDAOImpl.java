@@ -1,7 +1,10 @@
 package com.marse.message;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,12 +17,15 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public int saveMessage(Message objMessage) {
 
+		System.out.println(objMessage.toString());
+		
 		int msgId=0;
 		SessionFactory factory=HibernateUtils.getInstance();
 		Session session=factory.openSession();
 		Transaction tx=session.beginTransaction();
 		
-		session.save(objMessage);
+		//session.save(objMessage);
+		session.saveOrUpdate(objMessage);
 		msgId=objMessage.getMessageId();
 		tx.commit();
 		session.close();
@@ -37,22 +43,47 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public void updateReceivers(int msgId, String receivers) {
 
-		Message objMessage=new Message();
+		/*Message objMessage=new Message();
 		objMessage.setMessageId(msgId);
-		objMessage.setReceivers(receivers);
+		objMessage.setReceivers(receivers);*/
 		
 		SessionFactory factory=HibernateUtils.getInstance();
 		Session session=factory.openSession();
 		
 		Transaction tx=session.beginTransaction();
-		session.update(objMessage);
+		/*session.update(objMessage);
+		tx.commit();
+		session.close();*/
+
+		String hql = "UPDATE Message set receivers = :ids WHERE messageId = :mid";
+		Query query = session.createQuery(hql);
+		query.setParameter("ids", receivers);
+		query.setParameter("mid", msgId);
+		int result = query.executeUpdate();
 		tx.commit();
 		session.close();
-		
+		System.out.println("Rows affected: " + result);
 		
 		
 	}
-	
-	
 
+	@SuppressWarnings("unchecked")
+	public List<Message> getMessageReport(Date startDate, Date endDate){
+		
+		List<Message> objlstMessage= new ArrayList<Message>();
+		
+		SessionFactory factory=HibernateUtils.getInstance();
+		Session session=factory.openSession();
+		
+		//SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		
+		String frmDate = startDate.toString();
+		String enDate = endDate.toString();
+		objlstMessage = session.createQuery("FROM Message AS m WHERE m.msgDate BETWEEN :stDate AND :edDate ")
+			.setParameter("stDate", frmDate)
+			.setParameter("edDate", enDate)
+			.list();
+		
+		return objlstMessage;
+	}
 }

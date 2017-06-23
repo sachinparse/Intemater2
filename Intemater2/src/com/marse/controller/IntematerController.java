@@ -31,10 +31,11 @@ import com.marse.crypto.CryptoUtil;
 import com.marse.customer.CustomerDAO;
 import com.marse.daofactory.DAOFactory;
 import com.marse.message.MessageDAO;
-import com.marse.message.MessageDAOImpl;
+import com.marse.message.MessageService;
 import com.marse.model.Category;
 import com.marse.model.Customer;
 import com.marse.model.Message;
+import com.marse.model.MessageReport;
 import com.marse.model.User;
 import com.marse.sendemail.EmailService;
 import com.marse.sendemail.EmailStats;
@@ -1281,7 +1282,7 @@ public class IntematerController {
 								   @RequestParam String subject,
 								   @RequestParam String messageBody,
 								   @RequestParam (value="categoryId",required=false) String categoryId,
-								   HttpServletRequest request){
+								   HttpServletRequest request) throws ParseException{
 		
 		for (int i = 0; i < custIds.length; i++) {
 			System.out.println(custIds[i]);
@@ -1315,6 +1316,31 @@ public class IntematerController {
 				objMessage.setSubject(subject);
 				objMessage.setMessageData(messageBody);
 				objMessage.setMsgDate(new Date());
+				//objMessage.setReceivers(custIds.toString());
+				
+				if(custIds.length>0){
+					
+					String receivers="";
+					
+					for (int i = 0; i < custIds.length; i++) {
+						receivers=receivers + custIds[i]+",";
+					}
+					
+					System.out.println("1. receivers: "+receivers);
+					
+					if (receivers.endsWith(",")) {
+						receivers = receivers.substring(0, receivers.length() - 1);
+					}
+					System.out.println("2. receivers: "+receivers);
+					objMessage.setReceivers(receivers);
+				}
+				
+				System.out.println("Subject: "+objMessage.getSubject());
+				System.out.println("Body: "+ objMessage.getMessageData());
+				System.out.println("Date: "+objMessage.getMsgDate());
+				System.out.println("Receivers: "+objMessage.getReceivers());
+				
+				
 				
 				int msgId= objMessageDAO.saveMessage(objMessage);
 				
@@ -1360,6 +1386,93 @@ public class IntematerController {
 				objModel.setViewName("sendEmail");
 				
 				return objModel;
+			}
+		}
+		
+	}
+	
+	// Message Report page
+	
+	@RequestMapping(value="msgReportPage.form", method=RequestMethod.GET)
+	public ModelAndView messageReportPage(HttpServletRequest request){
+		
+		
+		ModelAndView objModel=new ModelAndView();
+		HttpSession objSession= request.getSession(false);
+		
+		if(objSession==null){
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			if(objSession.getAttribute("objUser")==null){
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+					objModel.setViewName("msgReport");
+					
+					return objModel;
+			}
+		}
+		
+	}
+	
+	
+	// Message Report
+	
+	@RequestMapping(value="msgReport.form", method=RequestMethod.POST)
+	public ModelAndView messageReport(  @RequestParam String startDate,
+										@RequestParam String endDate,
+										HttpServletRequest request){
+		
+		
+		ModelAndView objModel=new ModelAndView();
+		HttpSession objSession= request.getSession(false);
+		
+		if(objSession==null){
+			String message="Time out,<br> Please login again...!";
+			objModel.addObject("message", message);
+			objModel.setViewName("login");
+			return objModel;
+		}else{
+			if(objSession.getAttribute("objUser")==null){
+				String message="Invalid Session,<br> Please login again...!";
+				objModel.addObject("message", message);
+				objModel.setViewName("login");
+				return objModel;
+			}else{
+				
+					// Date functionality
+					 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+					 Date sDate=null;
+					 Date eDate=null;
+	
+					 try {
+	
+				            sDate = formatter.parse(startDate);
+				            eDate = formatter.parse(endDate);
+				            System.out.println(startDate+" : "+formatter.format(sDate));
+				            System.out.println(endDate+" : "+formatter.format(eDate));
+	
+				     } catch (ParseException e) {
+				            e.printStackTrace();
+				     }
+				
+					 MessageService objMessageService=new MessageService();
+					 
+					 List<MessageReport> objlstMessageReport=new ArrayList<MessageReport>();
+					 
+					 objlstMessageReport= objMessageService.getMessageReport(sDate, eDate);
+				
+					objModel.addObject("objlstMessageReport", objlstMessageReport);
+					objModel.addObject("startDate", startDate);
+					objModel.addObject("endDate", endDate);
+					objModel.setViewName("msgReport");
+					
+					return objModel;
 			}
 		}
 		

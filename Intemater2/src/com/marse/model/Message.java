@@ -24,7 +24,7 @@ public class Message {
 	@Column(length = 65535,columnDefinition="Text")
 	private String messageData;
 	@Column()
-	@Temporal(TemporalType.DATE)
+	/*@Temporal(TemporalType.DATE)*/
 	private Date msgDate;
 	private String subject;
 	@Column(length = 65535,columnDefinition="Text")
@@ -62,6 +62,12 @@ public class Message {
 	}
 	public void setMessageData(String messageData) {
 		this.messageData = messageData;
+	}
+	@Override
+	public String toString() {
+		return "Message [messageId=" + messageId + ", messageData="
+				+ messageData + ", msgDate=" + msgDate + ", subject=" + subject
+				+ ", receivers=" + receivers + "]";
 	}
 	
 	
