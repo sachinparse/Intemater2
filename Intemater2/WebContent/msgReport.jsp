@@ -112,7 +112,6 @@ a:hover, a:active {
 
 <script>
 		$(document).ready(function(){
-			
 			 $("#idSubmit").click(function(){
 			    	
 		    	 if ($("#projectName").val()=="") {
@@ -204,9 +203,8 @@ a:hover, a:active {
 	<h5 align="center"> 
 			<a href="sendEmailPage.form">Send Email</a>
 			<a href="showCustomers.form?recperpage=25">View Contacts</a>
-			<!-- <a href="register.form">Create Contact</a> -->
+			<a href="registerPage.form">Create Contact</a>
 			<a href="showCategory.form">Category</a>
-			<!-- <a href="msgReport.jsp">Message Report</a> -->
 			<c:if test="${objUser.roll eq 'admin' }">
 				<a href="showUsers.form?recperpage=25">Show Users</a>
 				<a href="newUser.form">Create New User</a>
@@ -232,7 +230,39 @@ a:hover, a:active {
   </center>
  </form>		
 
-	
+ <center>
+  <table border="1" width="75%">
+  	<tr><th>Message</th> <th>Message Receivers</th></tr>
+  	<c:forEach var="itemMsgReport" items="${objlstMessageReport }">
+  		<tr>
+  			<td  width="70%">
+  				<table>
+  						<tr>
+  							<td><b>Date</b></td><td><b>:</b></td><td><font color="#FF5733"><b>${fn:split(itemMsgReport.objMessage.msgDate,' ')[0]}</b></font></td>
+  						</tr>	
+  						<tr>
+  							<td><b>Subject</b></td><td><b>:</b></td><td><font color="#1F618D">${itemMsgReport.objMessage.subject }</font></td>
+  						</tr>
+  						<tr>
+  							<td style="text-align:left;vertical-align:top;"><b>Message</b></td><td style="text-align:left;vertical-align:top;"><b>:</b></td>
+  							<td>${itemMsgReport.objMessage.messageData }</td>
+  						</tr>
+  				</table>
+  			</td>
+  			
+  			<td  width="30%">
+  			    <table>
+						<c:forEach var="itemReceivers" items="${itemMsgReport.objlstCustomer }">		
+							<tr>
+					   		    <td>${itemReceivers.name }</td>
+					        </tr>											   		
+			   			</c:forEach>
+  			    </table>
+  			</td>
+  		</tr>
+  	</c:forEach>
+  </table>
+ </center>	
 
 
 

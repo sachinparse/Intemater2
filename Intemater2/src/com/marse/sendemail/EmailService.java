@@ -16,14 +16,22 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import com.marse.credentials.EmailCredentialsDAO;
 import com.marse.daofactory.DAOFactory;
 import com.marse.message.MessageDAO;
 import com.marse.model.Customer;
+import com.marse.model.EmailCredentials;
 
 public class EmailService {
 
 	
 	public List<Customer> sendEmail(List<Customer> objlstCustomer, String subject, String messageBody,  int msgId){
+		
+		   EmailCredentials objEmailCredentials=new EmailCredentials();
+		   
+		   EmailCredentialsDAO objEmailCredentialsDAO=DAOFactory.getInstanceOfEmailCredentials();
+		   
+		   objEmailCredentials=objEmailCredentialsDAO.getCredentials(1);
 
 		   String temp="Mail to be Send : <font color='blue'>"+objlstCustomer.size()+"</font> ";
 		
@@ -33,9 +41,10 @@ public class EmailService {
 		   List<Customer> templstCustomer=new ArrayList<Customer>();
 		   
 		   // Sender's email ID needs to be mentioned
-		   String from = "sachin.learning007@gmail.com";
-		   final String username = "sachin.learning007@gmail.com";//change accordingly
-		   final String password = "micromax25";//change accordingly
+		   
+		   String from = objEmailCredentials.getEmailId();  //String from = "xxx@gmail.com";
+		   final String username = objEmailCredentials.getEmailId(); //final String username = "xxx@gmail.com";//change accordingly
+		   final String password = objEmailCredentials.getPassword(); //final String password = "xxx";//change accordingly
 		   // Assuming you are sending email through relay.jangosmtp.net
 		   String port="587";
 		   String host = "smtp.gmail.com";

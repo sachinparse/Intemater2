@@ -22,6 +22,7 @@
 		<mapping class="com.marse.model.Category"/>
 		<mapping class="com.marse.model.Message"/>
 		<mapping class="com.marse.model.MessageReport"/>
+		<mapping class="com.marse.model.EmailCredentials"/>
 
 	</session-factory>
 </hibernate-configuration>

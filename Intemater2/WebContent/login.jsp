@@ -17,6 +17,10 @@
 
 	$(document).ready(function(){
 		
+	    $('#idUserId').bind('keyup paste', function(){ 
+		        this.value = this.value.replace(/[^0-9]/g, '');
+		});
+		
 		$("#idButton").click(function(){
 			
 			if($("#idUserId").val().trim().length != 0 && $("#idPassword").val().trim().length == 0){

@@ -1,5 +1,8 @@
 package com.marse.message;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -67,7 +70,7 @@ public class MessageDAOImpl implements MessageDAO {
 		
 	}
 
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	public List<Message> getMessageReport(Date startDate, Date endDate){
 		
 		List<Message> objlstMessage= new ArrayList<Message>();
@@ -77,13 +80,35 @@ public class MessageDAOImpl implements MessageDAO {
 		
 		//SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		
-		String frmDate = startDate.toString();
-		String enDate = endDate.toString();
-		objlstMessage = session.createQuery("FROM Message AS m WHERE m.msgDate BETWEEN :stDate AND :edDate ")
-			.setParameter("stDate", frmDate)
-			.setParameter("edDate", enDate)
-			.list();
-		
+	    DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    Date sDate = null;
+	    Date eDate = null;
+	    
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	    String start = formatter.format(startDate);
+	    String end = formatter.format(endDate);
+	    System.out.println(start);
+	    System.out.println(end);
+	    
+		 try {
+		     sDate = sdf.parse(start);
+		     eDate = sdf.parse(end);
+		 } catch (ParseException e) {
+		     // TODO Auto-generated catch block
+		     e.printStackTrace();
+		 }
+     
+		/*objlstMessage = session.createQuery("FROM Message AS m WHERE m.msgDate BETWEEN :stDate AND :edDate ")
+			.setParameter("stDate", sdf.format(sDate))
+			.setParameter("edDate", sdf.format(eDate))
+			.list();*/
+		 
+		 String hql ="FROM Message AS m WHERE m.msgDate BETWEEN '"+sdf.format(sDate)+"' AND '"+sdf.format(eDate)+"'";
+		 
+		 Query query=session.createQuery(hql);
+		 
+		 objlstMessage=(List<Message>)query.list();
+		 
 		return objlstMessage;
 	}
 }
