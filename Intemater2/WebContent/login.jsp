@@ -37,7 +37,39 @@
 
 </script>
 
+<style>
+	html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+#container {
+   min-height:100%;
+   position:relative;
+}
+#header {
+   background:#ff0;
+   padding:10px;
+}
+#body {
+   padding:10px;
+   padding-bottom:60px;   /* Height of the footer */
+}
+#footer {
+   position:absolute;
+   bottom:0;
+   width:95%;
+   height:60px;   /* Height of the footer */ 
+   text-align: right ;
+   font-size: 15px ;
+   font-family: 'Lato' ;
+}
+</style>
+
 </head>
+<div id="container">
+ <div id="body">
 <body>
 
 	<div>
@@ -70,4 +102,10 @@
 		</div>
 	</div>
 </body>
+ </div>
+    <div id="footer">
+		Mars Enterprises Pvt. Ltd. All Rights are Reserved &#169; 2017 
+		&nbsp;&nbsp;Contact: sachin.parse@gmail.com
+	</div>
+</div>
 </html>
