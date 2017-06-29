@@ -17,6 +17,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -47,11 +48,21 @@ public class User {
 	private String userEmail;
 	@Column(length=1)
 	private String userStatus;
+	@Transient
+	private boolean validLicence;
+	
 	
 	// setters and getters
 	
+	
 	public String getUserStatus() {
 		return userStatus;
+	}
+	public boolean getValidLicence() {
+		return validLicence;
+	}
+	public void setValidLicence(boolean validLicence) {
+		this.validLicence = validLicence;
 	}
 	public void setUserStatus(String userStatus) {
 		this.userStatus = userStatus;

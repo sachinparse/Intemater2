@@ -162,6 +162,9 @@ div { width: 40%; height: 30%; float: left; }
 	
 	<!-- <form action="sendEmail.form" method="post"> -->
 	<form action="" name="semdEmailForm" id="idSemdEmailForm" method="post">
+	
+       <h5 align="center"><font color="red">${validity}</font></h5>
+	
 <div id="div1" align="center">
     <br /><br /><br /><br />
 							<select name="categoryId" id="idCategoryId">

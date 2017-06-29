@@ -9,7 +9,6 @@ import java.security.spec.InvalidKeySpecException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -30,6 +29,7 @@ import com.marse.category.CategoryDAO;
 import com.marse.crypto.CryptoUtil;
 import com.marse.customer.CustomerDAO;
 import com.marse.daofactory.DAOFactory;
+import com.marse.licence.LicenceService;
 import com.marse.message.MessageDAO;
 import com.marse.message.MessageService;
 import com.marse.model.Category;
@@ -135,6 +135,12 @@ public class IntematerController {
 			
 			objUser=objUserDAO.getUser(userId);  //  fetched whole record of the current user
 			 
+			// License details 29062017
+			
+			LicenceService objLicenceService=new LicenceService();
+			
+			objUser.setValidLicence(objLicenceService.validateLicence());
+			
 			// fetching existing categories
 			
 			List<Category> objlstCategory=new ArrayList<Category>();
@@ -1257,12 +1263,15 @@ public class IntematerController {
 			objModel.setViewName("login");
 			return objModel;
 		}else{
+			
+			User objUser=(User) objSession.getAttribute("objUser");
+			
 			if(objSession.getAttribute("objUser")==null){
 				String message="Invalid Session,<br> Please login again...!";
 				objModel.addObject("message", message);
 				objModel.setViewName("login");
 				return objModel;
-			}else{
+			}else if(objUser.getValidLicence()==true){
 					CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
 					List<Category> listOfCategory=objCategoryDAO.listOfCategory();
 					
@@ -1270,6 +1279,12 @@ public class IntematerController {
 					objModel.setViewName("sendEmail");
 					
 					return objModel;
+			}else{
+				
+				String validity="Your License has been Expiered,<br> you can't send an email/s...!";
+				objModel.addObject("validity", validity);
+				objModel.setViewName("sendEmail");
+				return objModel;
 			}
 		}
 		
@@ -1299,92 +1314,102 @@ public class IntematerController {
 			objModel.setViewName("login");
 			return objModel;
 		}else{
+			
+			User objUser=(User) objSession.getAttribute("objUser");
+			
 			if(objSession.getAttribute("objUser")==null){
 				String message="Invalid Session,<br> Please login again...!";
 				objModel.addObject("message", message);
 				objModel.setViewName("login");
 				return objModel;
+			}else if(objUser.getValidLicence()==true){
+						
+					// Converting string array to integer array
+					int[] ids = new int[custIds.length];
+					
+					// Saving message...
+					MessageDAO objMessageDAO=DAOFactory.getInstancOfMessage();
+					Message objMessage=new Message();
+					
+					objMessage.setSubject(subject);
+					objMessage.setMessageData(messageBody);
+					objMessage.setMsgDate(new Date());
+					//objMessage.setReceivers(custIds.toString());
+					
+					if(custIds.length>0){
+						
+						String receivers="";
+						
+						for (int i = 0; i < custIds.length; i++) {
+							receivers=receivers + custIds[i]+",";
+						}
+						
+						System.out.println("1. receivers: "+receivers);
+						
+						if (receivers.endsWith(",")) {
+							receivers = receivers.substring(0, receivers.length() - 1);
+						}
+						System.out.println("2. receivers: "+receivers);
+						objMessage.setReceivers(receivers);
+					}
+					
+					System.out.println("Subject: "+objMessage.getSubject());
+					System.out.println("Body: "+ objMessage.getMessageData());
+					System.out.println("Date: "+objMessage.getMsgDate());
+					System.out.println("Receivers: "+objMessage.getReceivers());
+					
+					
+					
+					int msgId= objMessageDAO.saveMessage(objMessage);
+					
+					List<Customer> listOfCustomer=null;
+					
+					if(custIds.length>0){
+						
+						Integer[] id=new Integer[custIds.length];
+						
+						for(int i = 0;i < custIds.length;i++)
+						{
+						   id[i] = Integer.parseInt(custIds[i]);
+						}
+						
+						System.out.println("Length of an Integer Array : "+id.length);
+			
+						CustomerDAO objCustomerDAO=DAOFactory.getInstanceOfCustomer();
+						listOfCustomer=objCustomerDAO.getCustomerforEmail(id);	
+						System.out.println("List made.");
+						
+						// Sending emails...
+						
+						EmailService objEmailService=new EmailService();
+						
+						listOfCustomer=objEmailService.sendEmail(listOfCustomer, subject, messageBody, msgId);
+						
+					}
+					
+					//setting stats for user
+					String reply=new EmailStats().getReply();
+					System.out.println("Reply: "+reply);
+					
+					
+					CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
+					List<Category> listOfCategory=objCategoryDAO.listOfCategory();
+					
+					objModel.addObject("reply", reply);
+					objModel.addObject("subject", subject);
+					objModel.addObject("messageBody", messageBody);
+					objModel.addObject("categoryId", categoryId);
+					objModel.addObject("objlstCategory", listOfCategory);
+					objModel.addObject("listOfCustomer", listOfCustomer );
+					objModel.setViewName("sendEmail");
+					
+					return objModel;
+			     
 			}else{
 				
-				// Converting string array to integer array
-				int[] ids = new int[custIds.length];
-				
-				// Saving message...
-				MessageDAO objMessageDAO=DAOFactory.getInstancOfMessage();
-				Message objMessage=new Message();
-				
-				objMessage.setSubject(subject);
-				objMessage.setMessageData(messageBody);
-				objMessage.setMsgDate(new Date());
-				//objMessage.setReceivers(custIds.toString());
-				
-				if(custIds.length>0){
-					
-					String receivers="";
-					
-					for (int i = 0; i < custIds.length; i++) {
-						receivers=receivers + custIds[i]+",";
-					}
-					
-					System.out.println("1. receivers: "+receivers);
-					
-					if (receivers.endsWith(",")) {
-						receivers = receivers.substring(0, receivers.length() - 1);
-					}
-					System.out.println("2. receivers: "+receivers);
-					objMessage.setReceivers(receivers);
-				}
-				
-				System.out.println("Subject: "+objMessage.getSubject());
-				System.out.println("Body: "+ objMessage.getMessageData());
-				System.out.println("Date: "+objMessage.getMsgDate());
-				System.out.println("Receivers: "+objMessage.getReceivers());
-				
-				
-				
-				int msgId= objMessageDAO.saveMessage(objMessage);
-				
-				List<Customer> listOfCustomer=null;
-				
-				if(custIds.length>0){
-					
-					Integer[] id=new Integer[custIds.length];
-					
-					for(int i = 0;i < custIds.length;i++)
-					{
-					   id[i] = Integer.parseInt(custIds[i]);
-					}
-					
-					System.out.println("Length of an Integer Array : "+id.length);
-		
-					CustomerDAO objCustomerDAO=DAOFactory.getInstanceOfCustomer();
-					listOfCustomer=objCustomerDAO.getCustomerforEmail(id);	
-					System.out.println("List made.");
-					
-					// Sending emails...
-					
-					EmailService objEmailService=new EmailService();
-					
-					listOfCustomer=objEmailService.sendEmail(listOfCustomer, subject, messageBody, msgId);
-					
-				}
-				
-				//setting stats for user
-				String reply=new EmailStats().getReply();
-				System.out.println("Reply: "+reply);
-				
-				
-				CategoryDAO objCategoryDAO=DAOFactory.getInstancOfCategory();
-				List<Category> listOfCategory=objCategoryDAO.listOfCategory();
-				
-				objModel.addObject("reply", reply);
-				objModel.addObject("subject", subject);
-				objModel.addObject("messageBody", messageBody);
-				objModel.addObject("categoryId", categoryId);
-				objModel.addObject("objlstCategory", listOfCategory);
-				objModel.addObject("listOfCustomer", listOfCustomer );
+				String validity="Your License has been Expiered,<br> Please call to your Software Engineer...!";
+				objModel.addObject("validity", validity);
 				objModel.setViewName("sendEmail");
-				
 				return objModel;
 			}
 		}
