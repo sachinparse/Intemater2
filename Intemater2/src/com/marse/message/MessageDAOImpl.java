@@ -103,7 +103,7 @@ public class MessageDAOImpl implements MessageDAO {
 			.setParameter("edDate", sdf.format(eDate))
 			.list();*/
 		 
-		 String hql ="FROM Message AS m WHERE m.msgDate BETWEEN '"+sdf.format(sDate)+"' AND '"+sdf.format(eDate)+"'";
+		 String hql ="FROM Message AS m WHERE m.msgDate BETWEEN '"+sdf.format(sDate)+"' AND '"+sdf.format(eDate)+"' ORDER BY m.messageId DESC";
 		 
 		 Query query=session.createQuery(hql);
 		 
