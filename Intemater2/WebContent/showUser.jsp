@@ -59,14 +59,14 @@ h5 a:hover, h5 a:active {
     background-color: #FF8000;
 }
 
-a:link, a:visited {
+/* a:link, a:visited {
     background-color: #088D79;
     color: white;
     padding: 10px 25px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-}
+} */
 </style>
 
  
