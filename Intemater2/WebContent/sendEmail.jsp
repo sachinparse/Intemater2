@@ -75,7 +75,7 @@ div {
     height: 20px;
 }
 
-a:link, a:visited {
+h5 a:link, h5 a:visited {
     background-color: #088D79;
     color: white;
     padding: 10px 25px;
@@ -85,7 +85,7 @@ a:link, a:visited {
 }
 
 
-a:hover, a:active {
+h5 a:hover, h5 a:active {
     background-color: #FF8000;
 }
 </style>

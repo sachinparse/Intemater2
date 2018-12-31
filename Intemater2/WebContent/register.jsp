@@ -79,7 +79,7 @@ div {
     background:#ccc;
 }
 
-a:link, a:visited {
+h5 a:link, h5 a:visited {
     background-color: #088D79;
     color: white;
     padding: 10px 25px;
@@ -89,7 +89,7 @@ a:link, a:visited {
 }
 
 
-a:hover, a:active {
+h5 a:hover, h5 a:active {
     background-color: #FF8000;
 }
 </style>
@@ -145,9 +145,9 @@ a:hover, a:active {
 			
 		
 	</h5>
-<header class="main-header" role="banner">
-  <img src="images/Contact-Banner.png" alt="Banner Image" align="center"/>
-</header>
+	<header class="main-header" role="banner">
+	  <img src="images/Contact-Banner.png" alt="Banner Image" align="center"/>
+	</header>
 
 		
 		<h2 align="center"><u>Create New Contact</u></h2>
